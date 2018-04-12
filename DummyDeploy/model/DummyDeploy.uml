@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:profile="http://smartsoft/profile/component/1.0" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xsi:schemaLocation="http://smartsoft/profile/component/1.0 pathmap://SMARTMARSPROFILE/SmartMars.profile.uml#_aAgIYF6hEeS8WYUlWdOgVg">
+  <uml:Model xmi:id="_C7Ab8D5lEeiryP6d6gAAxw" name="DummyDeploy">
+    <elementImport xmi:id="_xabEoD5lEeiryP6d6gAAxw">
+      <importedElement xmi:type="uml:Component" href="pathmap://PLATFORM_RESOURCE/DummyPublisher/model/DummyPublisher.uml#_hZuFUj5eEeiryP6d6gAAxw"/>
+    </elementImport>
+    <elementImport xmi:id="_xa0tQD5lEeiryP6d6gAAxw">
+      <importedElement xmi:type="uml:Component" href="pathmap://PLATFORM_RESOURCE/DummySubscriber/model/DummySubscriber.uml#_XOl4oj5fEeiryP6d6gAAxw"/>
+    </elementImport>
+    <packagedElement xmi:type="uml:Class" xmi:id="_C7rKUz5lEeiryP6d6gAAxw" name="DummyDeploy"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_yyYWED5lEeiryP6d6gAAxw" name="DummyDeployer">
+      <ownedAttribute xmi:id="_7AzJAD5lEeiryP6d6gAAxw" name="DummyPublisher_istance">
+        <type xmi:type="uml:Component" href="pathmap://PLATFORM_RESOURCE/DummyPublisher/model/DummyPublisher.uml#_hZuFUj5eEeiryP6d6gAAxw"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_-qa7ED5lEeiryP6d6gAAxw" name="DummySubscriber_instance">
+        <type xmi:type="uml:Component" href="pathmap://PLATFORM_RESOURCE/DummySubscriber/model/DummySubscriber.uml#_XOl4oj5fEeiryP6d6gAAxw"/>
+      </ownedAttribute>
+      <ownedConnector xmi:id="_Q8j1sD5mEeiryP6d6gAAxw" name="Connector1">
+        <end xmi:id="_Q8kcwD5mEeiryP6d6gAAxw" partWithPort="_-qa7ED5lEeiryP6d6gAAxw">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Q8kcwT5mEeiryP6d6gAAxw" value="1"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Q8kcwj5mEeiryP6d6gAAxw" value="1"/>
+          <role xmi:type="uml:Port" href="pathmap://PLATFORM_RESOURCE/DummySubscriber/model/DummySubscriber.uml#_JWsF8D5lEeiryP6d6gAAxw"/>
+        </end>
+        <end xmi:id="_Q8lD0D5mEeiryP6d6gAAxw" partWithPort="_7AzJAD5lEeiryP6d6gAAxw">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Q8lD0T5mEeiryP6d6gAAxw" value="1"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Q8lD0j5mEeiryP6d6gAAxw" value="1"/>
+          <role xmi:type="uml:Port" href="pathmap://PLATFORM_RESOURCE/DummyPublisher/model/DummyPublisher.uml#_mCjRoD5eEeiryP6d6gAAxw"/>
+        </end>
+      </ownedConnector>
+      <ownedConnector xmi:id="_T9ZJcD5mEeiryP6d6gAAxw" name="Connector2">
+        <end xmi:id="_T9ZwgD5mEeiryP6d6gAAxw" partWithPort="_7AzJAD5lEeiryP6d6gAAxw">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_T9ZwgT5mEeiryP6d6gAAxw" value="1"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_T9Zwgj5mEeiryP6d6gAAxw" value="1"/>
+          <role xmi:type="uml:Port" href="pathmap://PLATFORM_RESOURCE/DummyPublisher/model/DummyPublisher.uml#_mCjRoD5eEeiryP6d6gAAxw"/>
+        </end>
+        <end xmi:id="_T9Zwgz5mEeiryP6d6gAAxw" partWithPort="_-qa7ED5lEeiryP6d6gAAxw">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_T9ZwhD5mEeiryP6d6gAAxw" value="1"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_T9ZwhT5mEeiryP6d6gAAxw" value="1"/>
+          <role xmi:type="uml:Port" href="pathmap://PLATFORM_RESOURCE/DummySubscriber/model/DummySubscriber.uml#_JWsF8D5lEeiryP6d6gAAxw"/>
+        </end>
+      </ownedConnector>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Device" xmi:id="_bjjpkD5mEeiryP6d6gAAxw" clientDependency="_mNUdkD5mEeiryP6d6gAAxw _zdQpoD5mEeiryP6d6gAAxw _AwidkD5nEeiryP6d6gAAxw" name="Laptop">
+      <deployment xmi:id="_mNUdkD5mEeiryP6d6gAAxw" name="NameService" client="_bjjpkD5mEeiryP6d6gAAxw" supplier="_iQGaED5mEeiryP6d6gAAxw"/>
+      <deployment xmi:id="_zdQpoD5mEeiryP6d6gAAxw" name="Publisher" client="_bjjpkD5mEeiryP6d6gAAxw" supplier="_tzN38D5mEeiryP6d6gAAxw"/>
+      <deployment xmi:id="_AwidkD5nEeiryP6d6gAAxw" name="Subscriber" client="_bjjpkD5mEeiryP6d6gAAxw" supplier="_201pcD5mEeiryP6d6gAAxw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Artifact" xmi:id="_iQGaED5mEeiryP6d6gAAxw" name="NameService" fileName="Artifact1.file"/>
+    <packagedElement xmi:type="uml:Artifact" xmi:id="_tzN38D5mEeiryP6d6gAAxw" name="PublisherArtifact" fileName="Artifact1.file"/>
+    <packagedElement xmi:type="uml:Artifact" xmi:id="_201pcD5mEeiryP6d6gAAxw" name="SubscriberArtifact" fileName="Artifact1.file"/>
+    <profileApplication xmi:id="_C7rKUT5lEeiryP6d6gAAxw">
+      <eAnnotations xmi:id="_C7rKUj5lEeiryP6d6gAAxw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARSPROFILE/SmartMars.profile.uml#_aAgIYF6hEeS8WYUlWdOgVg"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://SMARTMARSPROFILE/SmartMars.profile.uml#_NEWX8L4LEeKqqbDuwbBkFg"/>
+    </profileApplication>
+  </uml:Model>
+  <profile:SmartSystemConfiguration xmi:id="_yzvA8D5lEeiryP6d6gAAxw" base_Class="_yyYWED5lEeiryP6d6gAAxw"/>
+  <profile:SmartDevice xmi:id="_fL5CMD5mEeiryP6d6gAAxw" base_Device="_bjjpkD5mEeiryP6d6gAAxw" loginName="" deploymentDirectory="~/tmp/deployments/"/>
+  <profile:SmartNamingService xmi:id="_kPpP8D5mEeiryP6d6gAAxw" base_Artifact="_iQGaED5mEeiryP6d6gAAxw"/>
+  <profile:SmartArtifact xmi:id="_wNjMYD5mEeiryP6d6gAAxw" base_Artifact="_tzN38D5mEeiryP6d6gAAxw" utilizedComponentInstance="_7AzJAD5lEeiryP6d6gAAxw"/>
+  <profile:SmartArtifact xmi:id="_7w6h4D5mEeiryP6d6gAAxw" base_Artifact="_201pcD5mEeiryP6d6gAAxw" utilizedComponentInstance="_-qa7ED5lEeiryP6d6gAAxw"/>
+</xmi:XMI>
