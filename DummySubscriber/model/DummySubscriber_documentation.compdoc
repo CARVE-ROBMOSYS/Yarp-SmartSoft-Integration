@@ -1,0 +1,14 @@
+ComponentDocumentation DummySubscriber.DummySubscriber {
+	Description : "Description"
+	License : "..."
+	HardwareRequirements : "..."
+	Purpose : "..."
+
+	/*	// Document your services and component elements here:
+	Service DummySubscriber.DummySubscriber.ServiceXY {
+		Description : "..."
+		// ...
+	}
+	*/
+
+}

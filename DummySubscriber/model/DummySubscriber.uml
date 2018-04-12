@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:commObj="http://www.xtext.org/smartsoft/commObj/CommObj" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:profile="http://smartsoft/profile/component/1.0" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xsi:schemaLocation="http://smartsoft/profile/component/1.0 pathmap://SMARTMARSPROFILE/SmartMars.profile.uml#_aAgIYF6hEeS8WYUlWdOgVg">
+  <uml:Model xmi:id="_XN-NkD5fEeiryP6d6gAAxw" name="DummySubscriber">
+    <elementImport xmi:id="_SxPHED5gEeiryP6d6gAAxw">
+      <importedElement xmi:type="commObj:CommunicationObject" href="pathmap://PLATFORM_RESOURCE/DummyData/model/commObject/DummyData.comm#//@elements.0/CommDummy"/>
+    </elementImport>
+    <packagedElement xmi:type="uml:Component" xmi:id="_XOl4oj5fEeiryP6d6gAAxw" name="DummySubscriber">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_JWsF8D5lEeiryP6d6gAAxw" name="PositionSubscriber" visibility="public" aggregation="composite">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JpoQED5lEeiryP6d6gAAxw" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JppeMD5lEeiryP6d6gAAxw" value="1"/>
+        <defaultValue xmi:type="uml:LiteralString" xmi:id="_JpqFQD5lEeiryP6d6gAAxw">
+          <value xsi:nil="true"/>
+        </defaultValue>
+      </ownedAttribute>
+      <nestedClassifier xmi:type="uml:InformationItem" xmi:id="_FcsVkD5lEeiryP6d6gAAxw" name="Version" isAbstract="true"/>
+      <nestedClassifier xmi:type="uml:Class" xmi:id="_J3rTID5lEeiryP6d6gAAxw" name="ReaderTask"/>
+    </packagedElement>
+    <profileApplication xmi:id="_XOl4oD5fEeiryP6d6gAAxw">
+      <eAnnotations xmi:id="_XOl4oT5fEeiryP6d6gAAxw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARSPROFILE/SmartMars.profile.uml#_aAgIYF6hEeS8WYUlWdOgVg"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://SMARTMARSPROFILE/SmartMars.profile.uml#_NEWX8L4LEeKqqbDuwbBkFg"/>
+    </profileApplication>
+  </uml:Model>
+  <profile:SmartComponentMetadata xmi:id="_Fd2MID5lEeiryP6d6gAAxw" base_InformationItem="_FcsVkD5lEeiryP6d6gAAxw"/>
+  <profile:SmartPushNewestClient xmi:id="_JWwXYD5lEeiryP6d6gAAxw" base_Port="_JWsF8D5lEeiryP6d6gAAxw">
+    <commObject xmi:type="commObj:CommunicationObject" href="pathmap://PLATFORM_RESOURCE/DummyData/model/commObject/DummyData.comm#//@elements.0/CommDummy"/>
+  </profile:SmartPushNewestClient>
+  <profile:SmartTask xmi:id="_J3vkkD5lEeiryP6d6gAAxw" base_Class="_J3rTID5lEeiryP6d6gAAxw"/>
+</xmi:XMI>
