@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ComponentDefinition="http://www.ecore.org/component/ComponentDefinition" xmlns:StateExtension="http://www.ecore.org/component/StateExtension" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/style/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/style">
+  <viewpoint:DAnalysis xmi:id="_KharQGspEei3LL7UutseuA" selectedViews="_Kl3GYGspEei3LL7UutseuA" version="12.1.0.201708031200">
+    <semanticResources>model/TestV3_StateSlave.component</semanticResources>
+    <semanticResources>model/TestV3_StateSlave.componentDocumentation</semanticResources>
+    <semanticResources>model/TestV3_StateSlave.componentParameters</semanticResources>
+    <semanticResources>platform:/resource/CommBasicObjects/model/CommBasicObjects.types</semanticResources>
+    <semanticResources>platform:/resource/DummyComm/model/DummyComm.states</semanticResources>
+    <ownedViews xmi:type="viewpoint:DView" xmi:id="_Kl3GYGspEei3LL7UutseuA">
+      <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']"/>
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_KmMdkGspEei3LL7UutseuA" name="TestV3_StateSlave" repPath="#_KmBecGspEei3LL7UutseuA">
+        <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']"/>
+        <target xmi:type="ComponentDefinition:ComponentDefModel" href="model/TestV3_StateSlave.component#/"/>
+      </ownedRepresentationDescriptors>
+    </ownedViews>
+  </viewpoint:DAnalysis>
+  <diagram:DSemanticDiagram xmi:id="_KmKoYGspEei3LL7UutseuA" name="TestV3_StateSlave" uid="_KmBecGspEei3LL7UutseuA">
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" xmi:id="_KmKoYWspEei3LL7UutseuA" source="DANNOTATION_CUSTOMIZATION_KEY">
+      <data xmi:type="diagram:ComputedStyleDescriptionRegistry" xmi:id="_KmKoYmspEei3LL7UutseuA"/>
+    </ownedAnnotationEntries>
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" xmi:id="_KmQH8GspEei3LL7UutseuA" source="GMF_DIAGRAMS">
+      <data xmi:type="notation:Diagram" xmi:id="_KmQH8WspEei3LL7UutseuA" type="Sirius" element="_KmKoYGspEei3LL7UutseuA" measurementUnit="Pixel">
+        <children xmi:type="notation:Node" xmi:id="_KmQvAGspEei3LL7UutseuA" type="2002" element="_KmKoZGspEei3LL7UutseuA">
+          <children xmi:type="notation:Node" xmi:id="_KmRWEGspEei3LL7UutseuA" type="5006"/>
+          <children xmi:type="notation:Node" xmi:id="_KmR9IGspEei3LL7UutseuA" type="7001">
+            <children xmi:type="notation:Node" xmi:id="_VRfioGspEei3LL7UutseuA" type="3007" element="_VRaqIGspEei3LL7UutseuA">
+              <children xmi:type="notation:Node" xmi:id="_VRgJsGspEei3LL7UutseuA" type="5003">
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_VRgJsWspEei3LL7UutseuA" x="-45" y="51"/>
+              </children>
+              <children xmi:type="notation:Node" xmi:id="_VRtlEGspEei3LL7UutseuA" type="3005" element="_VRbRMGspEei3LL7UutseuA">
+                <styles xmi:type="notation:ShapeStyle" xmi:id="_VRtlEWspEei3LL7UutseuA" fontName="Ubuntu"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_VRtlEmspEei3LL7UutseuA"/>
+              </children>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_VRfioWspEei3LL7UutseuA" fontName="Ubuntu" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_VRfiomspEei3LL7UutseuA" x="175" y="162" width="50" height="50"/>
+            </children>
+            <styles xmi:type="notation:SortingStyle" xmi:id="_KmR9IWspEei3LL7UutseuA"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="_KmR9ImspEei3LL7UutseuA"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_KmQvAWspEei3LL7UutseuA" fontName="Ubuntu" fontHeight="10" bold="true"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_KmQvAmspEei3LL7UutseuA" x="492" y="132" width="435" height="279"/>
+        </children>
+        <styles xmi:type="notation:DiagramStyle" xmi:id="_KmQH8mspEei3LL7UutseuA"/>
+      </data>
+    </ownedAnnotationEntries>
+    <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_KmKoZGspEei3LL7UutseuA" name="TestV3_StateSlave" tooltipText="ComponentDefinition">
+      <target xmi:type="ComponentDefinition:ComponentDefinition" href="model/TestV3_StateSlave.component#//@component"/>
+      <semanticElements xmi:type="ComponentDefinition:ComponentDefinition" href="model/TestV3_StateSlave.component#//@component"/>
+      <decorations xmi:type="viewpoint:Decoration" xmi:id="_KmKoZWspEei3LL7UutseuA">
+        <description xmi:type="description_1:MappingBasedDecoration" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@decorationDescriptionsSet/@decorationDescriptions[name='ComponentIconDeco']"/>
+      </decorations>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_KmKoZmspEei3LL7UutseuA" labelSize="10" borderSize="1" borderSizeComputationExpression="1" foregroundColor="253,206,137">
+        <labelFormat>bold</labelFormat>
+        <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']"/>
+      <ownedDiagramElements xmi:type="diagram:DNode" xmi:id="_VRaqIGspEei3LL7UutseuA" name="TestV3_StateSlaveStates" tooltipText="StateAutomaton" width="5" height="5" resizeKind="NSEW">
+        <target xmi:type="StateExtension:ComponentStates" href="model/TestV3_StateSlave.component#//@component/@extensions.0"/>
+        <semanticElements xmi:type="StateExtension:ComponentStates" href="model/TestV3_StateSlave.component#//@component/@extensions.0"/>
+        <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+        <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+        <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+        <ownedStyle xmi:type="diagram:WorkspaceImage" xmi:id="_VRbRMGspEei3LL7UutseuA" workspacePath="/org.sirius.component.design/icons/StateAutomaton.svg">
+          <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']/@subNodeMappings[name='StateAutomatonNode']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']/@subNodeMappings[name='StateAutomatonNode']"/>
+      </ownedDiagramElements>
+    </ownedDiagramElements>
+    <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']"/>
+    <filterVariableHistory xmi:type="diagram:FilterVariableHistory" xmi:id="_KmKoZ2spEei3LL7UutseuA"/>
+    <activatedLayers xmi:type="description_1:Layer" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer"/>
+    <target xmi:type="ComponentDefinition:ComponentDefModel" href="model/TestV3_StateSlave.component#/"/>
+  </diagram:DSemanticDiagram>
+</xmi:XMI>

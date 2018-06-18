@@ -1,0 +1,21 @@
+ComponentDefinition TestV3_StateSlave {
+
+
+	StateAutomaton TestV3_StateSlaveStates  implementsExtendedMSC DummyComm.MyStates {
+		SubState mySubState_1;
+		SubState mySubState_2;
+		SubState mySubState_3;
+
+		CustomMainState MyState_1 implements ComponentLifecycle.Alive.Active {
+			subStates mySubState_1
+		}
+
+		CustomMainState MyState_2 implements ComponentLifecycle.Alive.Active {
+			subStates mySubState_2
+		}
+
+		CustomMainState MyState_3 implements ComponentLifecycle.Alive.Active {
+			subStates mySubState_3
+		}
+	}
+}
