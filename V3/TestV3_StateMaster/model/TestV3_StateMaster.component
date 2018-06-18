@@ -1,0 +1,6 @@
+ComponentDefinition TestV3_StateMaster {
+
+PreemptiveTask Task
+	{
+	}
+}
