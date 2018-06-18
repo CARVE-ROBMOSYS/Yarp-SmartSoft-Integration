@@ -18,8 +18,11 @@
 #include "BridgeV3_FromYarp_BaseStateService.hh"
 
 #include <iostream>
+#include <yarp/os/Time.h>
+#include <yarp/sig/Matrix.h>
 #include <yarp/os/LogStream.h>
 #include <yarp/math/FrameTransform.h>
+
 
 
 UpdateThread::UpdateThread(SmartACE::SmartComponent *comp) 
@@ -37,6 +40,15 @@ int UpdateThread::on_entry()
 {
 	// do initialization procedures here, which are called once, each time the task is started
 	// it is possible to return != 0 (e.g. when initialization fails) then the task is not executed further
+	COMP->tfClient.view(iFrame);
+	if(iFrame == nullptr)
+	{
+		yError() << "Cannot get iFrameTransform interface from client";
+		return -1;
+	}
+
+	robotPose_tfName    = COMP->COMP->getGlobalState().getSettings().getTf_robot();
+	world_tfName		= COMP->COMP->getGlobalState().getSettings().getTf_world();
 	return 0;
 }
 
@@ -45,50 +57,65 @@ int UpdateThread::on_execute()
 	// this method is called from an outside loop,
 	// hence, NEVER use an infinite loop (like "while(1)") here inside!!!
 	// also do not use blocking calls which do not result from smartsoft kernel
-	
+
+	static int counter = 0;
+
 	// to get the incoming data, use this methods:
 	Smart::StatusCode status;
-
 	std::cout << "Hello from UpdateThread " << std::endl;
 
-	if(!COMP->iFrame)
-		return 0;
-
-	yarp::sig::Matrix mat;
-	std::string  fromRef("/from"), toRef("/to");
-	if(!COMP->iFrame->getTransform(fromRef, toRef, mat) )
+	if(nullptr == iFrame)
 	{
-		yError() << "Cannot get requested transformation from " << fromRef << " to " << toRef;
+		yError() << "No valid iFrameTransform interface found";
+		return -1;		// this is a permanent error, so stop the thread from running
 	}
 
-	CommBasicObjects::CommBaseState commCurrentBaseState;
-	CommBasicObjects::CommBasePose pose;
+	yarp::sig::Matrix robotPose_mat;
+	// get the TF between the robot base and the world
+	if(!iFrame->getTransform(robotPose_tfName, world_tfName, robotPose_mat) )
+	{
+		yError() << "Cannot get requested transformation from " << robotPose_tfName << " to " << world_tfName;
+		return 0;		// this may be a temporary error, so keep the thread running
+	}
 
+	//
+	// Compute Robot Base Position
+	//
 	yarp::sig::Vector rpy;
-	yarp::math::FrameTransform tmp;
+	CommBasicObjects::CommBasePose basePose;
+	yarp::math::FrameTransform robotBase_tf;
 
-	tmp.fromMatrix(mat);
-	rpy = tmp.getRPYRot();
+	robotBase_tf.fromMatrix(robotPose_mat);
+	rpy = robotBase_tf.getRPYRot();
 
-	pose.set_base_roll(rpy[0]);
-	pose.set_base_elevation(rpy[1]);
-	pose.set_base_azimuth(rpy[2]);
+	// Set rotation
+	basePose.set_base_roll(     rpy[0]);
+	basePose.set_base_elevation(rpy[1]);
+	basePose.set_base_azimuth(  rpy[2]);
+	// Set translation
+	basePose.set_x(robotPose_mat[0][3], 1000);
+	basePose.set_y(robotPose_mat[1][3], 1000);
+	basePose.set_z(robotPose_mat[2][3], 1000);
 
+	// SmartSoft data
+	CommBasicObjects::CommBaseState robotBaseState;
 
-/*
-	// get base pose and velocity from gazebo interface
-	commCurrentBaseState.set_base_position();
-	commCurrentBaseState.set_base_raw_position(COMP->pose->getBasePose());
-	commCurrentBaseState.set_base_velocity(COMP->velocity->getBaseVelocity());
-
+	// BaseState
 	CommBasicObjects::CommTimeStamp time_stamp;
 	time_stamp.set_now();
-	commCurrentBaseState.set_time_stamp(time_stamp);
-*/
-	// publish pose-update
-	this->baseStateServiceOutPut(commCurrentBaseState);
+	robotBaseState.set_time_stamp(time_stamp);
+	robotBaseState.set_base_position(basePose);
+	robotBaseState.set_base_raw_position(basePose);
+//	commCurrentBaseState.set_base_velocity(COMP->velocity->getBaseVelocity());
 
+	//
+	// Finally publish robot base state update
+	//
+	this->baseStateServiceOutPut(robotBaseState);
+
+	// Delay (should be handled by SmartSoft, but how??)
 	yarp::os::Time::delay(COMP->COMP->getGlobalState().getSettings().getPeriod());
+
 	// it is possible to return != 0 (e.g. when the task detects errors), then the outer loop breaks and the task stops
 	return 0;
 }

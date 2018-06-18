@@ -18,10 +18,15 @@
 #define _UPDATETHREAD_HH
 
 #include "UpdateThreadCore.hh"
-	
+#include <yarp/dev/IRangefinder2D.h>
+#include <yarp/dev/IFrameTransform.h>
+
 class UpdateThread  : public UpdateThreadCore
 {
 private:
+	yarp::dev::IFrameTransform *iFrame;
+	std::string robotPose_tfName, world_tfName;
+
 public:
 	UpdateThread(SmartACE::SmartComponent *comp);
 	virtual ~UpdateThread();

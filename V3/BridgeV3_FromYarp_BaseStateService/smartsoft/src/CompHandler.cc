@@ -40,9 +40,11 @@ void CompHandler::onStartup()
 	std::string localPortName;
 	std::string remotePortName;
 
+	//
 	// Open Transform Client
-	localPortName  = COMP->getGlobalState().getSettings().getTF_localPort();
-	remotePortName = COMP->getGlobalState().getSettings().getTF_remotePort();
+	//
+	localPortName  = COMP->getGlobalState().getSettings().getTf_localPort();
+	remotePortName = COMP->getGlobalState().getSettings().getTf_remotePort();
 	config.clear();
 	config.put("device", "transformClient");
 	config.put("local",   localPortName);
@@ -56,20 +58,6 @@ void CompHandler::onStartup()
 		COMP->laserClient.close();
 		throw std::invalid_argument(errorStr);
 	}
-
-	COMP->tfClient.view(COMP->iFrame);
-
-	if(COMP->iFrame == nullptr)
-	{
-		std::string errorStr = " Failed to get IFrameTransform interface from the Frame Transform client device";
-		COMP->tfClient.close();
-		COMP->laserClient.close();
-		throw std::invalid_argument(errorStr);
-	}
-
-
-
-
 
 	// Start all services. If you need manual control, use the content of this function to
 	// connect and start each service individually, e.g:

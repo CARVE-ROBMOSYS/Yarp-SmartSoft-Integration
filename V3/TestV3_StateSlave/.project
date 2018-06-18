@@ -5,7 +5,6 @@
 	<projects>
 		<project>AceSmartSoftFramework</project>
 		<project>armadillo</project>
-		<project>DummyComm</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

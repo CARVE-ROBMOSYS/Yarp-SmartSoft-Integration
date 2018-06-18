@@ -1,7 +1,13 @@
 ComponentParameter BridgeV3_FromYarp_BaseStateServiceParams component BridgeV3_FromYarp_BaseStateService {
 	InternalParameter Settings {
-		tF_localPort :String         =  "/Bridge_TF"
-		tF_remotePort:String     =  "/transformServer"
-		period : Float                    = 0.01 
+		tf_localPort :String         =  "/Bridge_TF"
+		tf_remotePort:String     =  "/transformServer"
+
+		tf_robot      : String           =  "/robot"
+		tf_laser       : String           =  "/laser"
+		tf_world     : String           =  "/world"
+
+		period : Float                     = 0.1 
 	}
 }
+
