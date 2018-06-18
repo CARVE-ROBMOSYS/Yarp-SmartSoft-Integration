@@ -1,0 +1,14 @@
+ComponentDefinition BridgeV3_FromYarp_LaserService {
+
+PreemptiveTask DummyTask
+	{
+		ActivationConstraints {
+			configurable = true
+			minActFreq = 0.1 Hz
+			maxActFreq = 0.001 Hz
+		}
+	}
+	OutputPort LaserServiceOut implements CommBasicObjects.LaserService realizedBy DummyTask {
+	}
+	ComponentParameters BridgeV3_FromYarp_LaserServiceParams
+}
