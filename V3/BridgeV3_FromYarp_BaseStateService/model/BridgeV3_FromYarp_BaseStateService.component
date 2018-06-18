@@ -1,0 +1,9 @@
+ComponentDefinition BridgeV3_FromYarp_BaseStateService {
+
+PreemptiveTask UpdateThread
+	{
+	}
+	OutputPort BaseStateServiceOut implements CommBasicObjects.BaseStateService realizedBy UpdateThread {
+	}
+	ComponentParameters BridgeV3_FromYarp_BaseStateServiceParams
+}
