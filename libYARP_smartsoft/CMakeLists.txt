@@ -1,31 +1,31 @@
 
-project(comm_patterns)
+project(YARP_smartsoft)
 
-set(comm_patterns_HDRS include/send_pattern/SendPatternClient.h
-                       include/send_pattern/SendPatternServer.h)
+set(YARP_smartsoft_HDRS include/yarp/smartsoft/SendPatternClient.h
+                       include/yarp/smartsoft/SendPatternServer.h)
 
-set(comm_patterns_SRCS src/send_pattern/SendPatternClient.cpp
-                       src/send_pattern/SendPatternServer.cpp)
+set(YARP_smartsoft_SRCS src/SendPatternClient.cpp
+                       src/SendPatternServer.cpp)
 
 source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}"
              PREFIX "Source Files"
-             FILES ${comm_patterns_SRCS})
+             FILES ${YARP_smartsoft_SRCS})
 source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}"
              PREFIX "Header Files"
-             FILES ${comm_patterns_HDRS})
+             FILES ${YARP_smartsoft_HDRS})
 
-add_library(comm_patterns SHARED ${comm_patterns_SRCS} ${comm_patterns_HDRS})
+add_library(YARP_smartsoft SHARED ${YARP_smartsoft_SRCS} ${YARP_smartsoft_HDRS})
+add_library(YARP::YARP_smartsoft ALIAS YARP_smartsoft)
 
-target_include_directories(comm_patterns PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+target_include_directories(YARP_smartsoft PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
                                                 $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 
-target_link_libraries(comm_patterns PUBLIC YARP::YARP_conf
+target_link_libraries(YARP_smartsoft PUBLIC YARP::YARP_conf
                                            YARP::YARP_OS
                                            AceSmartSoftKernel)
-                                           YARP::YARP_OS)
 
 if(CMAKE_VERSION VERSION_LESS 3.8)
-  target_compile_features(comm_patterns PUBLIC cxx_auto_type
+  target_compile_features(YARP_smartsoft PUBLIC cxx_auto_type
                                                cxx_constexpr
                                                cxx_defaulted_move_initializers
                                                cxx_deleted_functions
@@ -34,17 +34,17 @@ if(CMAKE_VERSION VERSION_LESS 3.8)
                                                cxx_nullptr
                                                cxx_override)
 else()
-  target_compile_features(comm_patterns PUBLIC cxx_std_11)
+  target_compile_features(YARP_smartsoft PUBLIC cxx_std_11)
 endif()
 
-install(TARGETS comm_patterns
-        EXPORT comm_patterns
+install(TARGETS YARP_smartsoft
+        EXPORT YARP
         COMPONENT runtime
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/comm_patterns)
+        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/yarp/smartsoft)
 
 
-set_property(TARGET comm_patterns PROPERTY PUBLIC_HEADER ${comm_patterns_HDRS})
+set_property(TARGET YARP_smartsoft PROPERTY PUBLIC_HEADER ${YARP_smartsoft_HDRS})
 
