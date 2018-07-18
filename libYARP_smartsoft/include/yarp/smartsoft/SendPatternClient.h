@@ -22,7 +22,7 @@ template <class T>
 /**
  * @brief The SendPatternClient class
  */
-class SendPatternClient : public SmartACE::SendClient<T>
+class SendPatternClient //: public SmartACE::SendClient<T> FIXME: we need this inheritance??
 {
 public:
     /**
@@ -37,6 +37,8 @@ public:
 
     virtual ~SendPatternClient()
     {
+        m_port.interrupt();
+        m_port.close();
     }
 
     SendPatternClient(const std::string& portName) throw(SmartACE::SmartError)
@@ -51,7 +53,7 @@ public:
         m_port.enableBackgroundWrite(true);
     }
 
-    Smart::StatusCode connect(const std::string& server, const std::string& service) throw() override
+    Smart::StatusCode connect(const std::string& server, const std::string& service) throw()
     {
         //FIXME: use it
         YARP_UNUSED(service);
@@ -69,7 +71,7 @@ public:
 
     }
 
-    Smart::StatusCode disconnect() throw() override
+    Smart::StatusCode disconnect() throw()
     {
         if (!yarp::os::Network::disconnect(m_port.getName(), m_serverName))
         {
@@ -83,7 +85,7 @@ public:
         }
     }
 
-    Smart::StatusCode send(const T& c) throw() override
+    Smart::StatusCode send(const T& data) throw()
     {
         if (m_port.getOutputCount() == 0)
         {
@@ -91,7 +93,7 @@ public:
             return Smart::SMART_DISCONNECTED;
         }
 
-        if (!m_port.write(c))
+        if (!m_port.write(data))
         {
             yError()<<"SendClient: unable to send the data";
             return Smart::SMART_ERROR_COMMUNICATION;

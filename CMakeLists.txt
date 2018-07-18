@@ -16,3 +16,9 @@ find_package(YARP REQUIRED)
 find_package(AceSmartSoft REQUIRED)
 
 add_subdirectory(libYARP_smartsoft)
+
+option(COMPILE_examples "Compile examples" OFF)
+
+if(COMPILE_examples)
+  add_subdirectory(examples)
+endif()
