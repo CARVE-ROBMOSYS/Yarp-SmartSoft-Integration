@@ -15,4 +15,4 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(YARP REQUIRED)
 find_package(AceSmartSoft REQUIRED)
 
-add_subdirectory(comm_patterns)
+add_subdirectory(libYARP_smartsoft)

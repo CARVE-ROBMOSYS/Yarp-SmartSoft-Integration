@@ -43,3 +43,6 @@ src-gen
 build/
 bin/
 
+#IDE files
+*.txt.user
+*.kdev4
