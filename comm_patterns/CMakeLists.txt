@@ -20,6 +20,8 @@ target_include_directories(comm_patterns PUBLIC $<BUILD_INTERFACE:${CMAKE_CURREN
                                                 $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 
 target_link_libraries(comm_patterns PUBLIC YARP::YARP_conf
+                                           YARP::YARP_OS
+                                           AceSmartSoftKernel)
                                            YARP::YARP_OS)
 
 if(CMAKE_VERSION VERSION_LESS 3.8)
