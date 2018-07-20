@@ -17,7 +17,8 @@
 
 namespace yarp {
 namespace smartsoft {
-
+// FIXME: in the signature of the functions are missing all the SmartComponent* and WiringSlave
+// No idea how to use them...
 template <class T>
 /**
  * @brief The SendPatternClient class
@@ -35,15 +36,17 @@ public:
      */
     SendPatternClient(const SendPatternClient& rhs) = delete;
 
-    virtual ~SendPatternClient()
+    virtual ~SendPatternClient() throw()
     {
-        m_port.interrupt();
-        m_port.close();
+        disconnect();
+        remove();
     }
 
-    SendPatternClient(const std::string& portName) throw(SmartACE::SmartError)
+    SendPatternClient(const std::string& portName,const std::string& srvName="", const std::string& service="") throw(SmartACE::SmartError)
     {
-        if(!yarp::os::Network::checkNetwork() || portName.size()==0 || !m_port.open(portName))
+        //FIXME use it!
+        YARP_UNUSED(service);
+        if(!yarp::os::Network::checkNetwork() || portName.empty() || !m_port.open(portName))
         {
             throw(SmartACE::SmartError(Smart::SMART_ERROR,"CommPattern (sendClient): ERROR: unable to open YARP port"));
         }
@@ -51,9 +54,52 @@ public:
         m_port.setWriteOnly();
         // the client doesn't wait the answer from the server
         m_port.enableBackgroundWrite(true);
+        if (!srvName.empty())
+        {
+            if (!yarp::os::Network::connect(m_port.getName(), srvName))
+            {
+                throw(SmartACE::SmartError(Smart::SMART_ERROR,"CommPattern (sendClient): ERROR: unable to connect to "+srvName));
+            }
+            m_serverNames.emplace_back(srvName);
+        }
     }
 
-    Smart::StatusCode connect(const std::string& server, const std::string& service) throw()
+    Smart::StatusCode add(const std::string& portName) throw()
+    {
+        bool ok = true;
+        if (yarp::os::Network::exists(portName))
+        {
+            return Smart::SMART_PORTALREADYUSED;
+        }
+        if (m_port.isOpen())
+        {
+            m_port.interrupt();
+            m_port.close();
+        }
+
+        if (m_port.open(portName))
+        {
+            // the name of the port is changed, but old connection has to be restored
+            // FIXME: am I right??
+            ok = connectAllSrv();
+        }
+        else
+        {
+            ok = false;
+        }
+
+        return ok ? Smart::SMART_OK : Smart::SMART_ERROR;
+    }
+
+    Smart::StatusCode remove() throw()
+    {
+        // FIXME: how do we maintain the connections without the port???
+        m_port.interrupt();
+        m_port.close();
+        return Smart::SMART_OK;
+    }
+
+    Smart::StatusCode connect(const std::string& server, const std::string& service="") throw()
     {
         //FIXME: use it
         YARP_UNUSED(service);
@@ -61,11 +107,10 @@ public:
         {
             yError()<<"SendClient: unable to connect to the SendServer:"<<server;
             return Smart::SMART_ERROR;
-            //throw(SmartACE::SmartError(Smart::SMART_ERROR,"CommPattern (sendClient): ERROR: unable to connect with the server %s"),server);
         }
         else
         {
-            server = m_serverName;
+            m_serverNames.emplace_back(server);
             return Smart::SMART_OK;
         }
 
@@ -73,16 +118,16 @@ public:
 
     Smart::StatusCode disconnect() throw()
     {
-        if (!yarp::os::Network::disconnect(m_port.getName(), m_serverName))
-        {
-            yError()<<"SendClient: unable to disconnect from the SendServer:"<<m_serverName;
-            return Smart::SMART_ERROR;
-            //throw(SmartACE::SmartError(Smart::SMART_ERROR,"CommPattern (sendClient): ERROR: unable to connect with the server %s"),server);
-        }
-        else
-        {
-            return Smart::SMART_OK;
-        }
+        bool ok = disconnectAllSrv();
+        m_serverNames.clear();
+        return ok ? Smart::SMART_OK : Smart::SMART_ERROR;
+    }
+
+    Smart::StatusCode blocking(const bool flag) throw()
+    {
+        YARP_UNUSED(flag);
+        // their code is exactly this one
+        return Smart::SMART_OK;
     }
 
     Smart::StatusCode send(const T& data) throw()
@@ -104,8 +149,33 @@ public:
 
 
 private:
+    bool disconnectAllSrv()
+    {
+        bool ok = true;
+        for (auto srvName : m_serverNames) {
+            if (!yarp::os::Network::disconnect(m_port.getName(), srvName))
+            {
+                yError()<<"SendClient: unable to disconnect from the SendServer:"<<srvName;
+                ok = false;
+            }
+        }
+        return ok;
+    }
+
+    bool connectAllSrv()
+    {
+        bool ok = true;
+        for (auto srvName : m_serverNames) {
+            if (!yarp::os::Network::connect(m_port.getName(), srvName))
+            {
+                yError()<<"SendClient: unable to connect to the SendServer:"<<srvName;
+                ok = false;
+            }
+        }
+        return ok;
+    }
     yarp::os::Port m_port;
-    std::string m_serverName;// FIXME initialization missing
+    std::vector<std::string> m_serverNames;// FIXME initialization missing
 
 };
 
