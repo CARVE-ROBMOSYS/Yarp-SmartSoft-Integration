@@ -1,4 +1,6 @@
 project(example_send_pattern)
 
-add_executable(${PROJECT_NAME} main.cpp)
-target_link_libraries(${PROJECT_NAME} ${YARP_LIBRARIES} YARP::YARP_smartsoft)
+add_executable(sendClient client.cpp)
+add_executable(sendServer server.cpp)
+target_link_libraries(sendClient ${YARP_LIBRARIES} YARP::YARP_smartsoft)
+target_link_libraries(sendServer ${YARP_LIBRARIES} YARP::YARP_smartsoft)
