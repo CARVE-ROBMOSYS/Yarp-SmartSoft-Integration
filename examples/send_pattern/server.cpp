@@ -23,8 +23,7 @@ public:
     virtual ~MyBottleHandler()
     {}
 
-    using  TypedReaderCallback<Bottle>::onRead;
-    virtual void onRead(Bottle& datum) override
+    virtual void handleSend(const Bottle& datum) throw() override
     {
         yInfo()<<"MyBottleHandler: hey, I'm receiving a bottle of size:"<<datum.size();
         yInfo()<<"MyBottleHandler: it contains"<<datum.toString();

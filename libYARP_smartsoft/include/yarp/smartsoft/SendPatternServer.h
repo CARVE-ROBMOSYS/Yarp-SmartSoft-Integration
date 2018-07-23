@@ -34,6 +34,14 @@ public:
     {}
     virtual ~SendPatternServerHandler()
     {}
+    virtual void handleSend(const T& datum) throw() = 0 ;
+
+private:
+    using yarp::os::TypedReaderCallback<T>::onRead;
+    void onRead(T& datum) override final
+    {
+        handleSend(datum);
+    }
 };
 template <class T>
 /**
