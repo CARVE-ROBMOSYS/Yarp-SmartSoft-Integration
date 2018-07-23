@@ -6,13 +6,12 @@
  * BSD-3-Clause license. See the accompanying LICENSE file for details.
  */
 
-#ifndef YARP_SMARTSOFT_IMPL_PATTERNCLIENTBASE_H
-#define YARP_SMARTSOFT_IMPL_PATTERNCLIENTBASE_H
+#ifndef YARP_SMARTSOFT_PATTERNCLIENTBASE_H
+#define YARP_SMARTSOFT_PATTERNCLIENTBASE_H
 #include <yarp/os/LogStream.h>
 #include <yarp/os/Network.h>
 #include <yarp/os/Port.h>
 
-#include <memory>
 #include <aceSmartSoft.hh>
 
 namespace yarp {
@@ -74,4 +73,4 @@ protected:
 } // namespace smartsoft
 } // namespace yarp
 
-#endif // YARP_SMARTSOFT_IMPL_PATTERNCLIENTBASE_H
+#endif // YARP_SMARTSOFT_PATTERNCLIENTBASE_H

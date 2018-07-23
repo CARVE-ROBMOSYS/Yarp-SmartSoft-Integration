@@ -19,22 +19,18 @@ namespace yarp {
 namespace smartsoft {
 template <class T> class SendPatternServer;
 
-template <class T>
 /**
  * @brief The SendPatternServerHandler class
  */
+template <class T>
 class SendPatternServerHandler : public yarp::os::TypedReaderCallback<T>
 {
 public:
     SendPatternServerHandler()
     {}
-    //FIXME: the server in the construction need the handle,
-    // the handler need the server, there is something wrong here...
-    SendPatternServerHandler(SendPatternServer<T> *server)
-    {}
     virtual ~SendPatternServerHandler()
     {}
-    virtual void handleSend(const T& datum) throw() = 0 ;
+    virtual void handleSend(const T& datum) throw() = 0;
 
 private:
     using yarp::os::TypedReaderCallback<T>::onRead;
@@ -43,10 +39,10 @@ private:
         handleSend(datum);
     }
 };
-template <class T>
 /**
  * @brief The SendPatternServer class
  */
+template <class T>
 class SendPatternServer //: public SmartACE::SendServer<T> FIXME: we need this inheritance??
 {
 public:

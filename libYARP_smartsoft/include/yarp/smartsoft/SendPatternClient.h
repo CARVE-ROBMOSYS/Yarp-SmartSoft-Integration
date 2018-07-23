@@ -20,10 +20,10 @@ namespace yarp {
 namespace smartsoft {
 // FIXME: in the signature of the functions are missing all the SmartComponent* and WiringSlave
 // No idea how to use them...
-template <class T>
 /**
  * @brief The SendPatternClient class
  */
+template <class T>
 class SendPatternClient : public yarp::smartsoft::PatternClientBase
 {
 public:
