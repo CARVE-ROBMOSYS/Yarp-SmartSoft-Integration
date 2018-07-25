@@ -1,0 +1,9 @@
+ComponentDefinition BT_engine {
+
+PreemptiveTask Task1
+	{
+	}
+RequestPort TickRequest implements CommYARP_BT.BaseStateQueryService {
+	}
+	ComponentParameters BT_engineParams
+}
