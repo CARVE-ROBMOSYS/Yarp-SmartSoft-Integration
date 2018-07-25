@@ -1,0 +1,23 @@
+CommObjectsRepository CommYARP_BT version 1.0 {
+	Enumeration  TickCommand {
+		Tick
+		Halt
+	}
+
+	Enumeration  TickResult {
+		Running
+		Success
+		Fail
+		Idle
+		FatalError
+	}
+	
+	CommObject CommTickCommand {
+		command: TickCommand
+		parameter : String
+	}
+	
+	CommObject CommTickResult {
+		result: TickResult
+	}
+}

@@ -1,0 +1,3 @@
+StateDefinitionRepository CommYARP_BT {
+	ExtendedMainStateCollection MyStates extends ComponentLifecycle.Alive { }
+}
