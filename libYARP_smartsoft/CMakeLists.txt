@@ -5,7 +5,8 @@ set(YARP_smartsoft_HDRS include/yarp/smartsoft/PatternClientBase.h
                         include/yarp/smartsoft/QueryPatternClient.h
                         include/yarp/smartsoft/QueryPatternServer.h
                         include/yarp/smartsoft/SendPatternClient.h
-                        include/yarp/smartsoft/SendPatternServer.h)
+                        include/yarp/smartsoft/SendPatternServer.h
+                        include/yarp/smartsoft/SmartVocabs.h)
 
 set(YARP_smartsoft_IMPL_HDRS )
 

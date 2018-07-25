@@ -8,5 +8,12 @@
 
 #ifndef YARP_SMARTSOFT_QUERYPATTERNSERVER_H
 #define YARP_SMARTSOFT_QUERYPATTERNSERVER_H
+#include <yarp/os/LogStream.h>
+#include <yarp/os/Network.h>
 
+namespace yarp {
+namespace smartsoft {
+
+} // namespace smartsoft
+} // namespace yarp
 #endif // YARP_SMARTSOFT_QUERYPATTERNSERVER_H
