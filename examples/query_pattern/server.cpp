@@ -14,6 +14,7 @@ using namespace yarp::smartsoft;
 
 int main()
 {
-
+    Network yarp;
+    QueryPatternServer<Bottle,Bottle> qps("/query_pattern/server");
     return 0;
 }

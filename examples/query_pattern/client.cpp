@@ -16,7 +16,5 @@ int main()
     Network yarp;
     QueryPatternClient<Bottle,Bottle> qpc("/query_pattern/client");
 
-    yarp::os::Time::delay(1.0);
-
     return 0;
 }
