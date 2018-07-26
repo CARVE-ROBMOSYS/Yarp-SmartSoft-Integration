@@ -21,6 +21,7 @@
 #include <aceSmartSoft.hh>
 
 #include <atomic>
+#include <memory>
 #include <mutex>
 
 namespace yarp {
@@ -231,7 +232,7 @@ protected:
             }
             m_map_req[_id].__answer = message.body;
             m_map_req[_id].__isReady = true;
-            m_map_req[_id].__cv.notify_all();
+            m_map_req[_id].__cv->notify_all();
             return true;
         }
         return false;
@@ -242,9 +243,10 @@ private:
     {
         A __answer;
         bool __isReady;
-        std::condition_variable __cv;
+        std::unique_ptr<std::condition_variable>__cv{new std::condition_variable()};
         QueryRequest(bool isReady=false) : __isReady(isReady)
-        {}
+        {
+        }
     };
     bool checkConnection()
     {
@@ -258,7 +260,8 @@ private:
 
     u_int32_t sendRequest(const R& request)
     {
-        u_int32_t idReq = m_num_req++;
+        m_num_req++;
+        u_int32_t idReq = m_num_req;
 
         yarp::os::PortablePair<yarp::os::Bottle, R> message;
         message.head.addInt32(vocab_query_id);
@@ -285,11 +288,11 @@ private:
             if (timeout == std::chrono::steady_clock::duration::zero())
             {
                 // Wait forever
-                m_map_req[idReq].__cv.wait(uniqueLk, [this, idReq] { return m_map_req[idReq].__isReady; });
+                m_map_req[idReq].__cv->wait(uniqueLk, [this, idReq] { return m_map_req[idReq].__isReady; });
             }
             else
             {
-                ok = m_map_req[idReq].__cv.wait_for(uniqueLk, timeout, [this, idReq] { return m_map_req[idReq].__isReady; });
+                ok = m_map_req[idReq].__cv->wait_for(uniqueLk, timeout, [this, idReq] { return m_map_req[idReq].__isReady; });
             }
         }
 

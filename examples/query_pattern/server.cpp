@@ -18,18 +18,40 @@ class MyQueryHandler : public QueryPatternServerHandler<Bottle,Bottle>
         if (server)
         {
             Bottle answer;
+            std::string operation = datum.get(0).asString();
+            if (operation == "sum")
+            {
+                answer.addInt32(datum.get(1).asInt32()+datum.get(2).asInt32());
+            }
+            else if (operation == "subtraction")
+            {
+                answer.addInt32(datum.get(1).asInt32()-datum.get(2).asInt32());
+            }
+            else if (operation == "subtraction")
+            {
+                answer.addInt32(datum.get(1).asInt32()*datum.get(2).asInt32());
+            }
+            else
+            {
+                yError()<<"MyHandler"<<operation<<"not supported";
+                return;
+            }
+
             // do stuff...
             int32_t status_code = server->answer(idReq, answer);
+            }
 
         }
-    }
-
 };
 int main()
 {
     Network yarp;
     MyQueryHandler hdlr;
     QueryPatternServer<Bottle,Bottle> qps("/query_pattern/server", &hdlr);
-    yarp::os::Time::delay(1.0);
+    while (true)
+    {
+        yInfo()<<"The QueryServer is running...";
+        yarp::os::Time::delay(0.5);
+    }
     return 0;
 }
