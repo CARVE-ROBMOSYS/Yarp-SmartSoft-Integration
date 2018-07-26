@@ -214,20 +214,22 @@ public:
 protected:
     virtual bool read(yarp::os::ConnectionReader& reader) override
     {
-        if (reader.expectInt32() == vocab_query_id)
+        yarp::os::PortablePair<yarp::os::Bottle, A> message;
+        if (!message.read(reader))
         {
-            uint32_t _id = reader.expectInt32();
+            yError()<<"QueryClient: error receiving the answer from the server";
+            return false;
+        }
+        if (message.head.get(0).asInt32() == vocab_query_id)
+        {
+            uint32_t _id = message.head.get(1).asInt32();
             std::lock_guard<std::mutex> lk_guard(m_map_mutex);
             if (m_map_req.find(_id) == m_map_req.end())
             {
                 yError()<<"QueryClient: requested id"<<_id<<"not valid, the request has been discarded";
                 return false;
             }
-            bool ok = m_map_req[_id].__answer.read(reader);
-            if (!ok)
-            {
-                return false;
-            }
+            m_map_req[_id].__answer = message.body;
             m_map_req[_id].__isReady = true;
             m_map_req[_id].__cv.notify_all();
             return true;
@@ -258,9 +260,9 @@ private:
     {
         u_int32_t idReq = m_num_req++;
 
-        yarp::os::PortablePair<yarp::os::Bottle, const R&> message;
-        message.head.addInt32(yarp::os::Value(vocab_query_id));
-        message.head.addInt32(yarp::os::Value(m_num_req));
+        yarp::os::PortablePair<yarp::os::Bottle, R> message;
+        message.head.addInt32(vocab_query_id);
+        message.head.addInt32(m_num_req);
         message.body = request;
 
         bool ok = (m_port && m_port->write(message));
