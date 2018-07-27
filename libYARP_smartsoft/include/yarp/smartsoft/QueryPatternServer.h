@@ -12,6 +12,7 @@
 #include <yarp/os/LogStream.h>
 #include <yarp/os/Network.h>
 #include <yarp/os/PortablePair.h>
+#include <yarp/os/RpcServer.h>
 #include <yarp/smartsoft/SmartVocabs.h>
 
 #include <aceSmartSoft.hh>
@@ -73,20 +74,26 @@ public:
         {
             throw(SmartACE::SmartError(Smart::SMART_ERROR,"CommPattern (queryServer): ERROR: query handler invalid"));
         }
-        if (!yarp::os::Network::checkNetwork() || portName.empty() || !m_port.open(portName))
+        if (!yarp::os::Network::checkNetwork() || portName.empty() || !m_rpc_server.open(portName))
         {
             throw(SmartACE::SmartError(Smart::SMART_ERROR,"CommPattern (queryServer): ERROR: unable to open YARP port"));
         }
         // The server can only receive.
-        m_port.setReader(*this);
+        m_rpc_server.setReader(*this);
     }
 
     virtual ~QueryPatternServer() throw()
     {
-        m_port.interrupt();
-        m_port.close();
+        m_rpc_server.interrupt();
+        m_rpc_server.close();
     }
 
+    /**
+     * @brief answer
+     * @param id
+     * @param answer
+     * @return
+     */
     Smart::StatusCode answer(const int32_t& id, const A& answer) throw()
     {
         if (id < 0)
@@ -94,37 +101,35 @@ public:
             yError()<<"QueryServer: invalid id, it must be positive";
             return Smart::SMART_WRONGID;
         }
-        if (m_port.getInputCount() == 0)
+        if (m_rpc_server.getInputCount() == 0)
         {
             yError()<<"QueryServer: no ingoing connections..";
             return Smart::SMART_DISCONNECTED;
         }
-        yarp::os::PortablePair<yarp::os::Bottle, A> message;
-        message.head.addInt32(vocab_query_id);
-        message.head.addInt32(id);
-        message.body = answer;
-        return (m_port.reply(message)) ? Smart::SMART_OK : Smart::SMART_ERROR_COMMUNICATION;
+        return (answer.write(*m_connection->getWriter())) ? Smart::SMART_OK : Smart::SMART_ERROR_COMMUNICATION;
     }
 
 protected:
-    virtual bool read(yarp::os::ConnectionReader& reader)
+    virtual bool read(yarp::os::ConnectionReader& connection)
     {
         yarp::os::PortablePair<yarp::os::Bottle, R> message;
-        if (!message.read(reader))
+        if (!message.read(connection))
         {
             return false;
         }
         if (message.head.get(0).asInt32() == vocab_query_id)
         {
             uint32_t _id = message.head.get(1).asInt32();
+            m_connection = &connection;
             m_query_handler_ptr->handleQuery(this, _id, message.body);
             return true;
         }
         return false;
     }
 private:
-    yarp::os::Port m_port;
+    yarp::os::RpcServer m_rpc_server;
     QueryPatternServerHandler<R,A>* m_query_handler_ptr;
+    yarp::os::ConnectionReader* m_connection {nullptr};
 
 };
 

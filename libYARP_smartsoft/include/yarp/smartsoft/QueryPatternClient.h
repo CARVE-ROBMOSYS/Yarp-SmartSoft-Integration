@@ -21,6 +21,8 @@
 #include <aceSmartSoft.hh>
 
 #include <atomic>
+#include <future>
+#include <thread>
 #include <memory>
 #include <mutex>
 
@@ -31,8 +33,8 @@ namespace smartsoft {
  * @brief The QueryPatternClient class
  */
 template<class R, class A>
-class QueryPatternClient : public PatternClientBase,
-                           public yarp::os::PortReader
+class QueryPatternClient : public PatternClientBase
+                           //public yarp::os::PortReader
 {
 public:
     QueryPatternClient() = delete;
@@ -50,7 +52,7 @@ public:
     {
         YARP_UNUSED(service);//FIXME: use it!
 
-        m_port = new yarp::os::Port();
+        m_port = &m_rpc_client.asPort();
         if (!yarp::os::Network::checkNetwork() || portName.empty() || !m_port || !m_port->open(portName))
         {
             throw(SmartACE::SmartError(Smart::SMART_ERROR,
@@ -66,7 +68,6 @@ public:
             }
             m_serverNames.emplace_back(srvName);
         }
-        m_port->setReader(*this);
     }
 
     /**
@@ -76,10 +77,6 @@ public:
     {
         this->disconnect();
         this->remove();
-        if (m_port)
-        {
-            delete m_port;
-        }
     }
 
     /**
@@ -108,6 +105,7 @@ public:
             return Smart::SMART_DISCONNECTED;
         }
 
+        std::lock_guard<std::mutex> lk_guard(m_map_mutex);
         uint32_t idReq = sendRequest(request);
 
         if (idReq == vocab_query_wrong_id)
@@ -131,6 +129,7 @@ public:
             return Smart::SMART_DISCONNECTED;
         }
 
+        std::lock_guard<std::mutex> lk_guard(m_map_mutex);
         uint32_t idReq = sendRequest(request);
         // I expect that the server answer me with the ticket generated
         if (idReq == vocab_query_wrong_id)
@@ -162,9 +161,8 @@ public:
             return Smart::SMART_WRONGID;
         }
 
-        if (m_map_req[id].__isReady)
+        if (fetchAnswer(id,answer,false) == Smart::SMART_OK)
         {
-            answer = m_map_req[id].__answer;
             return Smart::SMART_OK;
         }
         else
@@ -187,12 +185,13 @@ public:
             return Smart::SMART_DISCONNECTED;
         }
 
+        std::lock_guard<std::mutex> lk_guard(m_map_mutex);
         if (m_map_req.find(id) == m_map_req.end())
         {
             yError()<<"QueryClient: requested id"<<id<<"not valid..";
             return Smart::SMART_WRONGID;
         }
-        return fetchAnswer(id, answer, timeout);
+        return fetchAnswer(id, answer, false, timeout);
     }
 
     /**
@@ -213,40 +212,18 @@ public:
     }
 
 protected:
-    virtual bool read(yarp::os::ConnectionReader& reader) override
-    {
-        yarp::os::PortablePair<yarp::os::Bottle, A> message;
-        if (!message.read(reader))
-        {
-            yError()<<"QueryClient: error receiving the answer from the server";
-            return false;
-        }
-        if (message.head.get(0).asInt32() == vocab_query_id)
-        {
-            uint32_t _id = message.head.get(1).asInt32();
-            std::lock_guard<std::mutex> lk_guard(m_map_mutex);
-            if (m_map_req.find(_id) == m_map_req.end())
-            {
-                yError()<<"QueryClient: requested id"<<_id<<"not valid, the request has been discarded";
-                return false;
-            }
-            m_map_req[_id].__answer = message.body;
-            m_map_req[_id].__isReady = true;
-            m_map_req[_id].__cv->notify_all();
-            return true;
-        }
-        return false;
-    }
 
 private:
     struct QueryRequest
     {
         A __answer;
-        bool __isReady;
-        std::unique_ptr<std::condition_variable>__cv{new std::condition_variable()};
-        QueryRequest(bool isReady=false) : __isReady(isReady)
-        {
-        }
+        std::future<bool> __future;
+        QueryRequest()
+        {}
+
+        QueryRequest(std::future<bool>&& fut) : __future{std::move(fut)}
+        {}
+
     };
     bool checkConnection()
     {
@@ -268,49 +245,49 @@ private:
         message.head.addInt32(m_num_req);
         message.body = request;
 
-        bool ok = (m_port && m_port->write(message));
-        if (ok)
-        {
-            std::lock_guard<std::mutex> lk_guard(m_map_mutex);
-            m_map_req[m_num_req] = QueryRequest();
-        }
-        return ok ? idReq : vocab_query_wrong_id;
+        m_map_req[m_num_req] = QueryRequest(std::async(std::launch::async,
+                                                       [this, message] {
+                                                           return m_port->write(message,m_map_req[m_num_req].__answer);
+                                                       }
+                                                       ));
+        return idReq;
     }
 
-    Smart::StatusCode fetchAnswer(const uint32_t& idReq, A& answer, const std::chrono::steady_clock::duration &timeout=std::chrono::steady_clock::duration::zero())
+    Smart::StatusCode fetchAnswer(const uint32_t& idReq, A& answer, bool waitForever = true, const std::chrono::steady_clock::duration &timeout=std::chrono::steady_clock::duration::zero())
     {
-        std::lock_guard<std::mutex> lk_guard(m_map_mutex);
         bool ok = true;
-        if (!m_map_req.at(idReq).__isReady)
+//        yDebug()<<"Waiting... map size:"<<m_map_req.size();
+//        yDebug()<<"Fetching..."<<idReq;
+//        yDebug()<<m_map_req.at(idReq).__future.valid();
+
+        if (!waitForever)
         {
-            std::unique_lock<std::mutex> uniqueLk(m_cv_mutex);
-            // We need this lambda in the wait to avoid spurious wake up
-            if (timeout == std::chrono::steady_clock::duration::zero())
-            {
-                // Wait forever
-                m_map_req[idReq].__cv->wait(uniqueLk, [this, idReq] { return m_map_req[idReq].__isReady; });
-            }
-            else
-            {
-                ok = m_map_req[idReq].__cv->wait_for(uniqueLk, timeout, [this, idReq] { return m_map_req[idReq].__isReady; });
-            }
+            ok  = std::future_status::ready == m_map_req.at(idReq).__future.wait_for(timeout);
+            ok &= m_map_req.at(idReq).__future.get();
+        }
+        else
+        {
+            // Wait forever
+            ok = m_map_req.at(idReq).__future.get();
         }
 
         if (ok)
         {
-            answer = m_map_req[idReq].__answer;
+            answer = m_map_req.at(idReq).__answer;
             // Once the answered has been consumed, remove it from the queue.
             m_map_req.erase(idReq);
             return Smart::SMART_OK;
         }
         else
         {
+            yError()<<"QueryClient: request "<<idReq<<"failed for timeout or troubles in communication";
             return  Smart::SMART_ERROR;
         }
     }
+
+    yarp::os::RpcClient m_rpc_client;
     std::map<uint32_t, QueryRequest> m_map_req;
     std::mutex m_map_mutex;
-    std::mutex m_cv_mutex;
     std::atomic<uint32_t> m_num_req{0};
 
 

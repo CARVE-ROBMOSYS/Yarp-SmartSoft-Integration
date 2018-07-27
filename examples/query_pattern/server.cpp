@@ -38,10 +38,18 @@ class MyQueryHandler : public QueryPatternServerHandler<Bottle,Bottle>
             }
 
             // do stuff...
+            yInfo()<<"MyHandler: answering with"<<answer.toString();
             int32_t status_code = server->answer(idReq, answer);
+            if (status_code == Smart::SMART_OK)
+            {
+                yInfo()<<"MyHandler: answer"<<answer.toString()<<"successfully sent";
             }
-
+            if (status_code == Smart::SMART_ERROR)
+            {
+                yError()<<"MyHandler: failed to answer";
+            }
         }
+    }
 };
 int main()
 {

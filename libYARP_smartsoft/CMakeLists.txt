@@ -31,7 +31,8 @@ target_include_directories(YARP_smartsoft PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRE
 
 target_link_libraries(YARP_smartsoft PUBLIC YARP::YARP_conf
                                             YARP::YARP_OS
-                                            AceSmartSoftKernel)
+                                            AceSmartSoftKernel
+                                            pthread)
 
 if(CMAKE_VERSION VERSION_LESS 3.8)
   target_compile_features(YARP_smartsoft PUBLIC cxx_auto_type

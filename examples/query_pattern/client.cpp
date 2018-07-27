@@ -16,7 +16,7 @@ int main()
     Network yarp;
     QueryPatternClient<Bottle,Bottle> qpc("/query_pattern/client");
 
-    int trials = 10;
+    int trials = 1000;
     while (Smart::SMART_OK != qpc.connect("/query_pattern/server"))
     {
         if (0 == trials)
@@ -45,7 +45,7 @@ int main()
     }
     else
     {
-        yInfo()<<"The resul of operation is"<<ans.get(0).asInt32();
+        yInfo()<<"The resul of operation is"<<ans.toString();
     }
 
     yarp::os::Time::delay(1.0);
