@@ -26,7 +26,7 @@ pointing to the build directory of `yarp` and `AceSmartSoft` respectively.```
 ```bash
   $ git clone https://github.com/CARVE-ROBMOSYS/Yarp-SmartSoft-Integration
   $ cd Yarp-SmartSoft-Integration
-  $ mdir build && cd build
+  $ mkdir build && cd build
   $ cmake ..
   $ make -j
   $ make install (optional)
