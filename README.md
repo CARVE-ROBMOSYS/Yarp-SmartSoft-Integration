@@ -24,12 +24,12 @@ SW components used to integrate YARP modules in SmartSoft
 pointing to the build directory of `yarp` and `AceSmartSoft` respectively.```
 ## Installation on Linux
 ```bash
-- $ git clone https://github.com/CARVE-ROBMOSYS/Yarp-SmartSoft-Integration
-- $ cd Yarp-SmartSoft-Integration
-- $ mdir build && cd build
-- $ cmake ..
-- $ make -j
-- $ make install (optional)
+  $ git clone https://github.com/CARVE-ROBMOSYS/Yarp-SmartSoft-Integration
+  $ cd Yarp-SmartSoft-Integration
+  $ mdir build && cd build
+  $ cmake ..
+  $ make -j
+  $ make install (optional)
 ```
 It is possible to compile the examples running `cmake -DCOMPILE_examples=ON ..`
 
