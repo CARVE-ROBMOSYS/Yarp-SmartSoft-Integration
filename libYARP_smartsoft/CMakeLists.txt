@@ -2,6 +2,8 @@
 project(YARP_smartsoft)
 
 set(YARP_smartsoft_HDRS include/yarp/smartsoft/PatternClientBase.h
+                        include/yarp/smartsoft/PushPatternClient.h
+                        include/yarp/smartsoft/PushPatternServer.h
                         include/yarp/smartsoft/QueryPatternClient.h
                         include/yarp/smartsoft/QueryPatternServer.h
                         include/yarp/smartsoft/SendPatternClient.h
