@@ -47,6 +47,12 @@ class SendPatternServer //: public SmartACE::SendServer<T> FIXME: we need this i
 {
 public:
     SendPatternServer() = delete;
+    /**
+     * @brief SendPatternServer
+     * @param portName
+     * @param serverHandler
+     * @param service
+     */
     SendPatternServer(const std::string portName, SendPatternServerHandler<T> *serverHandler, const std::string& service = "") throw(SmartACE::SmartError)
     {
         if (!serverHandler)
