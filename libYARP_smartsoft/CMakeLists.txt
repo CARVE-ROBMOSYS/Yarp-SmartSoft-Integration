@@ -12,9 +12,7 @@ set(YARP_smartsoft_HDRS include/yarp/smartsoft/PatternClientBase.h
 
 set(YARP_smartsoft_IMPL_HDRS )
 
-set(YARP_smartsoft_SRCS src/PatternClientBase.cpp
-                        src/SendPatternClient.cpp
-                        src/SendPatternServer.cpp)
+set(YARP_smartsoft_SRCS src/PatternClientBase.cpp)
 
 source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}"
              PREFIX "Source Files"
