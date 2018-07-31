@@ -39,10 +39,10 @@ public:
     PushPatternClient(const PushPatternClient& rhs) = delete;
 
     /**
-     * @brief PushPatternClient
-     * @param portName
-     * @param srvName
-     * @param service
+     * @brief PushPatternClient constructor
+     * @param portName name of the port associated to the client
+     * @param srvName name of the port of the server that it has to connect to
+     * @param service name of the service.
      */
     PushPatternClient(const std::string& portName, const std::string& srvName="",
                       const std::string& service="") throw(SmartACE::SmartError)
@@ -84,20 +84,34 @@ public:
     }
 
     /**
-     * @brief blocking
-     * @param flag
-     * @return
+     * @brief
+     * If blocking is set to false all blocking calls return with SMART_CANCELLED. This can be
+     * used to abort blocking calls.
+     *
+     * @param b (blocking)  true/false
+     *
+     * @return status code
+     * - SMART_OK                  : new mode set
+     * - SMART_ERROR               : something went wrong
      */
     Smart::StatusCode blocking(const bool flag) throw() override
     {
         m_blocking = flag;
         return Smart::SMART_OK;
     }
-    /**
-     * @brief connect
-     * @param server
-     * @param service
-     * @return
+
+    /** @brief
+     * Connect this service requestor to the denoted service provider. An
+     *  already established connection is first disconnected. See disconnect()
+     *  for implications on running or pending queries in that case.
+     *
+     *  @param server   name of the server
+     *  @param service  name of the service
+     *
+     *  @return status code
+     *   - SMART_OK                  : everything is OK and connected to the specified service.
+     *   - SMART_ERROR               : something went wrong, service requestor is now not connected to any
+     *                                 service provider.
      */
     Smart::StatusCode connect(const std::string& server, const std::string& service="") throw() override
     {
@@ -119,9 +133,17 @@ public:
 
     }
 
-    /**
-     * @brief subscribe
-     * @return
+
+    /** @brief
+     * Subscribe at the server to periodically get every n-th update. A
+     *  newly subscribed client gets the next available new data and is
+     *  then updated with regard to its individual update cycle.
+     *
+     *  @return status code
+     *    - SMART_OK                  : everything is ok and client is subscribed
+     *    - SMART_DISCONNECTED        : client is not connected to a server and can therefore
+     *                                  not subscribe for updates, not subscribed
+     *    - SMART_ERROR_COMMUNICATION : communication problems, not subscribed
      */
     Smart::StatusCode subscribe() throw()
     {
@@ -143,9 +165,16 @@ public:
         return Smart::SMART_OK;
     }
 
-    /**
-     * @brief unsubscribe
-     * @return
+    /** @brief
+     * Unsubscribe to get no more updates. All blocking calls are aborted with the appropriate
+     *  status and yet received and still buffered data is deleted to avoid returning old data.
+     *
+     *  @return status code
+     *    - SMART_OK                  : everything is ok and client is now unsubscribed or
+     *                                  has already been unsubscribed
+     *    - SMART_ERROR_COMMUNICATION : communication problems, not unsubscribed
+     *    - SMART_ERROR               : something went wrong, not unsubscribed
+     *
      */
     Smart::StatusCode unsubscribe() throw()
     {
@@ -160,10 +189,29 @@ public:
         return Smart::SMART_OK;
     }
 
-    /**
-     * @brief getUpdate
-     * @param d
-     * @return
+    /** @brief
+     * Non-blocking call to immediately return the latest available
+     *  data buffered at the client side from the most recent update.
+     *
+     *  No data is returned as long as no update is received since
+     *  subscription. To avoid returning old data, no data is
+     *  returned after the client is unsubscribed or when the
+     *  server is not active.
+     *
+     * @param d is set to the newest currently available data
+     *
+     * @return status code
+     *   - SMART_OK                  : everything ok and latest data since client got subscribed
+     *                                 is returned.
+     *   - SMART_NODATA              : client has not yet received an update since subscription and
+     *                                 therefore no data is available and no data is returned.
+     *   - SMART_NOTACTIVATED        : the server is currently not active and does therefore not
+     *                                 provide updates at the expected rate. No valid data returned.
+     *   - SMART_UNSUBSCRIBED        : no data available since client is not subscribed and can
+     *                                 therefore not receive updates. Method does not return old data from
+     *                                 last subscription since these might be based on too old parameter
+     *                                 settings. To get data one has to be subscribed.
+     *   - SMART_DISCONNECTED        : no data returned since client is even not connected to a server.
      */
     Smart::StatusCode getUpdate(T& d) throw()
     {
@@ -189,11 +237,19 @@ public:
         return Smart::SMART_OK;
     }
 
-    /**
-     * @brief getUpdateWait
-     * @param d
-     * @param timeout
-     * @return
+    /** @brief
+     * Blocking call which waits until the next update is received.
+     *
+     *  @param d is set to the newest currently available data
+     *  @param timeout allows to release the blocking wait after a given timeout time (the default max_time means infinite blocking)
+     *
+     *  @return status code
+     *   - SMART_OK                  : everything is ok and just received data is returned.
+     *   - SMART_CANCELLED           : blocking is not allowed or is not allowed anymore. Waiting for the
+     *                                 next update is aborted and no valid data is returned.
+     *   - SMART_UNSUBSCRIBED        : returns immediately without data if the client is not subscribed.
+     *   - SMART_DISCONNECTED        : returns immediately without data since client is even not connected
+     *                                 to a server.
      */
     Smart::StatusCode getUpdateWait(T& d, const std::chrono::steady_clock::duration &timeout=std::chrono::steady_clock::duration::zero()) throw()
     {
@@ -221,11 +277,20 @@ public:
         return Smart::SMART_OK;
     }
 
-    /**
-     * @brief getServerInfo
-     * @param t
-     * @param r
-     * @return
+    /** @brief
+     * Get cycle time and server state.
+     *
+     *  Returns cycle time of server in [seconds] and server state indicating
+     *  whether server is activated or not. The client can decide on the cycle
+     *  time on its individual update rate at subscription.
+     *
+     * @param t is set to the server cycle time [seconds]
+     * @param r indicates whether server is started [true, false]
+     *
+     * @return status code
+     *   - SMART_OK                  : everything is ok and returned values are valid.
+     *   - SMART_DISCONNECTED        : client is not connected to a server and
+     *                                 therefore not get any valid server info.
      */
     Smart::StatusCode getServerInfo(double& t,bool& r) throw()
     {

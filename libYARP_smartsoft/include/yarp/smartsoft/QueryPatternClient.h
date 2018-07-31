@@ -42,10 +42,10 @@ public:
     QueryPatternClient(const QueryPatternClient& rhs) = delete;
 
     /**
-     * @brief QueryPatternClient
-     * @param portName
-     * @param srvName
-     * @param service
+     * @brief QueryPatternClient constructor
+     * @param portName name of the port associated to the client
+     * @param srvName name of the port of the server that it has to connect to
+     * @param service name of the service.
      */
     QueryPatternClient(const std::string& portName, const std::string& srvName ="",
                        const std::string& service = "") throw(SmartACE::SmartError)
@@ -80,9 +80,15 @@ public:
     }
 
     /**
-     * @brief blocking
-     * @param flag
-     * @return
+     * @brief
+     * If blocking is set to false all blocking calls return with SMART_CANCELLED. This can be
+     * used to abort blocking calls.
+     *
+     * @param b (blocking)  true/false
+     *
+     * @return status code
+     * - SMART_OK                  : new mode set
+     * - SMART_ERROR               : something went wrong
      */
     Smart::StatusCode blocking(const bool flag) throw() override
     {
@@ -91,11 +97,26 @@ public:
         return Smart::SMART_OK;
     }
 
-    /**
-     * @brief query
-     * @param request
-     * @param answer
-     * @return
+    /** @brief
+     * Blocking Query.
+     *
+     *  Perform a blocking query and return only when the query answer
+     *  is available. Member function is thread safe and thread reentrant.
+     *
+     *  @param request send this request to the server (Portable)
+     *  @param answer  returned answer from the server (Portable)
+     *
+     *  @return status code:
+     *    - SMART_OK                  : everything is ok and <I>answer</I> contains answer
+     *    - SMART_CANCELLED           : blocking is not allowed or is not allowed anymore and therefore
+     *                                  pending query is aborted, answer is lost and <I>answer</I>
+     *                                  contains no valid answer.
+     *    - SMART_DISCONNECTED        : the client is either disconnected and no query
+     *                                  can be made or it got disconnected and a pending
+     *                                  query is aborted without answer. In both cases,
+     *                                  <I>answer</I> is not valid.
+     *    - SMART_ERROR_COMMUNICATION : communication problems, <I>answer</I> is not valid.
+     *    - SMART_ERROR               : something went wrong, <I>answer</I> is not valid.
      */
     Smart::StatusCode query(const R& request, A& answer) throw()
     {
@@ -116,11 +137,23 @@ public:
         return fetchAnswer(idReq, answer);
     }
 
-    /**
-     * @brief queryRequest
-     * @param request
-     * @param id
-     * @return
+    /** @brief
+     * Asynchronous Query.
+     *
+     *  Perform a query and receive the answer later, returns immediately.
+     *  Member function is thread safe and reentrant.
+     *
+     *  @param request send this request to the server (Portable)
+     *  @param id      is set to the identifier which is later used to receive
+     *                 the reply to this request
+     *
+     *  @return status code:
+     *    - SMART_OK                  : everything is ok and <I>id</I> contains query identifier
+     *                                  used to either fetch or discard the answer.
+     *    - SMART_DISCONNECTED        : request is rejected since client is not connected to a server
+     *                                  and therefore <I>id</I> is not a valid identifier.
+     *    - SMART_ERROR_COMMUNICATION : communication problems, <I>id</I> is not valid.
+     *    - SMART_ERROR               : something went wrong, <I>id</I> is not valid.
      */
     Smart::StatusCode queryRequest(const R& request, uint32_t& id) throw()
     {
@@ -141,11 +174,31 @@ public:
         return Smart::SMART_OK;
     }
 
-    /**
-     * @brief queryReceive
-     * @param id
-     * @param answer
-     * @return
+    /** @brief
+     * Check if answer is available.
+     *
+     *  Non-blocking call to fetch the answer belonging to the given identifier.
+     *  Returns immediately. Member function is thread safe and reentrant.
+     *
+     *  @warning
+     *    It is not allowed to call queryReceive(), queryReceiveWait() or queryDiscard() concurrently
+     *    with the <I>same</I> query id (which is not a restriction since it makes no sense !)
+     *
+     *  @param id      provides the identifier of the query
+     *  @param answer  is set to the answer returned from the server if it was available
+     *
+     *  @return status code:
+     *    - SMART_OK           : everything is ok and <I>answer</I> contains the answer
+     *    - SMART_WRONGID      : no pending query with this identifier available, therefore no valid
+     *                           <I>answer</I> returned.
+     *    - SMART_NODATA       : answer not yet available, therefore try again later. The identifier <I>id</I>
+     *                           keeps valid, but <I>answer</I> contains no valid answer.
+     *    - SMART_DISCONNECTED : the answer belonging to the <I>id</I> can not be received
+     *                           anymore since the client got disconnected. <I>id</I> is
+     *                           not valid any longer and <I>answer</I> contains no valid answer.
+     *    - SMART_ERROR        : something went wrong, <I>answer</I> contains no answer and <I>id</I> is
+     *                           not valid any longer.
+     *
      */
     Smart::StatusCode queryReceive(const uint32_t& id, A& answer) throw()
     {
@@ -171,12 +224,34 @@ public:
         }
     }
 
-    /**
-     * @brief queryReceiveWait
-     * @param id
-     * @param answer
-     * @param timeout
-     * @return
+    /** @brief
+     * Wait for reply.
+     *
+     *  Blocking call to fetch the answer belonging to the given identifier. Waits until
+     *  the answer is received.
+     *
+     *  @warning
+     *    It is not allowed to call queryReceive(), queryReceiveWait() or queryDiscard() concurrently
+     *    with the <I>same</I> query id (which is not a restriction since it makes no sense !)
+     *
+     *  @param id       provides the identifier of the query
+     *  @param answer   is set to the answer returned from the server if it was available
+     *
+     *  @return status code:
+     *    - SMART_OK           : everything is ok and <I>answer</I> contains the answer
+     *    - SMART_WRONGID      : no pending query with this identifier available, therefore no
+     *                           valid <I>answer</I> returned.
+     *    - SMART_CANCELLED    : blocking call is not allowed or is not allowed anymore and therefore
+     *                           blocking call is aborted and no valid <I>answer</I> is returned. The
+     *                           query identifier <I>id</I> keeps valid and one can either again call
+     *                           queryReceive(), queryReceiveWait() or discard the answer by calling
+     *                           queryDiscard().
+     *    - SMART_DISCONNECTED : blocking call is aborted and the answer belonging to <I>id</I> can not
+     *                           be received anymore since client got disconnected. <I>id</I> is not valid
+     *                           any longer and <I>answer</I> contains no valid answer.
+     *    - SMART_ERROR        : something went wrong, <I>answer</I> contains no answer and <I>id</I> is
+     *                           not valid any longer.
+     *
      */
     Smart::StatusCode queryReceiveWait(const uint32_t& id, A& answer, const std::chrono::steady_clock::duration &timeout=std::chrono::steady_clock::duration::zero()) throw()
     {
@@ -194,10 +269,29 @@ public:
         return fetchAnswer(id, answer, false, timeout);
     }
 
-    /**
-     * @brief queryDiscard
-     * @param id
-     * @return
+    /**  @brief
+     * Discard the pending answer with the identifier <I>id</I>
+     *
+     *  Call this member function if you do not want to get the answer of a request anymore which
+     *  was invoked by queryRequest(). This member function invalidates the identifier <I>id</I>.
+     *
+     *  @warning
+     *    This member function does NOT abort blocking calls ! This is done by the blocking() member
+     *    function. It has to be called if you have not yet received an answer and the identifier is
+     *    still valid, for example due to a CANCELLED return value, and you don't want to get the
+     *    answer anymore.
+     *
+     *  @warning
+     *    It is not allowed to call queryReceive(), queryReceiveWait() or queryDiscard() concurrently
+     *    with the <I>same</I> query id (which is not a restriction since it makes no sense !)
+     *
+     *  @param id  provides the identifier of the query
+     *
+     *  @return status code:
+     *    - SMART_OK           : everything is ok and query with the identifier <I>id</I> discarded.
+     *    - SMART_WRONGID      : no pending query with this identifier.
+     *    - SMART_ERROR        : something went wrong, <I>id</I> not valid any longer.
+     *
      */
     Smart::StatusCode queryDiscard(const uint32_t& id) throw()
     {

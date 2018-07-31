@@ -38,10 +38,10 @@ public:
     SendPatternClient(const SendPatternClient& rhs) = delete;
 
     /**
-     * @brief SendPatternClient
-     * @param portName
-     * @param srvName
-     * @param service
+     * @brief SendPatternClient constructor
+     * @param portName name of the port associated to the client.
+     * @param srvName name of the port of the server that it has to connect to.
+     * @param service name of the service.
      */
     SendPatternClient(const std::string& portName,const std::string& srvName="",
                       const std::string& service="") throw(SmartACE::SmartError)
@@ -80,7 +80,17 @@ public:
     }
 
 
-
+    /**
+     * @brief
+     * If blocking is set to false all blocking calls return with SMART_CANCELLED. This can be
+     * used to abort blocking calls.
+     *
+     * @param b (blocking)  true/false
+     *
+     * @return status code
+     * - SMART_OK                  : new mode set
+     * - SMART_ERROR               : something went wrong
+     */
     Smart::StatusCode blocking(const bool flag) throw() override
     {
         YARP_UNUSED(flag);
@@ -88,10 +98,17 @@ public:
         return Smart::SMART_OK;
     }
 
-    /**
-     * @brief send
-     * @param data
-     * @return
+    /** @brief
+     * Perform a one-way communication. Appropriate status codes make
+     *  sure that the information has been transferred.
+     *
+     *  @param c the object to be sent (Communication Object)
+     *
+     *  @return status code:
+     *    - SMART_OK                  : everything is ok and communication object sent to server
+     *    - SMART_DISCONNECTED        : the client is disconnected and no send can be made
+     *    - SMART_ERROR_COMMUNICATION : communication problems, data not transmitted
+     *    - SMART_ERROR               : something went wrong, data not transmitted
      */
     Smart::StatusCode send(const T& data) throw()
     {

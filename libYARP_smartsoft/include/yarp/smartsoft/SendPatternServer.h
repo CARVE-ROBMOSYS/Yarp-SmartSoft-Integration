@@ -28,8 +28,15 @@ class SendPatternServerHandler : public yarp::os::TypedReaderCallback<T>
 public:
     SendPatternServerHandler()
     {}
+
     virtual ~SendPatternServerHandler()
     {}
+
+    /**
+     * @brief
+     * Callback to be implemented, it is called every time the server receive new data.
+     * @param datum, request to be handled.
+     */
     virtual void handleSend(const T& datum) throw() = 0;
 
 private:
@@ -47,11 +54,12 @@ class SendPatternServer //: public SmartACE::SendServer<T> FIXME: we need this i
 {
 public:
     SendPatternServer() = delete;
+
     /**
      * @brief SendPatternServer
-     * @param portName
-     * @param serverHandler
-     * @param service
+     * @param portName, name of the port associated to the server.
+     * @param serverHandler, pointer to the send handler.
+     * @param service, name of the service.
      */
     SendPatternServer(const std::string portName, SendPatternServerHandler<T> *serverHandler, const std::string& service = "") throw(SmartACE::SmartError)
     {

@@ -28,36 +28,69 @@ public:
     {}
 
     /**
-     * @brief blocking
-     * @param flag
-     * @return
+     * @brief
+     * If blocking is set to false all blocking calls return with SMART_CANCELLED. This can be
+     * used to abort blocking calls.
+     *
+     * @param b (blocking)  true/false
+     *
+     * @return status code
+     * - SMART_OK                  : new mode set
+     * - SMART_ERROR               : something went wrong
      */
     virtual Smart::StatusCode blocking(const bool flag) throw() = 0;
 
-    /**
-     * @brief add
-     * @param portName
-     * @return
+    /** @brief
+     * Open a port to associate to this instance. Already
+     *  established connections keep valid. If this service
+     *  requestor is already exposing a port, it is first
+     *  closed and then reopened with the new port name.
+     *  add()/remove() and connect()/disconnect() can always
+     *  be used to change the status of this instance.
+     *
+     *  @param portName   name of port used for wiring
+     *
+     *  @return status code
+     *   - SMART_OK                  : everything is OK and the port requested
+     *                                 has been opened
+     *   - SMART_PORTALREADYUSED     : port name already in use and this
+     *   - SMART_ERROR               : something went wrong
      */
     virtual Smart::StatusCode add(const std::string& portName) throw();
 
-    /**
-     * @brief remove
-     * @return
+    /** @brief
+     * Close the port associated with this service requestor.
+     *
+     *  @return status code
+     *   - SMART_OK                  : everything is OK and instance not
+     *                                 exposed as port anymore.
+     *   - SMART_ERROR               : something went wrong.
      */
     virtual Smart::StatusCode remove() throw();
 
-    /**
-     * @brief connect
-     * @param server
-     * @param service
-     * @return
+    /** @brief
+     * Connect this service requestor to the denoted service provider. An
+     *  already established connection is first disconnected. See disconnect()
+     *  for implications on running or pending queries in that case.
+     *
+     *  @param server   name of the server
+     *  @param service  name of the service
+     *
+     *  @return status code
+     *   - SMART_OK                  : everything is OK and connected to the specified service.
+     *   - SMART_ERROR               : something went wrong, service requestor is now not connected to any
+     *                                 service provider.
      */
     virtual Smart::StatusCode connect(const std::string& server, const std::string& service="") throw();
 
-    /**
-     * @brief disconnect
-     * @return
+    /** @brief
+     * Disconnect the service requestor from the service provider.
+     *
+     *  @return status code
+     *   - SMART_OK                  : everything is OK and service requestor is disconnected from
+     *                                 the service provider.
+     *   - SMART_ERROR               : something went wrong. Again at least the service requestor
+     *                                 is in the disconnected state.
      */
     virtual Smart::StatusCode disconnect() throw();
 

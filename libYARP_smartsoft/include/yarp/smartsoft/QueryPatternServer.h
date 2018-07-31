@@ -33,20 +33,24 @@ class QueryPatternServerHandler
 {
 public:
     /**
-     * @brief QueryPatternServerHandler
+     * @brief QueryPatternServerHandler constructor
      */
+
     QueryPatternServerHandler()
     {}
+
     /**
      * @brief ~QueryPatternServerHandler
      */
     virtual ~QueryPatternServerHandler()
     {}
+
     /**
-     * @brief handleQuery
-     * @param server
-     * @param idReq
-     * @param datum
+     * @brief
+     * Callback to be implemented, it is called every time a new request reach the server.
+     * @param server, pointer to the QueryPatternServer
+     * @param idReq, identifier of the request.
+     * @param datum, request to be handled.
      */
     virtual void handleQuery(QueryPatternServer<R,A>* server, const int32_t idReq, const R& datum) throw() = 0;
 };
@@ -59,11 +63,12 @@ class QueryPatternServer : yarp::os::PortReader
 {
 public:
     QueryPatternServer() = delete;
+
     /**
      * @brief QueryPatternServer
-     * @param portName
-     * @param serverHandler
-     * @param service
+     * @param portName, name of the port associated to the server.
+     * @param serverHandler, pointer to the query handler.
+     * @param service, name of the service.
      */
     QueryPatternServer(const std::string portName, QueryPatternServerHandler<R,A>* serverHandler,
                        const std::string& service = "") throw(SmartACE::SmartError) : m_query_handler_ptr{serverHandler}
@@ -89,10 +94,15 @@ public:
     }
 
     /**
-     * @brief answer
-     * @param id
-     * @param answer
-     * @return
+     * @brief
+     * Answer to a request identified by <i> id </i>
+     * @param id number of the request
+     * @param answer answer that has to be sent
+     * @return status code:
+     *    - SMART_OK           : everything is ok, the answer has been sent.
+     *    - SMART_WRONGID      : no pending query with this identifier.
+     *    - SMART_DISCONNECTED : the server is not connected to any client.
+     *    - SMART_ERROR_COMMUNICATION;        : something went wrong, answer not sent.
      */
     Smart::StatusCode answer(const int32_t& id, const A& answer) throw()
     {

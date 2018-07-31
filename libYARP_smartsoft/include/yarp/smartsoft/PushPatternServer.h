@@ -25,9 +25,9 @@ class PushPatternServer
 public:
     PushPatternServer() = delete;
     /**
-     * @brief PushPatternServer
-     * @param portName
-     * @param service
+     * @brief PushPatternServer constructor
+     * @param portName, name of the port associate to this server.
+     * @param service, name of the service
      */
     PushPatternServer(const std::string portName, const std::string& service = "") throw(SmartACE::SmartError)
     {
@@ -47,10 +47,17 @@ public:
         m_port.close();
     }
 
-    /**
-     * @brief put
-     * @param d
-     * @return
+    /** @brief
+     * Provide new data which is sent to all subscribed clients
+     *
+     *  PushHandler::handlePushRequest() directly or indirectly
+     *  use this method to provide new data.
+     *
+     *  @param d contains the newly acquired data to be sent as
+     *           update.
+     *
+     *  @return status code
+     *    - SMART_OK                  : everything is ok
      */
     Smart::StatusCode put(const T& d) throw()
     {
