@@ -34,6 +34,12 @@ target_link_libraries(YARP_smartsoft PUBLIC YARP::YARP_conf
                                             AceSmartSoftKernel
                                             pthread)
 
+list(APPEND YARP_smartsoft_PUBLIC_DEPS YARP_conf
+                                 YARP_OS
+                                 AceSmartSoftKernel
+                                 pthread)
+list(APPEND YARP_smartsoft_PRIVATE_DEPS)
+
 if(CMAKE_VERSION VERSION_LESS 3.8)
   target_compile_features(YARP_smartsoft PUBLIC cxx_auto_type
                                                 cxx_constexpr
@@ -44,18 +50,25 @@ if(CMAKE_VERSION VERSION_LESS 3.8)
                                                 cxx_nullptr
                                                 cxx_override)
 else()
-  target_compile_features(YARP_smartsoft PUBLIC cxx_std_11)
+  target_compile_features(YARP_smartsoft PUBLIC cxx_std_14)
 endif()
 
 set_property(TARGET YARP_smartsoft PROPERTY PUBLIC_HEADER ${YARP_smartsoft_HDRS})
 set_property(TARGET YARP_smartsoft PROPERTY PRIVATE_HEADER ${YARP_smartsoft_IMPL_HDRS})
 
 install(TARGETS YARP_smartsoft
-        EXPORT YARP
-        COMPONENT runtime
+        EXPORT YARP_smartsoft
+        COMPONENT YARP_smartsoft
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
         PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/yarp/smartsoft)
 
+include(YarpInstallBasicPackageFiles)
+yarp_install_basic_package_files(YARP_smartsoft
+                                 DEPENDENCIES ${YARP_smartsoft_PUBLIC_DEPS}
+                                 PRIVATE_DEPENDENCIES ${YARP_smartsoft_PRIVATE_DEPS})
 
+
+set_property(GLOBAL APPEND PROPERTY YARP_LIBS YARP_smartsoft)
+set_property(TARGET YARP_smartsoft PROPERTY FOLDER "Libraries")
