@@ -40,6 +40,14 @@ respectively.
 ```
 It is possible to compile the examples running `cmake -DCOMPILE_examples=ON ..`
 
+# Usage
+
+- `libYARP_smartsoft`: to include it in your project add this line in your `CMakeLists.txt`
+
+```cmake
+find_package(YARP COMPONENTS smartsoft)
+```
+
 # Documentation
 
 If doxygen is installed, `make dox` will generate the documentation in the build
