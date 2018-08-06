@@ -1,0 +1,5 @@
+ComponentParameter PushClientParams component PushClient {
+	InternalParameter Settings {
+		serverPort :String 	=  "/push_pattern/server"
+	}
+}

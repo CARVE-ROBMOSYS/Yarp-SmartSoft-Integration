@@ -1,0 +1,7 @@
+ComponentDefinition PushClient {
+
+PreemptiveTask RecvTask
+	{
+	}
+	ComponentParameters PushClientParams
+}
