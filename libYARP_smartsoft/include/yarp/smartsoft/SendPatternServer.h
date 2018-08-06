@@ -9,7 +9,6 @@
 #ifndef YARP_SMARTSOFT_SENDPATTERNSERVER_H
 #define YARP_SMARTSOFT_SENDPATTERNSERVER_H
 
-#include <yarp/os/LogStream.h>
 #include <yarp/os/Network.h>
 #include <yarp/os/Port.h>
 

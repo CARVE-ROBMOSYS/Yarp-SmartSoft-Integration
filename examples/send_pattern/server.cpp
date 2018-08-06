@@ -7,6 +7,7 @@
  */
 
 #include <yarp/smartsoft/SendPatternServer.h>
+#include <yarp/os/LogStream.h>
 
 using namespace yarp::os;
 using namespace yarp::smartsoft;
@@ -38,6 +39,7 @@ int main()
     Network yarp;
     MyBottleHandler btHandler;
     SendPatternServer<Bottle> sps("/send_pattern/server", &btHandler);
+
     while (true)
     {
         yInfo()<<"The SendServer is running...";
