@@ -22,7 +22,7 @@ int main()
     {
         if (0 == trials)
         {
-            yError()<<"It was impossible to connect to the SendServer, closing...";
+            yError()<<"It was impossible to connect to the PushServer, closing...";
             return 1;
         }
         trials--;

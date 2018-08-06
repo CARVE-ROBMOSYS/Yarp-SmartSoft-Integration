@@ -144,7 +144,7 @@ public:
      *  Member function is thread safe and reentrant.
      *
      *  @param request send this request to the server (Portable)
-     *  @param id      is set to the identifier which is later used to receive
+     *  @param id      returns the identifier which is later used to receive
      *                 the reply to this request
      *
      *  @return status code:

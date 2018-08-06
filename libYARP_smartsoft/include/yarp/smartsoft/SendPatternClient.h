@@ -117,13 +117,11 @@ public:
 
         if (m_port->getOutputCount() == 0)
         {
-            yError()<<"SendClient: No outgoing connection";
             return Smart::SMART_DISCONNECTED;
         }
 
         if (!m_port->write(data))
         {
-            yError()<<"SendClient: unable to send the data";
             return Smart::SMART_ERROR_COMMUNICATION;
         }
 

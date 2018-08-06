@@ -27,7 +27,7 @@ class MyQueryHandler : public QueryPatternServerHandler<Bottle,Bottle>
             {
                 answer.addInt32(datum.get(1).asInt32()-datum.get(2).asInt32());
             }
-            else if (operation == "subtraction")
+            else if (operation == "multiply")
             {
                 answer.addInt32(datum.get(1).asInt32()*datum.get(2).asInt32());
             }

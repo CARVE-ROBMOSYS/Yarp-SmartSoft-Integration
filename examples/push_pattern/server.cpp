@@ -16,7 +16,7 @@ using namespace yarp::smartsoft;
 int main()
 {
     Network yarp;
-    PushPatternServer<Bottle> ppc("/push_pattern/server");
+    PushPatternServer<Bottle> pps("/push_pattern/server");
     int i = 0;
     while (true)
     {
@@ -24,7 +24,7 @@ int main()
         Bottle bt;
         yInfo()<<"The PushServer is running...";
         bt.addInt32(i);
-        ppc.put(bt);
+        pps.put(bt);
         yarp::os::Time::delay(0.5);
     }
     return 0;
