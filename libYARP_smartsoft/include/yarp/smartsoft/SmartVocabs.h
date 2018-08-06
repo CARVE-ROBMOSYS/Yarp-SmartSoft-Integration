@@ -16,13 +16,13 @@ namespace smartsoft {
 
 // Query pattern
 
-int32_t vocab_query_request      = yarp::os::createVocab('q','r','e','q');
-int32_t vocab_query_receive      = yarp::os::createVocab('q','r','e','c');
-int32_t vocab_query_receive_wait = yarp::os::createVocab('q','r','e','w');
-int32_t vocab_query_discard      = yarp::os::createVocab('q','d','i','s');
-int32_t vocab_query_not_ready    = yarp::os::createVocab('q','n','r');
-int32_t vocab_query_wrong_id     = yarp::os::createVocab('q','w','i','d');
-int32_t vocab_query_id           = yarp::os::createVocab('q','i','d');
+constexpr yarp::conf::vocab32_t  vocab_query_request      = yarp::os::createVocab('q','r','e','q');
+constexpr yarp::conf::vocab32_t  vocab_query_receive      = yarp::os::createVocab('q','r','e','c');
+constexpr yarp::conf::vocab32_t  vocab_query_receive_wait = yarp::os::createVocab('q','r','e','w');
+constexpr yarp::conf::vocab32_t  vocab_query_discard      = yarp::os::createVocab('q','d','i','s');
+constexpr yarp::conf::vocab32_t  vocab_query_not_ready    = yarp::os::createVocab('q','n','r');
+constexpr yarp::conf::vocab32_t  vocab_query_wrong_id     = yarp::os::createVocab('q','w','i','d');
+constexpr yarp::conf::vocab32_t  vocab_query_id           = yarp::os::createVocab('q','i','d');
 
 }
 }
