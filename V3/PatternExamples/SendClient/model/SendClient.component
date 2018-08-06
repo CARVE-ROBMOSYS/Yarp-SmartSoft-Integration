@@ -1,0 +1,7 @@
+ComponentDefinition SendClient {
+
+PreemptiveTask SendTask
+	{
+	}
+ComponentParameters SendClientParams
+}

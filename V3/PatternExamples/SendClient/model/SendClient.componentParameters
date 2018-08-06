@@ -1,0 +1,5 @@
+ComponentParameter SendClientParams component SendClient {
+	InternalParameter Settings {
+		serverPort :String	=  "/send_pattern/server"
+	}
+}
