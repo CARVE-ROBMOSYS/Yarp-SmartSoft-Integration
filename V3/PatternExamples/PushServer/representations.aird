@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ComponentDefinition="http://www.ecore.org/component/ComponentDefinition" xmlns:PerformanceExtension="http://www.ecore.org/component/PerformanceExtension" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/style/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/style">
+  <viewpoint:DAnalysis xmi:id="_KBHYYJl9Eei7L79EtqBcMA" selectedViews="_KFCPEJl9Eei7L79EtqBcMA" version="12.1.0.201708031200">
+    <semanticResources>model/PushServer.component</semanticResources>
+    <semanticResources>model/PushServer.componentDocumentation</semanticResources>
+    <semanticResources>model/PushServer.componentParameters</semanticResources>
+    <ownedViews xmi:type="viewpoint:DView" xmi:id="_KFCPEJl9Eei7L79EtqBcMA">
+      <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']"/>
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_KFQRgJl9Eei7L79EtqBcMA" name="PushServer" repPath="#_KFIVsJl9Eei7L79EtqBcMA">
+        <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']"/>
+        <target xmi:type="ComponentDefinition:ComponentDefModel" href="model/PushServer.component#/"/>
+      </ownedRepresentationDescriptors>
+    </ownedViews>
+  </viewpoint:DAnalysis>
+  <diagram:DSemanticDiagram xmi:id="_KFN1QJl9Eei7L79EtqBcMA" name="PushServer" uid="_KFIVsJl9Eei7L79EtqBcMA">
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" xmi:id="_KFN1QZl9Eei7L79EtqBcMA" source="DANNOTATION_CUSTOMIZATION_KEY">
+      <data xmi:type="diagram:ComputedStyleDescriptionRegistry" xmi:id="_KFN1Qpl9Eei7L79EtqBcMA"/>
+    </ownedAnnotationEntries>
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" xmi:id="_KFStwJl9Eei7L79EtqBcMA" source="GMF_DIAGRAMS">
+      <data xmi:type="notation:Diagram" xmi:id="_KFStwZl9Eei7L79EtqBcMA" type="Sirius" element="_KFN1QJl9Eei7L79EtqBcMA" measurementUnit="Pixel">
+        <children xmi:type="notation:Node" xmi:id="_KFTU0Jl9Eei7L79EtqBcMA" type="2002" element="_KFN1RJl9Eei7L79EtqBcMA">
+          <children xmi:type="notation:Node" xmi:id="_KFUi8Jl9Eei7L79EtqBcMA" type="5006"/>
+          <children xmi:type="notation:Node" xmi:id="_KFUi8Zl9Eei7L79EtqBcMA" type="7001">
+            <children xmi:type="notation:Node" xmi:id="_aYTz0Jl-Eei7L79EtqBcMA" type="3008" element="_aYKp4Jl-Eei7L79EtqBcMA">
+              <children xmi:type="notation:Node" xmi:id="_aYTz05l-Eei7L79EtqBcMA" type="5005"/>
+              <children xmi:type="notation:Node" xmi:id="_aYUa4Jl-Eei7L79EtqBcMA" type="7002">
+                <styles xmi:type="notation:SortingStyle" xmi:id="_aYUa4Zl-Eei7L79EtqBcMA"/>
+                <styles xmi:type="notation:FilteringStyle" xmi:id="_aYUa4pl-Eei7L79EtqBcMA"/>
+              </children>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_aYTz0Zl-Eei7L79EtqBcMA" fontName="Ubuntu" fontHeight="8" bold="true"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_aYTz0pl-Eei7L79EtqBcMA" x="91" y="78"/>
+            </children>
+            <styles xmi:type="notation:SortingStyle" xmi:id="_KFUi8pl9Eei7L79EtqBcMA"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="_KFUi85l9Eei7L79EtqBcMA"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_KFTU0Zl9Eei7L79EtqBcMA" fontName="Ubuntu" fontHeight="10" bold="true"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_KFTU0pl9Eei7L79EtqBcMA" x="336" y="72" width="351" height="219"/>
+        </children>
+        <styles xmi:type="notation:DiagramStyle" xmi:id="_KFStwpl9Eei7L79EtqBcMA"/>
+      </data>
+    </ownedAnnotationEntries>
+    <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_KFN1RJl9Eei7L79EtqBcMA" name="PushServer" tooltipText="ComponentDefinition">
+      <target xmi:type="ComponentDefinition:ComponentDefinition" href="model/PushServer.component#//@component"/>
+      <semanticElements xmi:type="ComponentDefinition:ComponentDefinition" href="model/PushServer.component#//@component"/>
+      <decorations xmi:type="viewpoint:Decoration" xmi:id="_KFN1RZl9Eei7L79EtqBcMA">
+        <description xmi:type="description_1:MappingBasedDecoration" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@decorationDescriptionsSet/@decorationDescriptions[name='ComponentIconDeco']"/>
+      </decorations>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_KFN1Rpl9Eei7L79EtqBcMA" labelSize="10" borderSize="1" borderSizeComputationExpression="1" foregroundColor="253,206,137">
+        <labelFormat>bold</labelFormat>
+        <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']"/>
+      <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_aYKp4Jl-Eei7L79EtqBcMA" name="PushTask" tooltipText="PreemptiveTask">
+        <target xmi:type="PerformanceExtension:PreemptiveTask" href="model/PushServer.component#//@component/@elements.0"/>
+        <semanticElements xmi:type="PerformanceExtension:PreemptiveTask" href="model/PushServer.component#//@component/@elements.0"/>
+        <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+        <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+        <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+        <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_aYQJcJl-Eei7L79EtqBcMA" borderSize="1" borderSizeComputationExpression="1" foregroundColor="114,159,207">
+          <labelFormat>bold</labelFormat>
+          <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']/@subContainerMappings[name='ActivityContainer']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']/@subContainerMappings[name='ActivityContainer']"/>
+      </ownedDiagramElements>
+    </ownedDiagramElements>
+    <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']"/>
+    <filterVariableHistory xmi:type="diagram:FilterVariableHistory" xmi:id="_KFN1R5l9Eei7L79EtqBcMA"/>
+    <activatedLayers xmi:type="description_1:Layer" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer"/>
+    <target xmi:type="ComponentDefinition:ComponentDefModel" href="model/PushServer.component#/"/>
+  </diagram:DSemanticDiagram>
+</xmi:XMI>

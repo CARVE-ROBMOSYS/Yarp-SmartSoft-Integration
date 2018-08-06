@@ -1,0 +1,6 @@
+ComponentDefinition PushServer {
+
+PreemptiveTask PushTask
+	{
+	}
+}
