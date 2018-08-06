@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ComponentDefinition="http://www.ecore.org/component/ComponentDefinition" xmlns:ComponentParameter="http://www.ecore.org/component/ComponentParameter" xmlns:PerformanceExtension="http://www.ecore.org/component/PerformanceExtension" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/style/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/style">
+  <viewpoint:DAnalysis xmi:id="_gTDAAJclEeiUVM-gQNQRIw" selectedViews="_gXFygJclEeiUVM-gQNQRIw" version="12.1.0.201708031200">
+    <semanticResources>model/QueryClient.component</semanticResources>
+    <semanticResources>model/QueryClient.componentDocumentation</semanticResources>
+    <semanticResources>model/QueryClient.componentParameters</semanticResources>
+    <ownedViews xmi:type="viewpoint:DView" xmi:id="_gXFygJclEeiUVM-gQNQRIw">
+      <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']"/>
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_gXNHSJclEeiUVM-gQNQRIw" name="QueryClient" repPath="#_gXI10JclEeiUVM-gQNQRIw">
+        <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']"/>
+        <target xmi:type="ComponentDefinition:ComponentDefModel" href="model/QueryClient.component#/"/>
+      </ownedRepresentationDescriptors>
+    </ownedViews>
+  </viewpoint:DAnalysis>
+  <diagram:DSemanticDiagram xmi:id="_gXNHQJclEeiUVM-gQNQRIw" name="QueryClient" uid="_gXI10JclEeiUVM-gQNQRIw">
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" xmi:id="_gXNHQZclEeiUVM-gQNQRIw" source="DANNOTATION_CUSTOMIZATION_KEY">
+      <data xmi:type="diagram:ComputedStyleDescriptionRegistry" xmi:id="_gXNHQpclEeiUVM-gQNQRIw"/>
+    </ownedAnnotationEntries>
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" xmi:id="_gXNuUJclEeiUVM-gQNQRIw" source="GMF_DIAGRAMS">
+      <data xmi:type="notation:Diagram" xmi:id="_gXNuUZclEeiUVM-gQNQRIw" type="Sirius" element="_gXNHQJclEeiUVM-gQNQRIw" measurementUnit="Pixel">
+        <children xmi:type="notation:Node" xmi:id="_gXNuU5clEeiUVM-gQNQRIw" type="2002" element="_gXNHRJclEeiUVM-gQNQRIw">
+          <children xmi:type="notation:Node" xmi:id="_gXOVYJclEeiUVM-gQNQRIw" type="5006"/>
+          <children xmi:type="notation:Node" xmi:id="_gXOVYZclEeiUVM-gQNQRIw" type="7001">
+            <children xmi:type="notation:Node" xmi:id="_6xcxcJclEeiUVM-gQNQRIw" type="3008" element="_6xTAcJclEeiUVM-gQNQRIw">
+              <children xmi:type="notation:Node" xmi:id="_6xdYgJclEeiUVM-gQNQRIw" type="5005"/>
+              <children xmi:type="notation:Node" xmi:id="_6xdYgZclEeiUVM-gQNQRIw" type="7002">
+                <styles xmi:type="notation:SortingStyle" xmi:id="_6xdYgpclEeiUVM-gQNQRIw"/>
+                <styles xmi:type="notation:FilteringStyle" xmi:id="_6xdYg5clEeiUVM-gQNQRIw"/>
+              </children>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_6xcxcZclEeiUVM-gQNQRIw" fontName="Ubuntu" fontHeight="8" bold="true"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_6xcxcpclEeiUVM-gQNQRIw" x="79" y="66" width="135" height="99"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_l-5LUJlQEei7L79EtqBcMA" type="3007" element="_l-hX4JlQEei7L79EtqBcMA">
+              <children xmi:type="notation:Node" xmi:id="_l-9cwJlQEei7L79EtqBcMA" type="5003">
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_l-9cwZlQEei7L79EtqBcMA" y="-21"/>
+              </children>
+              <children xmi:type="notation:Node" xmi:id="_l_BHIJlQEei7L79EtqBcMA" type="3005" element="_l-pTsJlQEei7L79EtqBcMA">
+                <styles xmi:type="notation:ShapeStyle" xmi:id="_l_BHIZlQEei7L79EtqBcMA" fontName="Ubuntu"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_l_BHIplQEei7L79EtqBcMA"/>
+              </children>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_l-5LUZlQEei7L79EtqBcMA" fontName="Ubuntu" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_l-5LUplQEei7L79EtqBcMA" x="103" y="222" width="50" height="64"/>
+            </children>
+            <styles xmi:type="notation:SortingStyle" xmi:id="_gXOVYpclEeiUVM-gQNQRIw"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="_gXOVY5clEeiUVM-gQNQRIw"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_gXNuVJclEeiUVM-gQNQRIw" fontName="Ubuntu" fontHeight="10" bold="true"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_gXNuVZclEeiUVM-gQNQRIw" x="360" y="84" width="279" height="339"/>
+        </children>
+        <styles xmi:type="notation:DiagramStyle" xmi:id="_gXNuUpclEeiUVM-gQNQRIw"/>
+      </data>
+    </ownedAnnotationEntries>
+    <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_gXNHRJclEeiUVM-gQNQRIw" name="QueryClient" tooltipText="ComponentDefinition">
+      <target xmi:type="ComponentDefinition:ComponentDefinition" href="model/QueryClient.component#//@component"/>
+      <semanticElements xmi:type="ComponentDefinition:ComponentDefinition" href="model/QueryClient.component#//@component"/>
+      <decorations xmi:type="viewpoint:Decoration" xmi:id="_gXNHRZclEeiUVM-gQNQRIw">
+        <description xmi:type="description_1:MappingBasedDecoration" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@decorationDescriptionsSet/@decorationDescriptions[name='ComponentIconDeco']"/>
+      </decorations>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_gXNHRpclEeiUVM-gQNQRIw" labelSize="10" borderSize="1" borderSizeComputationExpression="1" foregroundColor="253,206,137">
+        <labelFormat>bold</labelFormat>
+        <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']"/>
+      <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_6xTAcJclEeiUVM-gQNQRIw" name="QueryTask" tooltipText="PreemptiveTask">
+        <target xmi:type="PerformanceExtension:PreemptiveTask" href="model/QueryClient.component#//@component/@elements.0"/>
+        <semanticElements xmi:type="PerformanceExtension:PreemptiveTask" href="model/QueryClient.component#//@component/@elements.0"/>
+        <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+        <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+        <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+        <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_6xZHEJclEeiUVM-gQNQRIw" borderSize="1" borderSizeComputationExpression="1" foregroundColor="114,159,207">
+          <labelFormat>bold</labelFormat>
+          <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']/@subContainerMappings[name='ActivityContainer']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']/@subContainerMappings[name='ActivityContainer']"/>
+      </ownedDiagramElements>
+      <ownedDiagramElements xmi:type="diagram:DNode" xmi:id="_l-hX4JlQEei7L79EtqBcMA" name="QueryClientParams" tooltipText="ComponentParameters" width="5" height="5" resizeKind="NSEW">
+        <target xmi:type="ComponentParameter:ComponentParametersRef" href="model/QueryClient.component#//@component/@extensions.0"/>
+        <semanticElements xmi:type="ComponentParameter:ComponentParametersRef" href="model/QueryClient.component#//@component/@extensions.0"/>
+        <ownedStyle xmi:type="diagram:WorkspaceImage" xmi:id="_l-pTsJlQEei7L79EtqBcMA" workspacePath="/org.sirius.component.design/icons/component-params.png">
+          <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']/@subNodeMappings[name='ComponentParameterNode']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']/@subNodeMappings[name='ComponentParameterNode']"/>
+      </ownedDiagramElements>
+    </ownedDiagramElements>
+    <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']"/>
+    <filterVariableHistory xmi:type="diagram:FilterVariableHistory" xmi:id="_gXNHR5clEeiUVM-gQNQRIw"/>
+    <activatedLayers xmi:type="description_1:Layer" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer"/>
+    <target xmi:type="ComponentDefinition:ComponentDefModel" href="model/QueryClient.component#/"/>
+  </diagram:DSemanticDiagram>
+</xmi:XMI>

@@ -1,0 +1,5 @@
+ComponentParameter QueryClientParams component QueryClient {
+		InternalParameter Settings {
+			serverPort :String         =  "/query_pattern/server"
+	}
+}
