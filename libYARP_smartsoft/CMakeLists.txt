@@ -35,9 +35,8 @@ target_link_libraries(YARP_smartsoft PUBLIC YARP::YARP_conf
                                             pthread)
 
 list(APPEND YARP_smartsoft_PUBLIC_DEPS YARP_conf
-                                 YARP_OS
-                                 AceSmartSoftKernel
-                                 pthread)
+                                       YARP_OS
+                                       AceSmartSoft)
 list(APPEND YARP_smartsoft_PRIVATE_DEPS)
 
 if(CMAKE_VERSION VERSION_LESS 3.8)
