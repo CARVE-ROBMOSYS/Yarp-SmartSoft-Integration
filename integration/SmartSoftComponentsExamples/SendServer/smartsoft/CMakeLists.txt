@@ -52,7 +52,7 @@ SMART_COMPONENT_AUTOBUILD_DEPENDENCIES()
 ## using regular CMake commands (like FIND_PACKAGE, INCLUDE_DIRECTORIES, etc.) ##
 
 # you can add additional external libraries using regular CMake commands, e.g.:
-find_package(YARP COMPONENTS smartsoft REQUIRED)
+find_package(YARP COMPONENTS OS sig smartsoft REQUIRED)
 
 ########
 

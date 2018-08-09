@@ -43,12 +43,9 @@ SMART_COMPONENT_AUTOBUILD_DEPENDENCIES()
 FIND_PACKAGE(open62541 QUIET PATHS /usr/local/lib/cmake)
 
 find_package(YARP REQUIRED)
-list(APPEND CMAKE_MODULE_PATH ${YARP_MODULE_PATH})
-include_directories(${YARP_INCLUDE_DIRS})
 
 # include Miccol stuff
 include_directories(/home/icub/SOFTWARE/YARP-BT-modules/include)
-
 
 
 # these are the regular includes (add your own includes, if needed)

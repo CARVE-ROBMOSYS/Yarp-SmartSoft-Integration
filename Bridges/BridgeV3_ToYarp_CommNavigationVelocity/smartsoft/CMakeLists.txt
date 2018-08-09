@@ -42,8 +42,6 @@ SMART_COMPONENT_AUTOBUILD_DEPENDENCIES()
 # you can add additional external libraries using regular CMake commands, e.g.:
 # in order to add already compiled libraries (which have a cmake package definition), uncomment:
 find_package(YARP REQUIRED)
-list(APPEND CMAKE_MODULE_PATH ${YARP_MODULE_PATH})
-include_directories(${YARP_INCLUDE_DIRS})
 
 FIND_PACKAGE(open62541 QUIET PATHS /usr/local/lib/cmake)
 
