@@ -58,11 +58,13 @@ FILE(GLOB_RECURSE SRC_GEN_PARAMS ${CMAKE_CURRENT_LIST_DIR}/src-gen/params/*.cc)
 # collect your own (local) source-files here (if needed)
 
 # generate the BT engine
-# execute_process(COMMAND bash -c "ocamlopt -output-obj -o modcaml.o unix.cmxa ${CMAKE_SOURCE_DIR}/OCaml/fib.ml")
+execute_process(COMMAND bash -c "readskill.native sklist.xml")						# --> genera skill.ml
+execute_process(COMMAND bash -c "ocamlbuild -use-ocamlfind interpreter.native.o")	# --> genera interpreter.native.o che rinominiamo modcaml.o (o come ci piace)
 
 # set(SRCS main.cpp wrap.cpp)
-set(OBJS ${CMAKE_SOURCE_DIR}/../libs/modcaml.o)
-set(OCAML_SRCS ${CMAKE_SOURCE_DIR}/../OCamlWrap/wrap.c src/ExecSkill_wrap.cpp)
+set(OBJS ${CMAKE_SOURCE_DIR}/../libs/modreset.o)
+set(OCAML_SRCS ../OCamlWrap/wrap.c			# wrap c/c++ 
+			src/ExecSkill_wrap.cpp)			# bridge verso SmartSoft
 
 # SET_SOURCE_FILES_PROPERTIES(${OBJS} 
 #							 PROPERTIES
@@ -73,14 +75,13 @@ set(OCAML_SRCS ${CMAKE_SOURCE_DIR}/../OCamlWrap/wrap.c src/ExecSkill_wrap.cpp)
 include_directories(${CMAKE_SOURCE_DIR}/../)
 
 # create the executable using collected source-files
-ADD_EXECUTABLE(${PROJECT_NAME} ${SRC} ${SRC_GEN} ${SRC_GEN_PARAMS} ${OCAML_SRCS} ${OBJS}  )
+ADD_EXECUTABLE(${PROJECT_NAME} ${SRC} ${SRC_GEN} ${SRC_GEN_PARAMS} ${OCAML_SRCS} ${OBJS})
 
 # add_library(wrap SHARED ${OCAML_SRCS})
-          
+
+# findPackage(ocaml)  # --> cartella con le librerie /usr/lib/ocaml)
 # link your external libraries here (if there are any)
 target_link_libraries(${PROJECT_NAME} 	-L/usr/lib/ocaml
-										
-										# ${OBJS}
                                         asmrun
 									   	unix
 									   	dl 

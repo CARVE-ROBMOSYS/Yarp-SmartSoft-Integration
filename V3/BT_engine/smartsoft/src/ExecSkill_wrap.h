@@ -6,6 +6,7 @@ enum Status {RUNNING, FAILURE, SUCCESS, ERROR};
 extern "C"
 {
 	int ExecuteSkill(const char *name);
+	void ResetSkill(const char *name);
 }
 
 

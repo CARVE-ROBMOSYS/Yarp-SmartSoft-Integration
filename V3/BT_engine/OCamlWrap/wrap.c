@@ -35,3 +35,9 @@ int tick(value bt) {
 CAMLprim value exec(value v) {
   return Val_int(ExecuteSkill(String_val(v)));
 }
+
+CAMLprim value reset(value v) {
+  ResetSkill(String_val(v));
+  return Val_true;
+}
+

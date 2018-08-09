@@ -66,7 +66,7 @@ int Task1::on_execute()
 	// it is possible to return != 0 (e.g. when the task detects errors), then the outer loop breaks and the task stops
 	std::cout << "\n\n-------------------------\ntick return value is " << ret << std::endl;
 	sleep(1);
-    return -5;
+    return 0;
 }
 
 int Task1::on_exit()
