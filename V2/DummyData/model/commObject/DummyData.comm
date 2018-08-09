@@ -1,7 +1,0 @@
-CommObjectRepository DummyData Version 1.0.0 {
-
-    CommObject CommDummy {
-        dataInt32  : Int32  = 42
-        dataString : String = "Towel"
-    }
-}
