@@ -1,0 +1,17 @@
+ComponentParameter BT_TickManagerParams component BT_TickManager {
+	InternalParameter Settings {
+		tickManager_localPort  :String  =  "/tickManager"
+		configFile : String = "config.ini"
+		}
+
+		ParameterSetInstance CommYARP_BT.ConfigParams {
+		/** Drop the current map and create a new map with free cells of dimensions [mm] ?xsize and ?ysize. The map is initialized with an offset [mm] ?xoff and ?yoff relative to world coordinates. The cellsize used for this map as well as the obstacle growing type are specified in the ini-configuration. The id ?id will be assigned to the map to synchronize components, for example with SmartPlannerBreadthFirstSearch and SmartCdlServer.
+					Using this parameter is only allowed in neutral state. */
+		TriggerInstance configFile passive
+		}
+		
+}
+
+
+
+

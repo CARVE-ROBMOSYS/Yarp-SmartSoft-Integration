@@ -1,0 +1,8 @@
+ComponentDefinition BT_TickManager {
+
+AnswerPort BehaviourTreeTick_QueryServer implements CommYARP_BT.BehaviourTreeTickQueryService {
+	}
+	RequestHandler BehaviourTreeTick_QueryServiceHandler triggeredFrom BehaviourTreeTick_QueryServer {
+	}
+	ComponentParameters BT_TickManagerParams
+}
