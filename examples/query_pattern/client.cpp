@@ -12,6 +12,34 @@ using namespace yarp::os;
 using namespace yarp::smartsoft;
 using namespace std::chrono_literals;
 
+
+void checkAnswer(QueryPatternClient<Bottle,Bottle> &client, const Smart::StatusCode statusQuery, const uint32_t ID, Bottle &answer, bool wait=false)
+{
+
+    if (statusQuery == Smart::SMART_DISCONNECTED)
+    {
+        yError()<<"The client is not connected to nobody...";
+    }
+    else if(statusQuery == Smart::SMART_ERROR_COMMUNICATION)
+    {
+        yError()<<"Something is not working in the communication...";
+    }
+    else
+    {
+        Smart::StatusCode statusRecv;
+        answer.clear();
+        if(!wait)
+            statusRecv= client.queryReceive(ID, answer);
+        else
+            statusRecv = client.queryReceiveWait(ID, answer, 5s);
+
+        if ( statusRecv == Smart::SMART_NODATA)
+            yWarning() << "The result with ID: " << ID << " Not yet data\n";
+        else if (statusRecv == Smart::SMART_OK)
+            yInfo() << "The result with \t ID: " << ID << " is: " << answer.toString() << "\n";
+    }
+}
+
 int main()
 {
     Network yarp;
@@ -36,7 +64,8 @@ int main()
     req.addString("sum");
     req.addInt32(2);
     req.addInt32(2);
-    Smart::StatusCode status =  qpc.query(req,ans);
+    yInfo() << "Query is   \t" << req.toString();
+    Smart::StatusCode status =  qpc.query(req, ans);
     if (status == Smart::SMART_DISCONNECTED)
     {
         yError()<<"The client is not connected to nobody...";
@@ -47,7 +76,7 @@ int main()
     }
     else
     {
-        yInfo()<<"The result of operation is"<<ans.toString();
+        yInfo()<<"The result is \t" << ans.toString() << "\n";
     }
 
 
@@ -59,28 +88,20 @@ int main()
 
     uint32_t ticket{0};
     status = qpc.queryRequest(req, ticket);
+    yInfo() << "Query request  \t ID: " << ticket << " R: " << req.toString();
 
-    yarp::os::Time::delay(0.3);
-    if (status == Smart::SMART_DISCONNECTED)
-    {
-        yError()<<"The client is not connected to nobody...";
-    }
-    else if(status == Smart::SMART_ERROR_COMMUNICATION)
-    {
-        yError()<<"Something is not working in the communication...";
-    }
-    else
-    {
-        ans.clear();
-        status = qpc.queryReceive(ticket, ans);
-        if ( status == Smart::SMART_NODATA)
-            yError("No yet data");
-        else if (status == Smart::SMART_OK)
-            yInfo()<<"The result of operation is"<<ans.toString();
-    }
-    req.clear();
+    yarp::os::Time::delay(0.5);
+    checkAnswer(qpc, status, ticket, ans);
+    yarp::os::Time::delay(0.5);
+    checkAnswer(qpc, status, ticket, ans);
+    yarp::os::Time::delay(2);
+    checkAnswer(qpc, status, ticket, ans);
+
+
+    yarp::os::Time::delay(1);
+
     // testing consequent requests..
-
+    req.clear();
     req.addString("sum");
     req.addInt32(6);
     req.addInt32(6);
@@ -90,77 +111,46 @@ int main()
     req2.addInt32(7);
     req2.addInt32(7);
 
-    uint32_t ticket1{0}, ticket2{0};
-    Smart::StatusCode status1 = qpc.queryRequest(req, ticket1);
-    Smart::StatusCode status2 = qpc.queryRequest(req2, ticket2);
+    Bottle req3;
+    req3.addString("sum");
+    req3.addInt32(100);
+    req3.addInt32(100);
+
+    uint32_t ticket1{0}, ticket2{0}, ticket3{0};
+    Smart::StatusCode status1, status2, status3;
+
+    status1 = qpc.queryRequest(req, ticket1);
+    yInfo() << "Query request  \t ID: " << ticket1 << " R: " << req.toString();
+
+    yInfo() << "Query is   \t" << req2.toString();
+    status2 =  qpc.query(req2, ans);
+    yInfo()<<"The result is \t" << ans.toString() << "\n";
+
+    status3 = qpc.queryRequest(req3, ticket3);
+    yInfo() << "Query request  \t ID: " << ticket3 << " R: " << req3.toString();
 
     yarp::os::Time::delay(0.3);
-    if (status2 == Smart::SMART_DISCONNECTED)
-    {
-        yError()<<"The client is not connected to nobody...";
-    }
-    else if(status2 == Smart::SMART_ERROR_COMMUNICATION)
-    {
-        yError()<<"Something is not working in the communication...";
-    }
-    else
-    {
-        ans.clear();
-        status = qpc.queryReceive(ticket2, ans);
-        if ( status == Smart::SMART_NODATA)
-            yError("No yet data");
-        else if (status == Smart::SMART_OK)
-            yInfo()<<"The result of operation is"<<ans.toString();
-    }
+    checkAnswer(qpc, status3, ticket3, ans);
+    checkAnswer(qpc, status1, ticket1, ans);
 
-    if (status1 == Smart::SMART_DISCONNECTED)
-    {
-        yError()<<"The client is not connected to nobody...";
-    }
-    else if(status1 == Smart::SMART_ERROR_COMMUNICATION)
-    {
-        yError()<<"Something is not working in the communication...";
-    }
-    else
-    {
-        ans.clear();
-        status = qpc.queryReceive(ticket1, ans);
-        if ( status == Smart::SMART_NODATA)
-            yError("No yet data");
-        else if (status == Smart::SMART_OK)
-            yInfo()<<"The result of operation is"<<ans.toString();
-    }
-
-    req.clear();
     // testing queryRequest
+    req.clear();
     req.addString("sum");
     req.addInt32(8);
     req.addInt32(8);
 
     status = qpc.queryRequest(req, ticket);
-    if (status == Smart::SMART_DISCONNECTED)
-    {
-        yError()<<"The client is not connected to nobody...";
-    }
-    else if(status == Smart::SMART_ERROR_COMMUNICATION)
-    {
-        yError()<<"Something is not working in the communication...";
-    }
-    else
-    {
-        ans.clear();
-        status = qpc.queryReceiveWait(ticket, ans, 10s);
-        if ( status == Smart::SMART_NODATA)
-            yError("No yet data");
-        else if (status == Smart::SMART_OK)
-            yInfo()<<"The result of operation is"<<ans.toString();
-    }
+    yInfo() << "Query request ID: " << ticket << " R: " << req.toString() << "\n";
 
-    yInfo()<<"Waiting for 1 sec something will never arrive";
+    checkAnswer(qpc, status1, ticket1, ans, true);
+    checkAnswer(qpc, status3, ticket3, ans, true);
+    checkAnswer(qpc, status,  ticket,  ans, true);
+
+    yInfo() << "Query receive with non-existing ID";
+    ans.clear();
     status = qpc.queryReceiveWait(100, ans, 1s);
     if (status != Smart::SMART_OK)
         yInfo()<<"It is not arrived as expected";
-
 
     return 0;
 }
