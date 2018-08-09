@@ -18,6 +18,8 @@ class MyQueryHandler : public QueryPatternServerHandler<Bottle,Bottle>
         if (server)
         {
             Bottle answer;
+            yarp::os::Time::delay(2);
+            yInfo() << "Handling request " << datum.toString();
             std::string operation = datum.get(0).asString();
             if (operation == "sum")
             {
@@ -59,7 +61,7 @@ int main()
     while (true)
     {
         yInfo()<<"The QueryServer is running...";
-        yarp::os::Time::delay(0.5);
+        yarp::os::Time::delay(5);
     }
     return 0;
 }
