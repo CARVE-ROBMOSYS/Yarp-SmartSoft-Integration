@@ -210,7 +210,6 @@ public:
         std::lock_guard<std::mutex> lk_guard(m_map_mutex);
         if (m_map_req.find(id) == m_map_req.end())
         {
-            yError()<<"QueryClient: requested id"<<id<<"not valid..";
             return Smart::SMART_WRONGID;
         }
 
@@ -263,7 +262,6 @@ public:
         std::lock_guard<std::mutex> lk_guard(m_map_mutex);
         if (m_map_req.find(id) == m_map_req.end())
         {
-            yError()<<"QueryClient: requested id"<<id<<"not valid..";
             return Smart::SMART_WRONGID;
         }
         return fetchAnswer(id, answer, false, timeout);
@@ -298,7 +296,6 @@ public:
         std::lock_guard<std::mutex> lk_guard(m_map_mutex);
         if (m_map_req.find(id) == m_map_req.end())
         {
-            yError()<<"QueryClient: requested id"<<id<<"not valid..";
             return Smart::SMART_WRONGID;
         }
         m_map_req.erase(id);
@@ -351,8 +348,7 @@ private:
     {
         bool ok = false;
 //        yDebug()<<"Waiting... map size:"<<m_map_req.size();
-//        yDebug()<<"Fetching..."<<idReq;
-//        yDebug()<<m_map_req.at(idReq).__future.valid();
+//        yDebug()<<"Fetching..." << idReq << " is valid " << m_map_req.at(idReq).__future.valid();
 
         if (!waitForever)
         {
@@ -383,7 +379,6 @@ private:
         }
         else
         {
-            yError()<<"QueryClient: request "<<idReq<<"failed for timeout or troubles in communication";
             return  Smart::SMART_ERROR;
         }
     }
@@ -392,8 +387,6 @@ private:
     std::map<uint32_t, QueryRequest> m_map_req;
     std::mutex m_map_mutex;
     std::atomic<uint32_t> m_num_req{0};
-
-
 };
 
 } // namespace smartsoft
