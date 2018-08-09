@@ -349,20 +349,29 @@ private:
 
     Smart::StatusCode fetchAnswer(const uint32_t& idReq, A& answer, bool waitForever = true, const std::chrono::steady_clock::duration &timeout=std::chrono::steady_clock::duration::zero())
     {
-        bool ok = true;
+        bool ok = false;
 //        yDebug()<<"Waiting... map size:"<<m_map_req.size();
 //        yDebug()<<"Fetching..."<<idReq;
 //        yDebug()<<m_map_req.at(idReq).__future.valid();
 
         if (!waitForever)
         {
-            ok  = std::future_status::ready == m_map_req.at(idReq).__future.wait_for(timeout);
-            ok &= m_map_req.at(idReq).__future.get();
+            std::future_status s = m_map_req.at(idReq).__future.wait_for(timeout);
+            if(s == std::future_status::ready)
+            {
+                m_map_req.at(idReq).__future.get();
+                ok = true;
+            }
+            else
+            {
+                return Smart::SMART_NODATA;
+            }
         }
         else
         {
             // Wait forever
-            ok = m_map_req.at(idReq).__future.get();
+            m_map_req.at(idReq).__future.get();
+            ok = true;
         }
 
         if (ok)
