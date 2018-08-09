@@ -1,0 +1,9 @@
+ComponentDefinition BridgeV3_FromYarp_GridMap2D {
+
+PreemptiveTask Task1
+	{
+	}
+	OutputPort CurrGridMapPushServiceOut implements CommNavigationObjects.CurrGridMapPushService realizedBy Task1 {
+	}
+	ComponentParameters BridgeV3_FromYarp_GridMap2DParams
+}
