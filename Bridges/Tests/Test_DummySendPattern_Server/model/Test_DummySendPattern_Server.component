@@ -1,0 +1,5 @@
+ComponentDefinition Test_DummySendPattern_Server {
+
+InputPort BaseStateServiceIn implements CommBasicObjects.BaseStateService {
+	}
+}

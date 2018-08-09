@@ -1,0 +1,5 @@
+SystemComponentArchitecture BridgeV3_System_Test1 {
+
+ComponentInstance SmartPlanner instantiates SmartPlannerBreadthFirstSearch
+{
+} }

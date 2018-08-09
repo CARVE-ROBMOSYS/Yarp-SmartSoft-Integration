@@ -1,0 +1,11 @@
+ParameterSetRepository CommYARP_BT {
+
+	ParameterSet ConfigParams {
+	    /*
+		 * load current map from xml
+		 */
+		Trigger configFile {
+			filename : String
+		}
+	}
+}

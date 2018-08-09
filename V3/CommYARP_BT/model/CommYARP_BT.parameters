@@ -1,3 +1,0 @@
-ParameterSetRepository CommYARP_BT {
-	ParameterSet MyParameterSet extends EmptyDefaultParameterSet { }
-}

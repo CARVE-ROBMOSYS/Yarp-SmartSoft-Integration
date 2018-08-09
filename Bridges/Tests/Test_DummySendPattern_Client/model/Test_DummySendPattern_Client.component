@@ -1,0 +1,8 @@
+ComponentDefinition Test_DummySendPattern_Client {
+
+PreemptiveTask Task
+	{
+	}
+	OutputPort BaseStateServiceOut implements CommBasicObjects.BaseStateService realizedBy Task {
+	}
+}

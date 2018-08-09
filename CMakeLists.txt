@@ -46,10 +46,7 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR}"
 
 include(YarpDoc)
 
-add_subdirectory(libYARP_smartsoft)
+add_subdirectory(integration)
 
 option(COMPILE_examples "Compile examples" OFF)
 
-if(COMPILE_examples)
-  add_subdirectory(examples)
-endif()

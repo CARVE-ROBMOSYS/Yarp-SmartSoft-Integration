@@ -1,0 +1,9 @@
+ServiceDefRepository CommYARP_BT version 1.0 {
+
+	RequestAnswerServiceDefinition BehaviourTreeTickQueryService {
+		QueryPattern <
+			RequestType = CommYARP_BT.CommTickCommand
+			AnswerType = CommYARP_BT.CommTickResult
+		>
+	}
+}

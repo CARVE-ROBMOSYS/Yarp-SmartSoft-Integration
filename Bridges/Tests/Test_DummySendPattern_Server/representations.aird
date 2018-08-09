@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ComponentDefinition="http://www.ecore.org/component/ComponentDefinition" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/style/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/style">
+  <viewpoint:DAnalysis xmi:id="_sRXDgH9oEeinDfEvRv5Cgw" selectedViews="_sWbJsH9oEeinDfEvRv5Cgw" version="12.1.0.201708031200">
+    <semanticResources>model/Test_DummySendPattern_Server.component</semanticResources>
+    <semanticResources>model/Test_DummySendPattern_Server.componentDocumentation</semanticResources>
+    <semanticResources>model/Test_DummySendPattern_Server.componentParameters</semanticResources>
+    <semanticResources>platform:/resource/CommBasicObjects/model/CommBasicObjects.types</semanticResources>
+    <ownedViews xmi:type="viewpoint:DView" xmi:id="_sWbJsH9oEeinDfEvRv5Cgw">
+      <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']"/>
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_sWy9IH9oEeinDfEvRv5Cgw" name="Test_DummySendPattern_Server" repPath="#_sWlhwH9oEeinDfEvRv5Cgw">
+        <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']"/>
+        <target xmi:type="ComponentDefinition:ComponentDefModel" href="model/Test_DummySendPattern_Server.component#/"/>
+      </ownedRepresentationDescriptors>
+    </ownedViews>
+  </viewpoint:DAnalysis>
+  <diagram:DSemanticDiagram xmi:id="_sWxvAH9oEeinDfEvRv5Cgw" name="Test_DummySendPattern_Server" uid="_sWlhwH9oEeinDfEvRv5Cgw">
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" xmi:id="_sWxvAX9oEeinDfEvRv5Cgw" source="DANNOTATION_CUSTOMIZATION_KEY">
+      <data xmi:type="diagram:ComputedStyleDescriptionRegistry" xmi:id="_sWxvAn9oEeinDfEvRv5Cgw"/>
+    </ownedAnnotationEntries>
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" xmi:id="_sW4csH9oEeinDfEvRv5Cgw" source="GMF_DIAGRAMS">
+      <data xmi:type="notation:Diagram" xmi:id="_sW4csX9oEeinDfEvRv5Cgw" type="Sirius" element="_sWxvAH9oEeinDfEvRv5Cgw" measurementUnit="Pixel">
+        <children xmi:type="notation:Node" xmi:id="_sW6R4H9oEeinDfEvRv5Cgw" type="2002" element="_sWxvBH9oEeinDfEvRv5Cgw">
+          <children xmi:type="notation:Node" xmi:id="_sW9VMH9oEeinDfEvRv5Cgw" type="5006"/>
+          <children xmi:type="notation:Node" xmi:id="_sW9VMX9oEeinDfEvRv5Cgw" type="7001">
+            <styles xmi:type="notation:SortingStyle" xmi:id="_sW9VMn9oEeinDfEvRv5Cgw"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="_sW9VM39oEeinDfEvRv5Cgw"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_x5nFcH9oEeinDfEvRv5Cgw" type="3012" element="_x5dUcH9oEeinDfEvRv5Cgw">
+            <children xmi:type="notation:Node" xmi:id="_x5oTkH9oEeinDfEvRv5Cgw" type="5010">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_x5oTkX9oEeinDfEvRv5Cgw" x="31" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_x5r98H9oEeinDfEvRv5Cgw" type="3014" element="_x5d7gH9oEeinDfEvRv5Cgw">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_x5r98X9oEeinDfEvRv5Cgw" fontName="Ubuntu"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_x5r98n9oEeinDfEvRv5Cgw"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_x5nFcX9oEeinDfEvRv5Cgw" fontName="Ubuntu" fontHeight="8"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_x5nFcn9oEeinDfEvRv5Cgw" x="-22" y="132" width="30" height="30"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_sW6R4X9oEeinDfEvRv5Cgw" fontName="Ubuntu" fontHeight="10" bold="true"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_sW6R4n9oEeinDfEvRv5Cgw" x="324" y="132" width="495" height="327"/>
+        </children>
+        <styles xmi:type="notation:DiagramStyle" xmi:id="_sW4csn9oEeinDfEvRv5Cgw"/>
+      </data>
+    </ownedAnnotationEntries>
+    <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_sWxvBH9oEeinDfEvRv5Cgw" name="Test_DummySendPattern_Server" tooltipText="ComponentDefinition">
+      <target xmi:type="ComponentDefinition:ComponentDefinition" href="model/Test_DummySendPattern_Server.component#//@component"/>
+      <semanticElements xmi:type="ComponentDefinition:ComponentDefinition" href="model/Test_DummySendPattern_Server.component#//@component"/>
+      <decorations xmi:type="viewpoint:Decoration" xmi:id="_sWxvBX9oEeinDfEvRv5Cgw">
+        <description xmi:type="description_1:MappingBasedDecoration" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@decorationDescriptionsSet/@decorationDescriptions[name='ComponentIconDeco']"/>
+      </decorations>
+      <ownedBorderedNodes xmi:type="diagram:DNode" xmi:id="_x5dUcH9oEeinDfEvRv5Cgw" name="BaseStateServiceIn" tooltipText="InputPort" width="3" height="3" resizeKind="NSEW">
+        <target xmi:type="ComponentDefinition:InputPort" href="model/Test_DummySendPattern_Server.component#//@component/@elements.0"/>
+        <semanticElements xmi:type="ComponentDefinition:InputPort" href="model/Test_DummySendPattern_Server.component#//@component/@elements.0"/>
+        <ownedStyle xmi:type="diagram:CustomStyle" xmi:id="_x5d7gH9oEeinDfEvRv5Cgw" id="input">
+          <description xmi:type="style:CustomStyleDescription" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']/@borderedNodeMappings[name='InputPortNode']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']/@borderedNodeMappings[name='InputPortNode']"/>
+      </ownedBorderedNodes>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_sWxvBn9oEeinDfEvRv5Cgw" labelSize="10" borderSize="1" borderSizeComputationExpression="1" foregroundColor="253,206,137">
+        <labelFormat>bold</labelFormat>
+        <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']"/>
+    </ownedDiagramElements>
+    <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']"/>
+    <filterVariableHistory xmi:type="diagram:FilterVariableHistory" xmi:id="_sWxvB39oEeinDfEvRv5Cgw"/>
+    <activatedLayers xmi:type="description_1:Layer" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer"/>
+    <target xmi:type="ComponentDefinition:ComponentDefModel" href="model/Test_DummySendPattern_Server.component#/"/>
+  </diagram:DSemanticDiagram>
+</xmi:XMI>
