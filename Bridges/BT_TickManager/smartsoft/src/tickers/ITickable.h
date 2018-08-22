@@ -12,6 +12,7 @@
 #include <string>
 
 #include <yarp/conf/api.h>
+#include <CommYARP_BT/CommTickResult.hh>
 #include <CommYARP_BT/CommTickCommand.hh>
 
 #ifndef YARP_SmartSoft_API
@@ -38,7 +39,7 @@ public:
 	/**
 	 * Enum type listing all possible result of a tick action on the target
 	 */
-	enum struct tickResult  { running, success, failure, idle, fatal_error};
+//	enum struct tickResult  { running, success, failure, idle, halted, error};
 
 	/**
 	 * Enum type with all the possible variant of a tick action.
@@ -59,7 +60,7 @@ public:
 	 *       tickCommand_t enum.
 	 * @params: optional parameters to be sent to the target
 	 */
-	virtual tickResult tick(tickCommand cmd, std::string params) = 0;
+	virtual CommYARP_BT::TickResult tick(CommYARP_BT::TickCommand cmd, std::string params) = 0;
 };
 
 #endif  // YARPSMARTSOFT_ITCKER_H

@@ -12,52 +12,52 @@
 #include <yarp/os/Network.h>
 
 #include "ITickable.h"
-#include "BTCmd.h"
+#include "include/tick_client.h"
 
-// From miccol definition
-enum ReturnStatus {BT_RUNNING, BT_SUCCESS, BT_FAILURE, BT_IDLE, BT_HALTED, BT_ERROR};
 
 class YarpTicker : 	public ITickable,
-					public BTCmd
+					public TickClient
 {
 private:
+
 	yarp::os::Network yarpNetwork;
-	yarp::os::Port    tickerPort;
+	ReturnStatusVocab a;
 
 	void tickConvert_toYarp() {};
-	tickResult tickConvert_fromYarp(ReturnStatus in)
+	CommYARP_BT::TickResult tickConvert_fromYarp(ReturnStatus in)
 	{
-		tickResult ret =  ITickable::tickResult::fatal_error;
+		CommYARP_BT::TickResult ret =  CommYARP_BT::TickResult::Error;
 		switch(in)
 		{
 			case BT_RUNNING:
 			{
-				ret = ITickable::tickResult::running;
+				ret = CommYARP_BT::TickResult::Running;
 			} break;
 
 			case BT_SUCCESS:
 			{
-
+				ret = CommYARP_BT::TickResult::Success;
 			} break;
 
 			case BT_FAILURE:
 			{
-
+				ret = CommYARP_BT::TickResult::Failure;
 			} break;
 
 			case BT_IDLE:
 			{
-
+				ret = CommYARP_BT::TickResult::Idle;
 			} break;
 
 			case BT_HALTED:
 			{
-
+				ret = CommYARP_BT::TickResult::Halted;
 			} break;
 
 			case BT_ERROR:
+			default:
 			{
-
+				ret = CommYARP_BT::TickResult::Error;
 			} break;
 
 			return ret;
@@ -81,7 +81,7 @@ public:
 	 *       tickCommand_t enum.
 	 * @params: optional parameters to be sent to the target
 	 */
-	tickResult tick(tickCommand cmd, std::string params) override;
+	CommYARP_BT::TickResult tick(CommYARP_BT::TickCommand cmd, std::string params) override;
 
 	/* Inherited from BTCmd:
 

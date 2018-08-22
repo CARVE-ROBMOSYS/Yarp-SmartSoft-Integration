@@ -34,15 +34,13 @@ bool YarpTicker::configure(std::string target)
 		return false;
 	}
 
+	TickClient::configure(COMP->getGlobalState().getSettings().getTickManager_localPort() + target);
 
-	/* Using Miccol stuff */
-    BTCmd::yarp().attachAsServer(tickerPort);
-
-	tickerPort.open(COMP->getGlobalState().getSettings().getTickManager_localPort() + target + ":o");
 	yInfo() << "connecting to " << target;
-	tickerPort.addOutput(target, "tcp");
-	yInfo() << "DONE";
+	if(!TickClient::connect(target))
+		yError() << " Cannot connect to " << target;
 
+	yInfo() << "DONE";
 	return true;
 }
 
@@ -52,11 +50,14 @@ bool YarpTicker::configure(std::string target)
  *       tickCommand_t enum.
  * @params: optional parameters to be sent to the target
  */
-ITickable::tickResult YarpTicker::tick(tickCommand cmd, string params)
+CommYARP_BT::TickResult YarpTicker::tick(CommYARP_BT::TickCommand cmd, string params)
 {
-	BTCmd::request_tick();
+	std::cout << "\t YarpTicker ticking " << params << "... ";
 
-	return ITickable::tickResult::running;
+	CommYARP_BT::TickResult res = tickConvert_fromYarp( request_tick(params) );
+	std::cout << "\treturns  " << (int) res << "  " << res.to_string() << std::endl;
+
+	return res;
 }
 
 
