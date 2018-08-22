@@ -7,9 +7,10 @@ CommObjectsRepository CommYARP_BT version 1.0 {
 	Enumeration  TickResult {
 		Running
 		Success
-		Fail
+		Failure
 		Idle
-		FatalError
+		Halted
+		Error
 	}
 	
 	CommObject CommTickCommand {

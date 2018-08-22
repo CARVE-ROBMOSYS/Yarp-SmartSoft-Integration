@@ -18,7 +18,7 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.0)
 
 # find the SmartSoft CMake Macros (version 2 that uses CMake v3)
-FIND_FILE(SMART_MACROS SmartMacros2.cmake PATHS $ENV{SMART_ROOT_ACE}/CMakeMacros /opt/smartSoftAce/CMakeMacros/)
+FIND_FILE(SMART_MACROS SmartMacros2.cmake PATHS $ENV{SMART_ROOT_ACE}/CMakeMacros /opt/smartSoftAce/CMakeMacros)
 INCLUDE(${SMART_MACROS})
 
 # Create and configure a CMake project for a CommunicationObject
@@ -86,6 +86,7 @@ target_link_libraries(${PROJECT_NAME} 	-L/usr/lib/ocaml
 									   	unix
 									   	dl 
 									  	m)
+
 
 IF(open62541_FOUND)
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} open62541)
