@@ -33,16 +33,14 @@
               <styles xmi:type="notation:ShapeStyle" xmi:id="_UD4-sY_WEeiG8_2EM05z4g" fontName="Ubuntu" fontHeight="8" bold="true"/>
               <layoutConstraint xmi:type="notation:Bounds" xmi:id="_UD4-so_WEeiG8_2EM05z4g" x="127" y="90" width="219" height="99"/>
             </children>
-            <children xmi:type="notation:Node" xmi:id="_onMdUJAbEeiG8_2EM05z4g" type="3007" element="_om-a4JAbEeiG8_2EM05z4g">
-              <children xmi:type="notation:Node" xmi:id="_onMdU5AbEeiG8_2EM05z4g" type="5003">
-                <layoutConstraint xmi:type="notation:Location" xmi:id="_onMdVJAbEeiG8_2EM05z4g" y="-21"/>
+            <children xmi:type="notation:Node" xmi:id="_Ii0f0KR9EeihwOx4UtDHzw" type="3008" element="_Iio5oKR9EeihwOx4UtDHzw">
+              <children xmi:type="notation:Node" xmi:id="_Ii1t8KR9EeihwOx4UtDHzw" type="5005"/>
+              <children xmi:type="notation:Node" xmi:id="_Ii2VAKR9EeihwOx4UtDHzw" type="7002">
+                <styles xmi:type="notation:SortingStyle" xmi:id="_Ii2VAaR9EeihwOx4UtDHzw"/>
+                <styles xmi:type="notation:FilteringStyle" xmi:id="_Ii2VAqR9EeihwOx4UtDHzw"/>
               </children>
-              <children xmi:type="notation:Node" xmi:id="_onMdVZAbEeiG8_2EM05z4g" type="3005" element="_onEhgJAbEeiG8_2EM05z4g">
-                <styles xmi:type="notation:ShapeStyle" xmi:id="_onMdVpAbEeiG8_2EM05z4g" fontName="Ubuntu"/>
-                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_onMdV5AbEeiG8_2EM05z4g"/>
-              </children>
-              <styles xmi:type="notation:ShapeStyle" xmi:id="_onMdUZAbEeiG8_2EM05z4g" fontName="Ubuntu" fontHeight="8"/>
-              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_onMdUpAbEeiG8_2EM05z4g" x="199" y="222" width="50" height="64"/>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_Ii0f0aR9EeihwOx4UtDHzw" fontName="Ubuntu" fontHeight="8" bold="true"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Ii0f0qR9EeihwOx4UtDHzw" x="162" y="234"/>
             </children>
             <styles xmi:type="notation:SortingStyle" xmi:id="_wrq64Y87EeivOfl02nHMUw"/>
             <styles xmi:type="notation:FilteringStyle" xmi:id="_wrq64o87EeivOfl02nHMUw"/>
@@ -83,13 +81,10 @@
     <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_wrAMhI87EeivOfl02nHMUw" name="BT_TickManager" tooltipText="ComponentDefinition">
       <target xmi:type="ComponentDefinition:ComponentDefinition" href="model/BT_TickManager.component#//@component"/>
       <semanticElements xmi:type="ComponentDefinition:ComponentDefinition" href="model/BT_TickManager.component#//@component"/>
-      <decorations xmi:type="viewpoint:Decoration" xmi:id="_wrAMhY87EeivOfl02nHMUw">
-        <description xmi:type="description_1:MappingBasedDecoration" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@decorationDescriptionsSet/@decorationDescriptions[name='ComponentIconDeco']"/>
-      </decorations>
       <ownedBorderedNodes xmi:type="diagram:DNode" xmi:id="_UDkOkI_WEeiG8_2EM05z4g" name="BehaviourTreeTick_QueryServer" tooltipText="AnswerPort" outgoingEdges="_UDv0wI_WEeiG8_2EM05z4g" width="3" height="3" resizeKind="NSEW">
         <target xmi:type="ComponentDefinition:AnswerPort" href="model/BT_TickManager.component#//@component/@elements.0"/>
         <semanticElements xmi:type="ComponentDefinition:AnswerPort" href="model/BT_TickManager.component#//@component/@elements.0"/>
-        <ownedStyle xmi:type="diagram:CustomStyle" xmi:id="_UDk1oI_WEeiG8_2EM05z4g" id="answer">
+        <ownedStyle xmi:type="diagram:CustomStyle" xmi:id="_UDk1oI_WEeiG8_2EM05z4g" showIcon="false" id="answer">
           <description xmi:type="style:CustomStyleDescription" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']/@borderedNodeMappings[name='AnswerPortNode']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']/@borderedNodeMappings[name='AnswerPortNode']"/>
@@ -97,7 +92,7 @@
       <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
       <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
       <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
-      <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_wrAMho87EeivOfl02nHMUw" labelSize="10" borderSize="1" borderSizeComputationExpression="1" foregroundColor="253,206,137">
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_wrAMho87EeivOfl02nHMUw" labelSize="10" borderSize="1" borderSizeComputationExpression="1" foregroundColor="255,245,181">
         <labelFormat>bold</labelFormat>
         <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']/@style"/>
       </ownedStyle>
@@ -108,27 +103,31 @@
         <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
         <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
         <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
-        <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_UDumoI_WEeiG8_2EM05z4g" borderSize="1" borderSizeComputationExpression="1" foregroundColor="233,185,110">
+        <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_UDumoI_WEeiG8_2EM05z4g" borderSize="1" borderSizeComputationExpression="1">
           <labelFormat>bold</labelFormat>
           <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']/@subContainerMappings[name='RequestHandlerContainer']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']/@subContainerMappings[name='RequestHandlerContainer']"/>
       </ownedDiagramElements>
-      <ownedDiagramElements xmi:type="diagram:DNode" xmi:id="_om-a4JAbEeiG8_2EM05z4g" name="BT_TickManagerParams" tooltipText="ComponentParameters" width="5" height="5" resizeKind="NSEW">
-        <target xmi:type="ComponentParameter:ComponentParametersRef" href="model/BT_TickManager.component#//@component/@extensions.0"/>
-        <semanticElements xmi:type="ComponentParameter:ComponentParametersRef" href="model/BT_TickManager.component#//@component/@extensions.0"/>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" xmi:id="_onEhgJAbEeiG8_2EM05z4g" workspacePath="/org.sirius.component.design/icons/component-params.png">
-          <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']/@subNodeMappings[name='ComponentParameterNode']/@style"/>
+      <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_Iio5oKR9EeihwOx4UtDHzw" name="BT_TickManagerParams" tooltipText="ComponentParameters">
+        <target xmi:type="ComponentParameter:ComponentParametersRef" href="model/BT_TickManager.component#//@component/@elements.2"/>
+        <semanticElements xmi:type="ComponentParameter:ComponentParametersRef" href="model/BT_TickManager.component#//@component/@elements.2"/>
+        <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+        <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+        <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+        <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_IipgsKR9EeihwOx4UtDHzw" borderSize="1" borderSizeComputationExpression="1">
+          <labelFormat>bold</labelFormat>
+          <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']/@subContainerMappings[name='ComponentParametersContainer']/@style"/>
         </ownedStyle>
-        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']/@subNodeMappings[name='ComponentParameterNode']"/>
+        <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']/@subContainerMappings[name='ComponentParametersContainer']"/>
       </ownedDiagramElements>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_UDv0wI_WEeiG8_2EM05z4g" sourceNode="_UDkOkI_WEeiG8_2EM05z4g" targetNode="_UDpuII_WEeiG8_2EM05z4g">
       <target xmi:type="ComponentDefinition:RequestHandler" href="model/BT_TickManager.component#//@component/@elements.1"/>
       <semanticElements xmi:type="ComponentDefinition:RequestHandler" href="model/BT_TickManager.component#//@component/@elements.1"/>
-      <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_UDwb0I_WEeiG8_2EM05z4g" sourceArrow="OutputClosedArrow" targetArrow="OutputClosedArrow" size="2">
+      <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_UDwb0I_WEeiG8_2EM05z4g" targetArrow="OutputClosedArrow" size="2">
         <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@edgeMappings[name='RequestHandlerEdge']/@style"/>
-        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" xmi:id="_UDwb0Y_WEeiG8_2EM05z4g"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" xmi:id="_UDwb0Y_WEeiG8_2EM05z4g" showIcon="false"/>
       </ownedStyle>
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@edgeMappings[name='RequestHandlerEdge']"/>
     </ownedDiagramElements>

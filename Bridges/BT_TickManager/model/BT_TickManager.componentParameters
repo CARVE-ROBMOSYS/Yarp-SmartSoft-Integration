@@ -1,7 +1,7 @@
 ComponentParameter BT_TickManagerParams component BT_TickManager {
 	InternalParameter Settings {
 		tickManager_localPort  :String  =  "/tickManager"
-		configFile : String = "config.ini"
+		configFile : String = "/home/icub/SOFTWARE/smartsoft_3.6/Yarp-SmartSoft-Integration/Bridges/BT_TickManager/smartsoft/conf/config.ini"
 		}
 
 		ParameterSetInstance CommYARP_BT.ConfigParams {
@@ -11,6 +11,7 @@ ComponentParameter BT_TickManagerParams component BT_TickManager {
 		}
 		
 }
+
 
 
 

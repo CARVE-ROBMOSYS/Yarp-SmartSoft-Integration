@@ -16,9 +16,14 @@
 //--------------------------------------------------------------------------
 #ifndef _COMPHANDLER_HH
 #define _COMPHANDLER_HH
-	
+
+#include <iostream>
+
 class CompHandler
 {
+private:
+	bool is_whitespace(const std::string& s);
+
 public:
 	void onStartup();
 	void onShutdown();

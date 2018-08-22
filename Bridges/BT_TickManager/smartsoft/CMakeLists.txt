@@ -44,7 +44,8 @@ FIND_PACKAGE(open62541 QUIET PATHS /usr/local/lib/cmake)
 
 find_package(YARP REQUIRED)
 
-# include Miccol stuff
+# include Miccol stuff --> TBR
+include_directories(/home/icub/SOFTWARE/YARP-BT-modules)
 include_directories(/home/icub/SOFTWARE/YARP-BT-modules/include)
 
 
@@ -70,7 +71,10 @@ include_directories(tickers)
 
 # create the executable using collected source-files
 add_executable(${PROJECT_NAME} ${SRC} ${SRC_GEN} ${SRC_GEN_PARAMS} ${TICKERS}
+				/home/icub/SOFTWARE/YARP-BT-modules/src/ReturnStatus.cpp			# should be a library to be linked
 				/home/icub/SOFTWARE/YARP-BT-modules/src/BTCmd.cpp					# should be a library to be linked
+				/home/icub/SOFTWARE/YARP-BT-modules/src/tick_client.cpp				# should be a library to be linked
+				/home/icub/SOFTWARE/YARP-BT-modules/src/tick_server.cpp				# should be a library to be linked
 				)
 
 # link your external libraries here (if there are any)

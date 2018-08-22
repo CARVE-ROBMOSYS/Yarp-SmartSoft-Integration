@@ -35,7 +35,27 @@ void BehaviourTreeTick_QueryServiceHandler::handleQuery(const SmartACE::QueryId 
 	
 	// implement your query handling logic here and fill in the answer object
 	
+	CommYARP_BT::TickCommand cmd = request.getCommand();
+	CommYARP_BT::TickResult  res = CommYARP_BT::TickResult::Error;
 	std::string tickParam = request.getParameter();
-	// COMP->
+
+	std::cout << "Tick Manager Received tick request: " << tickParam << std::endl;
+
+	//	sleep(4);
+
+	std::string skill = tickParam;
+	auto it = COMP->tickables_map.find(skill);
+	if( it == COMP->tickables_map.end())
+	{
+		std::cout << "Error: skill " << skill << " not found!";
+		res = CommYARP_BT::TickResult::Error;
+	}
+	else
+	{
+		res = (int) (*it).second.tickerInstance->tick(cmd /* (*it).second.command*/, (*it).second.params);
+	}
+
+	answer.setResult(res);
+	std::cout << "answering query id " << id << "  with value: " << answer.getResult().to_string() << "  (res " << (int)res << " " << res << ")" << std::endl << std::endl;
 	this->server->answer(id, answer);
 }

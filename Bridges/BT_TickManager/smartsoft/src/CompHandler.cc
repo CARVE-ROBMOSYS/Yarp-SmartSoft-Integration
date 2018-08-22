@@ -17,7 +17,6 @@
 #include "CompHandler.hh"
 #include "BT_TickManager.hh"
 
-#include <iostream>
 #include "tickers/yarpTicker.h"
 #include <yarp/os/LogStream.h>
 #include "tickers/ITickable.h"
@@ -45,23 +44,44 @@ void CompHandler::onStartup()
 
     myFile.open(file.c_str() , std::ios::in);
     if(!myFile.is_open())
-    	std::cout << "\nerror opening file\n";
+    {
+    	std::cout << "\nerror opening file " << file << std::endl;
+    	return;
+    }
     else
     {
 		/* Read it */
 		string line;
+		std::cout << "\n reading file " << file << std::endl;
+
 		while(!myFile.eof())
 		{
-			std::cout << std::endl << "Got a new line:  ";
 			getline(myFile, line);
+
+//			std::cout << "Got a new line:  " << line << std::endl;
 
 			istringstream ticker(line);
 			vector<string> tokens {istream_iterator<string>{ticker}, istream_iterator<string>{}};
+
+//			std::cout << "tokens size:  " << tokens.size() << std::endl;
+
+			if(tokens.size() == 0)		// skip blank lines
+				continue;
+
+	    	if(tokens.size() < 4)
+	    	{
+	    		std::cout << "Error: line " << line << " malformed. Some parameters are missing";
+	    		continue;
+	    	}
+
+/*
+			for(int i=0;  i< tokens.size(); i++)
+				std::cout << i << " " << tokens[i] << std::endl;
+*/
 			inputData.push_back(tokens);
 		}
 		myFile.close();
-
-		std::cout << "Config file loaded " << file << "\n";
+		std::cout << "Config file loaded\n";
     }
 
     /* Instantiate devices */
@@ -76,7 +96,9 @@ void CompHandler::onStartup()
 		entry.tickerType = tokens[1];
 		entry.tickerId   = tokens[2];
 		entry.command    = tokens[3];
-		entry.params     = tokens[4];
+
+		if(tokens.size() >= 5)
+			entry.params     = tokens[4];
 
 		bool found = false;
 		for (auto &elem : COMP->tickables_map)
@@ -84,18 +106,22 @@ void CompHandler::onStartup()
 			if( (elem.second.tickerType == entry.tickerType) && (elem.second.tickerId == entry.tickerId) )
 			{
 				// Ticker already exists.
+				std::cout << "Using an already existing ticker ... ";
 				found = true;
 				entry.tickerInstance = elem.second.tickerInstance;		// re-cycle already existing ticker
 				COMP->tickables_map[entry.skill2Tick] = entry;			// add entry in the map
+				break;
 			}
 		}
+		std::cout << std::endl;
 
 		if(!found)		// create new instance
 		{
 			if(entry.tickerType == "yarp")
 			{
-				std::cout << "Create a new YARP ticker " << std::endl;
+				std::cout << "Creating a new YARP ticker ... ";
 				YarpTicker *t = new YarpTicker();							// create new yarp ticker
+				t->configure(entry.tickerId);
 				entry.tickerInstance = t;
 				COMP->tickables_map[entry.skill2Tick] = entry;				// add entry in the map
 				COMP->yarpTickers_list.push_back(t);						// keep a list of ticker to easy destroy them at the closure
@@ -103,14 +129,16 @@ void CompHandler::onStartup()
 
 			if(entry.tickerType == "smartsoft")
 			{
-				std::cout << "Create a new smartsoft ticker " << std::endl;
+				std::cout << "Create a new smartsoft ticker ... ";
 				SmartTicker *t = new SmartTicker(COMP->stateMaster);		// create new SmartSoft ticker
+				t->configure(entry.tickerId);
 				entry.tickerInstance = t;
 				COMP->tickables_map[entry.skill2Tick] = entry;				// add entry in the map
 				COMP->smartTickers_list.push_back(t);						// keep a list of ticker to easily destroy them at the closure
 			}
+			std::cout << " done" << std::endl;
 		}
-		std::cout << std::endl << std::endl;
+//		std::cout << std::endl << std::endl;
     }
 
 	yInfo() << "DONE";
@@ -131,6 +159,19 @@ void CompHandler::onStartup()
 	// Notify the component that setup/initialization is finished.
 	// You may move this function to any other place.
 	COMP->setStartupFinished();
+}
+
+
+bool CompHandler::is_whitespace(const std::string& s)
+{
+	for(auto it = s.begin(); it != s.end(); ++it)
+	{
+		if(!isspace(*it))
+		{
+			return false;
+		}
+	}
+	return true;
 }
 
 void CompHandler::onShutdown() 

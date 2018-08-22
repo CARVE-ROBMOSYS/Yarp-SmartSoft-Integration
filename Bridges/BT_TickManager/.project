@@ -3,6 +3,7 @@
 	<name>BT_TickManager</name>
 	<comment></comment>
 	<projects>
+		<project>AceSmartSoftFramework</project>
 		<project>CommBasicObjects</project>
 		<project>CommYARP_BT</project>
 	</projects>
