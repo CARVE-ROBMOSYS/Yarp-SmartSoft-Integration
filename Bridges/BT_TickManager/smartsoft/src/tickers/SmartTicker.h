@@ -21,7 +21,7 @@ class SmartTicker : public ITickable
 private:
 	SmartACE::StateMaster *stateMaster;
 	std::list<std::string> mainstates;
-	std::string targets;
+	std::string targetSkill;
 
 public:
 
@@ -41,7 +41,7 @@ public:
 	 *       tickCommand_t enum.
 	 * @params: optional parameters to be sent to the target
 	 */
-	tickResult tick(tickCommand cmd, std::string params) override;
+	CommYARP_BT::TickResult tick(CommYARP_BT::TickCommand cmd, std::string params) override;
 };
 
 
