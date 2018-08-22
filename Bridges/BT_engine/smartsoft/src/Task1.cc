@@ -60,12 +60,16 @@ int Task1::on_execute()
 	// to get the incoming data, use this methods:
 	Smart::StatusCode status;
 
-	std::cout << "calling tick " << std::endl;
+	std::cout << "on_execute() " << std::endl;
 
 	int ret = tick(behaviourTree);
 	// it is possible to return != 0 (e.g. when the task detects errors), then the outer loop breaks and the task stops
-	std::cout << "\n\n-------------------------\ntick return value is " << ret << std::endl;
-	sleep(1);
+	std::cout << "\ntick return value is " << ret << "\n-------------------------\n" << std::endl;
+
+/*
+	std::cout << "sleeping 5 secs " << std::endl;
+	sleep(5);
+*/
     return 0;
 }
 

@@ -32,7 +32,10 @@ void CompHandler::onStartup()
 	// connect and start each service individually, e.g:
 	// COMP->connectMyPortName("SmartExampleComponent", "examplePort");
 	status = COMP->connectAndStartAllServices();
+	//COMP->tickRequest-> ("BT_engine", "examplePort");
 	
+	COMP->tickRequest->blocking(true);
+
 	// Start all tasks. If you need manual control, use the content of this function to
 	// start each task individually.
 	COMP->startAllTasks();
