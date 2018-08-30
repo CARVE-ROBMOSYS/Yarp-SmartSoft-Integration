@@ -6,6 +6,8 @@ SW components used to integrate YARP modules in SmartSoft
 # Organization 
 - Bridges: This folder contains SmartSoft components aimed to work as specialized bridges between pure YARP executable and pure SmartSoft components. They translate a message from a framework to the other one, by following proper communication patterns on each side.
 
+- Systems: Contains the scenario description in form of a RobMoSys System Architecture. This MDSD project contains an instantiation of all the SmartSoft components required to run the demo along with the component connections. In order to run the demo, the robot or the simulator is required along with some additional YARP modules.
+
 - BehaviorTrees: This folder contains a SmartSoft message defining the `tick` semantic and two SmartSoft components. The first component runs the behaviour trees and send the tick messages by mean of the query pattern. The second component, the `TickManager` receives the tick requests from the engine and dispatch them to the actual skills. This components acts also as a bridge in case the requested skill is implemented in a different framework.
 
 - Integration: This folder contains the software library based on YARP which reproduce the RobMoSys communication pattern and some examples.
