@@ -62,7 +62,7 @@ int UpdateThread::on_execute()
 
 	// to get the incoming data, use this methods:
 	Smart::StatusCode status;
-	std::cout << "Hello from UpdateThread " << std::endl;
+	std::cout << "Hello from BaseState UpdateThread " << std::endl;
 
 	if(nullptr == iFrame)
 	{
@@ -93,9 +93,9 @@ int UpdateThread::on_execute()
 	basePose.set_base_elevation(rpy[1]);
 	basePose.set_base_azimuth(  rpy[2]);
 	// Set translation
-	basePose.set_x(robotPose_mat[0][3], 1000);
-	basePose.set_y(robotPose_mat[1][3], 1000);
-	basePose.set_z(robotPose_mat[2][3], 1000);
+	basePose.set_x(robotPose_mat[0][3], 1);
+	basePose.set_y(robotPose_mat[1][3], 1);
+	basePose.set_z(robotPose_mat[2][3], 1);
 
 	// SmartSoft data
 	CommBasicObjects::CommBaseState robotBaseState;

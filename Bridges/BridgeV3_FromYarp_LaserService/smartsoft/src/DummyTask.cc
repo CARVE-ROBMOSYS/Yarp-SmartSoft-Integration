@@ -164,12 +164,14 @@ int DummyTask::on_execute()
 
 	// LaserScan6DPose::CommLaserScan
 	commMobileLaserScan.set_scan_valid(true);
+	commMobileLaserScan.set_scan_size(data.size());
 	commMobileLaserScan.set_scan_time_stamp(time_stamp);
     commMobileLaserScan.set_scan_update_count(counter++);
     commMobileLaserScan.set_scan_double_field_of_view(laserScan_angleMin, laserScan_step);		// TODO verify: accepts degrees, verify yarp device!!
-    commMobileLaserScan.set_min_distance(laserScan_distanceMin, 1000);
-    commMobileLaserScan.set_max_distance(laserScan_distanceMax, 1000);
-    commMobileLaserScan.set_scan_length_unit(1000);												// TODO  verify: 1000 to set meters, is it right??
+    commMobileLaserScan.set_min_distance(laserScan_distanceMin, 1);								// TODO  HERE 1 means meters
+    commMobileLaserScan.set_max_distance(laserScan_distanceMax, 1);								// TODO  HERE 1 means meters
+    commMobileLaserScan.set_scan_length_unit(1000);												// TODO  HERE 1000 means meters
+
 
     double tmpRho, tmpTheta;
 //    CommBasicObjectsIDL::LaserScanPoint  smartTmp;
@@ -190,6 +192,8 @@ int DummyTask::on_execute()
 	//
 	// Finally publish laser-scan update
 	//
+	yInfo() << "Publishing data";
+
 	this->laserServiceOutPut(commMobileLaserScan);
 
 	// Delay (should be handled by SmartSoft, but how??)

@@ -23,12 +23,8 @@ NavigationVelocityServiceInHandler::NavigationVelocityServiceInHandler(Smart::In
 :	NavigationVelocityServiceInHandlerCore(subject, prescaleFactor)
 {
 	std::cout << "constructor NavigationVelocityServiceInHandler\n";
-	std::cout << "gattiiiiiiiii\n";
-	std::cout << "gattiiiiiiiii\n";
-	std::cout << "gattiiiiiiiii\n";
-	std::cout << "gattiiiiiiiii\n";
-	std::cout << "gattiiiiiiiii ovunqueee!!!\n";
 }
+
 NavigationVelocityServiceInHandler::~NavigationVelocityServiceInHandler() 
 {
 	std::cout << "destructor NavigationVelocityServiceInHandler\n";
@@ -41,9 +37,11 @@ void NavigationVelocityServiceInHandler::on_NavigationVelocityServiceIn(const Co
 	yarp::os::Bottle & velCmd = COMP->commandPort.prepare();
 	std::cout << "Got a new message";
 	velCmd.clear();
+	velCmd.addInt32(3);
 	velCmd.addDouble(input.getVX());
 	velCmd.addDouble(input.getVY());
 	velCmd.addDouble(input.getOmega());
+	velCmd.addInt32(100);
 	COMP->commandPort.write();
 	std::cout << "Sent cmd via yarp -> " << velCmd.toString();
 }
