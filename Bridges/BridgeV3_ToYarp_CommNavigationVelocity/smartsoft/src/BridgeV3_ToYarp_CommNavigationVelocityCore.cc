@@ -34,7 +34,7 @@ void BridgeV3_ToYarp_CommNavigationVelocityCore::onStartup()
 	}
 
 	bool ret = false;
-	std::string localPortName;
+	std::string localPortName = "/NavBridge";
 	std::string remotePortName;
 
 	ret = commandPort.open(localPortName);

@@ -1,15 +1,15 @@
 ComponentParameter BridgeV3_FromYarp_LaserServiceParams component BridgeV3_FromYarp_LaserService {
 	InternalParameter Settings {
-		tf_localPort :String         =  "/Bridge_TF"
-		tf_remotePort:String     =  "/transformServer"
+		tf_localPort  :String     =  "/LaserService/tf"
+		tf_remotePort :String     =  "/transformServer"
 
-		tf_robot      : String           =  "/robot"
-		tf_laser       : String           =  "/laser"
-		tf_world     : String           =  "/world"
+		tf_robot      : String    =  "mobile_base_body_link"
+		tf_laser      : String    =  "mobile_base_lidar"
+		tf_world      : String    =  "odom"
 
-  	    laserLocalPort  :String     = "/Bridge/laser"
-		laserRemotePort: String = "/laser/laseeeeeer"
-		period : Float                     = 0.1 
+  	    laserLocalPort  :String     = "/LaserService/laser"
+		laserRemotePort: String     = "/SIM_CER_ROBOT/laser"
+		period : Float              = 0.1 
 	}
 }
 
