@@ -17,3 +17,16 @@
 ## Service Ports
 
 
+## Component Parameters BridgeV3_FromYarp_BaseStateServiceParams
+
+### InternalParameter Settings
+
+| Attribute Name | Attribute Type | Description |
+|----------------|----------------|-------------|
+| tf_localPort | String |  |
+| tf_remotePort | String |  |
+| tf_robot | String |  |
+| tf_laser | String |  |
+| tf_world | String |  |
+| period | Float |  |
+

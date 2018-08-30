@@ -1,9 +1,10 @@
 ComponentDefinition BridgeV3_FromYarp_BaseStateService {
 
-PreemptiveTask UpdateThread
+	CoordinationSlavePort CoordinationPort implements CommBasicObjects.DefaultCoordinationService { }
+	ComponentParameters BridgeV3_FromYarp_BaseStateServiceParams slave CoordinationPort
+	Activity UpdateThread
 	{
 	}
 	OutputPort BaseStateServiceOut implements CommBasicObjects.BaseStateService realizedBy UpdateThread {
 	}
-	ComponentParameters BridgeV3_FromYarp_BaseStateServiceParams
 }

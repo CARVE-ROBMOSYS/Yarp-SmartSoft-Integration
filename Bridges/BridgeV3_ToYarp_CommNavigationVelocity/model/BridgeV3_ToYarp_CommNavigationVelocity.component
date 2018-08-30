@@ -1,7 +1,9 @@
 ComponentDefinition BridgeV3_ToYarp_CommNavigationVelocity {
 
-InputPort NavigationVelocityServiceIn implements CommNavigationObjects.NavigationVelocityService {
-	}
-	InputHandler NavigationVelocityServiceInHandler triggeredFrom NavigationVelocityServiceIn
-ComponentParameters BridgeV3_ToYarp_CommNavigationVelocityParams
+	CoordinationSlavePort CoordinationPort implements CommBasicObjects.DefaultCoordinationService { }
+
+	InputPort NavigationVelocityServiceIn implements CommNavigationObjects.NavigationVelocityService {	}
+	InputHandler NavigationVelocityServiceInHandler triggeredFrom NavigationVelocityServiceIn { }
+	
+	ComponentParameters BridgeV3_ToYarp_CommNavigationVelocityParams slave CoordinationPort
 }
