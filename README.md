@@ -4,7 +4,9 @@ Yarp-SmartSoft-Integration
 SW components used to integrate YARP modules in SmartSoft
 
 # Organization 
-- Bridges: This folder contains SmartSoft components aimed to work as specialized bridges between pure YARP executable and pure SmartSoft components. They translate a message from a framework to the other one, by following proper communication patterns on each side. Furtthermore, this folder contains two components to run the behaviour trees inside SmartSoft and a communication message to propagate the Tick from it to the skills.
+- Bridges: This folder contains SmartSoft components aimed to work as specialized bridges between pure YARP executable and pure SmartSoft components. They translate a message from a framework to the other one, by following proper communication patterns on each side.
+
+- BehaviorTrees: This folder contains a SmartSoft message defining the `tick` semantic and two SmartSoft components. The first component runs the behaviour trees and send the tick messages by mean of the query pattern. The second component, the `TickManager` receives the tick requests from the engine and dispatch them to the actual skills. This components acts also as a bridge in case the requested skill is implemented in a different framework.
 
 - Integration: This folder contains the software library based on YARP which reproduce the RobMoSys communication pattern and some examples.
   - libYARP_smartsoft: the library itself. It implements the communication patterns by wrapping YARP components and it mimic SmartSoft API. The library depends on YARP and includes `<aceSmartSoft.hh>`header for some enum definition.
