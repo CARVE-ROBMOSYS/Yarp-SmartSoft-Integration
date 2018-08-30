@@ -17,3 +17,11 @@
 ## Service Ports
 
 
+## Component Parameters BT_engineParams
+
+### InternalParameter Settings
+
+| Attribute Name | Attribute Type | Description |
+|----------------|----------------|-------------|
+| bt_description | String |  |
+
