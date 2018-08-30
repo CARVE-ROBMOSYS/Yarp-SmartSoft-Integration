@@ -1,0 +1,18 @@
+DeploymentModel SystemR1Demo {
+
+TargetPlatformReference Local using SystemR1Demo.Local
+	{
+		UploadDirectory "/home/icub/SOFTWARE/deployment_3.6"
+		NetworkInterface eno1
+	}
+	NamingService
+	{
+		deploy-to Local }
+	ComponentArtefact SystemR1Demo.BridgeV3_FromYarp_LaserService deploy-to Local
+	ComponentArtefact SystemR1Demo.BridgeV3_ToYarp_CommNavigationVelocity deploy-to Local
+	ComponentArtefact SystemR1Demo.SmartCdlServer deploy-to Local
+	ComponentArtefact SystemR1Demo.SmartMapperGridMap deploy-to Local
+	ComponentArtefact SystemR1Demo.SmartPlannerBreadthFirstSearch deploy-to Local
+	ComponentArtefact SystemR1Demo.YARP_BaseStateService deploy-to Local
+ComponentArtefact SystemR1Demo.SmartRobotConsole deploy-to Local
+}

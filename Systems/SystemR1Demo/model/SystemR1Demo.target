@@ -1,0 +1,11 @@
+TargetPlatformModel SystemR1Demo {
+
+	TargetPlatformDefinition Local
+		{
+		Linux "Ubuntu Linux 18.04 64bit"
+			TargetMiddleware ACE_SmartSoft
+			NetworkInterface eno1 { HostAddress "127.0.0.1" Kind "" }
+			CPU CPU3 { Kind "Intel DualCore 64bit" CoresTally 2 }
+			LoginAccount icub { FullName "iCub robot" Email "icub@ciccio.po" }
+		}
+}
