@@ -40,9 +40,9 @@ void NavigationVelocityServiceInHandler::on_NavigationVelocityServiceIn(const Co
 	velCmd.addInt32(3);
 	velCmd.addDouble(input.getVX());
 	velCmd.addDouble(input.getVY());
-	velCmd.addDouble(input.getOmega());
+	velCmd.addDouble(input.getOmega()*180/M_PI);
 	velCmd.addInt32(100);
 	COMP->commandPort.write();
-	std::cout << "Sent cmd via yarp -> " << velCmd.toString();
+	std::cout << "Sent cmd via yarp -> " << velCmd.toString() << std::endl;
 }
 

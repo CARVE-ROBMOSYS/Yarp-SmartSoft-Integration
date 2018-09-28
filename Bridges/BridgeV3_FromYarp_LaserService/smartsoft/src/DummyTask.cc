@@ -123,11 +123,11 @@ int DummyTask::on_execute()
 	basePose.set_base_roll(     rpy[0]);
 	basePose.set_base_elevation(rpy[1]);
 	basePose.set_base_azimuth(  rpy[2]);
-	// Set translation
-	basePose.set_x(robotPose_mat[0][3], 1000);
-	basePose.set_y(robotPose_mat[1][3], 1000);
-	basePose.set_z(robotPose_mat[2][3], 1000);
 
+	// Set translation
+	basePose.set_x(robotPose_mat[0][3], 1);
+	basePose.set_y(robotPose_mat[1][3], 1);
+	basePose.set_z(robotPose_mat[2][3], 1);
 
 	//
 	// Compute Laser Sensor Position
@@ -142,9 +142,9 @@ int DummyTask::on_execute()
 	laserPose.set_elevation(rpy[1]);
 	laserPose.set_azimuth(  rpy[2]);
 	// Set translation
-	laserPose.set_x(robotPose_mat[0][3], 1000);
-	laserPose.set_y(robotPose_mat[1][3], 1000);
-	laserPose.set_z(robotPose_mat[2][3], 1000);
+	laserPose.set_x(robotPose_mat[0][3], 1);
+	laserPose.set_y(robotPose_mat[1][3], 1);
+	laserPose.set_z(robotPose_mat[2][3], 1);
 
 	// Fill SmartSoft data
 	CommBasicObjects::CommMobileLaserScan commMobileLaserScan;		// Bigger data to be filled
@@ -164,25 +164,43 @@ int DummyTask::on_execute()
 
 	// LaserScan6DPose::CommLaserScan
 	commMobileLaserScan.set_scan_valid(true);
+    commMobileLaserScan.set_scan_length_unit(1);												// TODO  HERE 1 means meters
 	commMobileLaserScan.set_scan_size(data.size());
 	commMobileLaserScan.set_scan_time_stamp(time_stamp);
     commMobileLaserScan.set_scan_update_count(counter++);
     commMobileLaserScan.set_scan_double_field_of_view(laserScan_angleMin, laserScan_step);		// TODO verify: accepts degrees, verify yarp device!!
     commMobileLaserScan.set_min_distance(laserScan_distanceMin, 1);								// TODO  HERE 1 means meters
     commMobileLaserScan.set_max_distance(laserScan_distanceMax, 1);								// TODO  HERE 1 means meters
-    commMobileLaserScan.set_scan_length_unit(1000);												// TODO  HERE 1000 means meters
 
+/*
+    std::cout << "data.size() " << data.size() << std::endl;
+    std::cout << "laserScan_angleMin " << laserScan_angleMin << std::endl;
+	std::cout << "laserScan_step " << laserScan_step << std::endl;
+    std::cout << "laserScan_distanceMin " << laserScan_distanceMin << std::endl;
+	std::cout << "laserScan_distanceMax " << laserScan_distanceMax << std::endl;
+*/
 
     double tmpRho, tmpTheta;
 //    CommBasicObjectsIDL::LaserScanPoint  smartTmp;
     for(int i=0; i< data.size(); i++)
     {
-    	// Is it possible to spped up this, by using a CommBasicObjectsIDL::LaserScanPoint??
+    	// Is it possible to speed up this, by using a CommBasicObjectsIDL::LaserScanPoint??
     	data[i].get_polar(tmpRho, tmpTheta);
-    	commMobileLaserScan.set_scan_index(i, i);
-    	commMobileLaserScan.set_scan_distance(i, tmpRho, 1);									// TODO verify: 1 for meter ??
-    	commMobileLaserScan.set_scan_intensity(i, 255);											// TODO verify: intensity measured in what???
+
+		if (std::isinf(tmpRho)) {
+			commMobileLaserScan.set_scan_distance(i, laserScan_distanceMax, 1);
+		}
+		else
+		{
+			commMobileLaserScan.set_scan_distance(i, tmpRho, 1);									// TODO verify: 1 for meter ??
+			commMobileLaserScan.set_scan_intensity(i, 128);											// TODO verify: intensity measured in what???
+			double giovanni = commMobileLaserScan.get_scan_distance(i);								// TODO verify: 1 for meter ??
+			commMobileLaserScan.set_scan_index(i, i);
+		}
     }
+    std::cout << std::endl;
+
+
 	commMobileLaserScan.set_sensor_pose(SensorOffset);
 	commMobileLaserScan.set_max_scan_size(data.size());
 
@@ -192,9 +210,10 @@ int DummyTask::on_execute()
 	//
 	// Finally publish laser-scan update
 	//
-	yInfo() << "Publishing data";
+	yInfo() << "Publishing update";
 
 	this->laserServiceOutPut(commMobileLaserScan);
+//	std::cout << commMobileLaserScan << std::endl << std::endl;
 
 	// Delay (should be handled by SmartSoft, but how??)
 	yarp::os::Time::delay(COMP->COMP->getGlobalState().getSettings().getPeriod());
