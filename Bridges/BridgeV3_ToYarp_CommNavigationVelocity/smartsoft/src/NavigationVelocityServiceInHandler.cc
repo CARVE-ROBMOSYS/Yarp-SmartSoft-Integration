@@ -38,8 +38,8 @@ void NavigationVelocityServiceInHandler::on_NavigationVelocityServiceIn(const Co
 	std::cout << "Got a new message";
 	velCmd.clear();
 	velCmd.addInt32(3);
-	velCmd.addDouble(input.getVX());
-	velCmd.addDouble(input.getVY());
+	velCmd.addDouble(input.get_vX(1));
+	velCmd.addDouble(input.get_vY(1));
 	velCmd.addDouble(input.getOmega()*180/M_PI);
 	velCmd.addInt32(100);
 	COMP->commandPort.write();
