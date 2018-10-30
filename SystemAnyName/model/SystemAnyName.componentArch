@@ -1,0 +1,11 @@
+SystemComponentArchitecture SystemAnyName {
+
+ComponentInstance Test_QueryClient instantiates Test_QueryClient
+{
+	RequiredService BaseState_Client
+	RequiredService Tick_Client
+} ComponentInstance Test_QueryServer instantiates Test_QueryServer
+{
+	ProvidedService BaseState_Server
+	ProvidedService Tick_Server
+} Connection Test_QueryClient.Tick_Client -> Test_QueryServer.Tick_Server Connection Test_QueryClient.BaseState_Client -> Test_QueryServer.BaseState_Server }

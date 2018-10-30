@@ -1,0 +1,11 @@
+ComponentDefinition Test_QueryServer {
+
+AnswerPort BaseState_Server implements CommBasicObjects.BaseStateQueryService {
+	}
+	RequestHandler BaseStateQueryServiceAnswHandler triggeredFrom BaseState_Server {
+	}
+	AnswerPort Tick_Server implements CommYARP_BT.BehaviourTreeTickQueryService {
+	}
+	RequestHandler BehaviourTreeTickQueryServiceAnswHandler triggeredFrom Tick_Server {
+	}
+}

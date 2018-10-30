@@ -1,0 +1,10 @@
+ComponentDefinition Test_QueryClient {
+
+RequestPort BaseState_Client implements CommBasicObjects.BaseStateQueryService {
+	}
+	RequestPort Tick_Client implements CommYARP_BT.BehaviourTreeTickQueryService {
+	}
+Activity ^Activity
+	{
+	}
+}
