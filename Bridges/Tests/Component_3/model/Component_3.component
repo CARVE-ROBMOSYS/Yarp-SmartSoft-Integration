@@ -1,0 +1,7 @@
+ComponentDefinition Component_3 {
+
+AnswerPort msgServer implements CommYARP_BT.BehaviourTreeTickQueryService {
+	}
+	RequestHandler mshHandler triggeredFrom msgServer {
+	}
+}

@@ -1,0 +1,9 @@
+ComponentDefinition Component_2 {
+
+AnswerPort msgServer implements CommYARP_BT.BehaviourTreeTickQueryService {
+	}
+	RequestHandler msgHandler triggeredFrom msgServer {
+	}
+	RequestPort msgClient implements CommYARP_BT.BehaviourTreeTickQueryService {
+	}
+}
