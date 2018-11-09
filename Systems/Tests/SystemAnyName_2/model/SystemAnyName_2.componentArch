@@ -1,0 +1,13 @@
+SystemComponentArchitecture SystemAnyName_2 {
+
+ComponentInstance Component_1 instantiates Component_1
+{
+	RequiredService msgSource
+} ComponentInstance Component_2 instantiates Component_2
+{
+	ProvidedService msgServer
+	RequiredService msgClient
+} ComponentInstance Component_3 instantiates Component_3
+{
+	ProvidedService msgServer
+} Connection Component_1.msgSource -> Component_2.msgServer Connection Component_2.msgClient -> Component_3.msgServer }

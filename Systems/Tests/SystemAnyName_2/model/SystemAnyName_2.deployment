@@ -1,0 +1,15 @@
+DeploymentModel SystemAnyName_2 {
+
+TargetPlatformReference localhost using SystemAnyName_2.localhost
+    {
+        UploadDirectory "/home/icub/SOFTWARE/deployment_3.6_bis"
+        LoginAccount icub
+        NetworkInterface eno1
+    }
+NamingService
+	{
+		deploy-to localhost }
+	ComponentArtefact SystemAnyName_2.Component_1 deploy-to localhost
+	ComponentArtefact SystemAnyName_2.Component_2 deploy-to localhost
+	ComponentArtefact SystemAnyName_2.Component_3 deploy-to localhost
+}
