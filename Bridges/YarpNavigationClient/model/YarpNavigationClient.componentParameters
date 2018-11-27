@@ -1,0 +1,7 @@
+ComponentParameter YarpNavigationClientParams component YarpNavigationClient {
+    InternalParameter Settings {
+        map_server_name  : String     =  "/mapServer"
+        navigation_server_name  : String     =  "//navigationServer"
+        localization_server_name  : String     =  "/localizationServer"
+    }
+}

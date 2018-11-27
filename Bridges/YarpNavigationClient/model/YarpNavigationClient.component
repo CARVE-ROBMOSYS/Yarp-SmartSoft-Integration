@@ -1,0 +1,9 @@
+ComponentDefinition YarpNavigationClient {
+
+AnswerPort BT_tick implements CommYARP_BT.BehaviourTreeTickQueryService {
+	}
+	RequestHandler BT_tick_Handler triggeredFrom BT_tick {
+	}
+	CoordinationSlavePort CoordinationPort implements CommBasicObjects.DefaultCoordinationService { }
+	ComponentParameters YarpNavigationClientParams slave CoordinationPort
+}
