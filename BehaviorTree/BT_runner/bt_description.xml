@@ -1,0 +1,15 @@
+<root>
+
+  <BehaviorTree ID="bt0008">
+    <Sequence name="seq0008">
+      <Fallback name="fb0008a">
+        <Action ID="Go_to_location1" />
+      </Fallback>
+      <Fallback name="fb0008b">
+        <Action ID="Go_to_location2" />
+      </Fallback>
+    </Sequence>
+  </BehaviorTree>
+
+</root>
+

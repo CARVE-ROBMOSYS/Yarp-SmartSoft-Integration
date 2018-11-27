@@ -1,0 +1,8 @@
+ComponentDefinition BT_runner {
+
+RequestPort BehaviourTreeTickQueryServiceReq implements CommYARP_BT.BehaviourTreeTickQueryService {
+	}
+	Activity Task1
+	{
+	}
+}
