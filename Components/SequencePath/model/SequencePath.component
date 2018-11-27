@@ -1,0 +1,12 @@
+ComponentDefinition SequencePath {
+
+RequestPort tickClient implements CommYARP_BT.BehaviourTreeTickQueryService {
+	}
+	AnswerPort tickServer implements CommYARP_BT.BehaviourTreeTickQueryService {
+	}
+	RequestHandler tickHandler triggeredFrom tickServer {
+	}
+Activity SequencerActivity
+	{
+	}
+}
