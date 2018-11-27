@@ -1,6 +1,0 @@
-ComponentParameter BT_engineParams component BT_engine {
-		InternalParameter Settings {
-			bt_description :String     =  "bt_description.xml"
-	}
-}
-

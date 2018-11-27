@@ -1,9 +1,0 @@
-ComponentDefinition BT_engine {
-
-	CoordinationSlavePort CoordinationPort implements CommBasicObjects.DefaultCoordinationService { }
-	ComponentParameters BT_engineParams slave CoordinationPort
-
-	Activity Task1 	{	}
-	RequestPort TickRequest implements CommYARP_BT.BaseStateQueryService realizedBy Task1 { 	}
-		
-}
