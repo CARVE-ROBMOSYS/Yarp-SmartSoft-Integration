@@ -171,6 +171,12 @@ int DummyTask::on_execute()
     commMobileLaserScan.set_scan_double_field_of_view(laserScan_angleMin, laserScan_step);		// TODO verify: accepts degrees, verify yarp device!!
     commMobileLaserScan.set_min_distance(laserScan_distanceMin, 1);								// TODO  HERE 1 means meters
     commMobileLaserScan.set_max_distance(laserScan_distanceMax, 1);								// TODO  HERE 1 means meters
+	commMobileLaserScan.set_scanner_x(laserPose.get_x(1), 1);
+	commMobileLaserScan.set_scanner_y(laserPose.get_y(1), 1);
+	commMobileLaserScan.set_scanner_z(laserPose.get_z(1), 1);
+	commMobileLaserScan.set_scanner_azimuth(laserPose.get_azimuth());
+	commMobileLaserScan.set_scanner_elevation(0);
+	commMobileLaserScan.set_scanner_roll(0);
 
 /*
     std::cout << "data.size() " << data.size() << std::endl;
