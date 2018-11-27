@@ -1,3 +1,0 @@
-SystemParameterModel SystemR1DemoParams extendsSystem SystemR1Demo {
-
- ComponentParameterInstance BridgeV3_FromYarp_LaserService refinesParamStruct BridgeV3_FromYarp_LaserServiceParams { } }
