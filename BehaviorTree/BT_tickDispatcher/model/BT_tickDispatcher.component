@@ -1,0 +1,18 @@
+ComponentDefinition BT_tickDispatcher {
+
+CoordinationSlavePort CoordinationPort implements CommBasicObjects.DefaultCoordinationService { }
+	ComponentParameters BT_tickDispatcherParams slave CoordinationPort
+	AnswerPort BT_Tick_input implements CommYARP_BT.BehaviourTreeTickQueryService {
+	}
+	RequestHandler BT_Tick_Query_Handler triggeredFrom BT_Tick_input {
+	}
+	RequestPort BT_Navig_tick implements CommYARP_BT.BehaviourTreeTickQueryService {
+	}
+Activity ^Activity
+	{
+	}
+RequestPort BT_manip_tick implements CommYARP_BT.BehaviourTreeTickQueryService {
+	}
+	RequestPort BT_vision_tick implements CommYARP_BT.BehaviourTreeTickQueryService {
+	}
+}
