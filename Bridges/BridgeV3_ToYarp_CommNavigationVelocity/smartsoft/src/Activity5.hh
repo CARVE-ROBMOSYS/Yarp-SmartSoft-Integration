@@ -14,33 +14,21 @@
 // If you want the toolchain to re-generate this file, please 
 // delete it before running the code generator.
 //--------------------------------------------------------------------------
-#ifndef _BRIDGEV3_TOYARP_COMMNAVIGATIONVELOCITYCORE_HH
-#define _BRIDGEV3_TOYARP_COMMNAVIGATIONVELOCITYCORE_HH
-	
-#include "aceSmartSoft.hh"
-#include <iostream>
-#include <atomic>
+#ifndef _ACTIVITY5_HH
+#define _ACTIVITY5_HH
 
-#include <yarp/os/Port.h>
-#include <yarp/os/Bottle.h>
-#include <yarp/os/Network.h>
+#include "Activity5Core.hh"
 
-#include <CommBasicObjects/CommNavigationVelocity.hh>
-
-
-class BridgeV3_ToYarp_CommNavigationVelocityCore
+class Activity5  : public Activity5Core
 {
+private:
 public:
-	yarp::os::Network yarp;
-	yarp::os::BufferedPort<yarp::os::Bottle> commandPort;
-
-	std::atomic_bool is_newData;
-	CommBasicObjects::CommNavigationVelocity newData;
-	CommBasicObjects::CommNavigationVelocity input;
-
-public:
-	BridgeV3_ToYarp_CommNavigationVelocityCore();
-	void onStartup();
-};
+	Activity5(SmartACE::SmartComponent *comp);
+	virtual ~Activity5();
 	
+	virtual int on_entry();
+	virtual int on_execute();
+	virtual int on_exit();
+};
+
 #endif

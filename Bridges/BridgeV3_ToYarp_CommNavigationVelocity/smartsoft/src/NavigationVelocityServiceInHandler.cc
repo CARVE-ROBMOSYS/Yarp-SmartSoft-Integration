@@ -32,18 +32,11 @@ NavigationVelocityServiceInHandler::~NavigationVelocityServiceInHandler()
 
 void NavigationVelocityServiceInHandler::on_NavigationVelocityServiceIn(const CommBasicObjects::CommNavigationVelocity &input)
 {
-	// implement business logic here
-	// (do not use blocking calls here, otherwise this might block the InputPort NavigationVelocityServiceIn)
-	yarp::os::Bottle & velCmd = COMP->commandPort.prepare();
 	std::cout << "Got a new message: VX " << input.getVX() << " VY: " << input.getVY() << " omega: " << input.get_omega();
 	std::cout << "vX " << input.get_vX(1) << " vY: " << input.get_vY(1) << " omega: " << input.get_omega();
-	velCmd.clear();
-	velCmd.addInt32(3);
-	velCmd.addDouble(input.get_vX(1));
-	velCmd.addDouble(input.get_vY(1));
-	velCmd.addDouble(input.getOmega()*180/M_PI);
-	velCmd.addInt32(100);
-	COMP->commandPort.write();
-	std::cout << "Sent cmd via yarp -> " << velCmd.toString() << std::endl;
+
+	COMP->newData = input;
+	COMP->is_newData = true;
+	return;
 }
 

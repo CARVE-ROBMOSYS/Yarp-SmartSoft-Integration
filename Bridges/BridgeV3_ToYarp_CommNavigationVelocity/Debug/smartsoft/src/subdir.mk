@@ -4,6 +4,7 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CC_SRCS += \
+../smartsoft/src/Activity5.cc \
 ../smartsoft/src/BridgeV3_ToYarp_CommNavigationVelocityCore.cc \
 ../smartsoft/src/CompHandler.cc \
 ../smartsoft/src/NavigationVelocityServiceInHandler.cc \
@@ -11,6 +12,7 @@ CC_SRCS += \
 ../smartsoft/src/SmartStateChangeHandler.cc 
 
 CC_DEPS += \
+./smartsoft/src/Activity5.d \
 ./smartsoft/src/BridgeV3_ToYarp_CommNavigationVelocityCore.d \
 ./smartsoft/src/CompHandler.d \
 ./smartsoft/src/NavigationVelocityServiceInHandler.d \
@@ -18,6 +20,7 @@ CC_DEPS += \
 ./smartsoft/src/SmartStateChangeHandler.d 
 
 OBJS += \
+./smartsoft/src/Activity5.o \
 ./smartsoft/src/BridgeV3_ToYarp_CommNavigationVelocityCore.o \
 ./smartsoft/src/CompHandler.o \
 ./smartsoft/src/NavigationVelocityServiceInHandler.o \

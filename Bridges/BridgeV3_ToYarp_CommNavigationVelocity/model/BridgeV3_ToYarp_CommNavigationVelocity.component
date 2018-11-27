@@ -6,4 +6,8 @@ ComponentDefinition BridgeV3_ToYarp_CommNavigationVelocity {
 	InputHandler NavigationVelocityServiceInHandler triggeredFrom NavigationVelocityServiceIn { }
 	
 	ComponentParameters BridgeV3_ToYarp_CommNavigationVelocityParams slave CoordinationPort
+Activity Activity5
+	{
+		DefaultTrigger PeriodicTimer 50.0 Hz
+	}
 }
