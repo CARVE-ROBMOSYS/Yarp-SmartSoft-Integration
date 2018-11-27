@@ -1,0 +1,17 @@
+DeploymentModel System_BT_test {
+
+
+TargetPlatformReference localhost using System_BT_test.localhost
+	{
+		UploadDirectory "/home/icub/SOFTWARE/deployment_3.6_bis/"
+		LoginAccount icub
+		NetworkInterface eno1
+	}
+	ComponentArtefact System_BT_test.BT_runner deploy-to localhost
+
+	ComponentArtefact System_BT_test.BT_tickDispatcher deploy-to localhost
+	NamingService
+	{
+		deploy-to localhost }
+ComponentArtefact System_BT_test.YarpNavigationClient deploy-to localhost
+}

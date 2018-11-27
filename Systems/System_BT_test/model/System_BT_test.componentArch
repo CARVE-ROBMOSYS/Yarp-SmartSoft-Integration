@@ -1,0 +1,31 @@
+SystemComponentArchitecture System_BT_test {
+
+ComponentInstance BT_runner instantiates BT_runner
+{
+	RequiredService BehaviourTreeTickQueryServiceReq
+}
+
+ComponentInstance BT_tickDispatcher instantiates BT_tickDispatcher
+{
+	ProvidedService BT_Tick_input
+	RequiredService BT_Navig_tick
+} 
+
+ComponentInstance YarpNavigationClient instantiates YarpNavigationClient
+{
+	ProvidedService BT_tick
+} 
+
+/*
+ComponentInstance SequencePath instantiates SequencePath
+{
+	RequiredService tickClient
+	ProvidedService tickServer
+} 
+*/
+Connection BT_runner.BehaviourTreeTickQueryServiceReq -> BT_tickDispatcher.BT_Tick_input 
+
+
+// Connection  SequencePath.tickClient -> YarpNavigationClient.BT_tick 
+Connection BT_tickDispatcher.BT_Navig_tick -> YarpNavigationClient.BT_tick
+}

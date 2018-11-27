@@ -1,0 +1,3 @@
+SystemParameterModel System_BT_testParams extendsSystem System_BT_test {
+
+}
