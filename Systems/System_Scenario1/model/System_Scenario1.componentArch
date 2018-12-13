@@ -1,0 +1,21 @@
+SystemComponentArchitecture System_Scenario1 {
+
+ComponentInstance BT_runner instantiates BT_runner
+{
+	RequiredService BehaviourTreeTickQueryServiceReq
+} ComponentInstance BT_tickDispatcher instantiates BT_tickDispatcher
+{
+	ProvidedService BT_Tick_input
+	RequiredService BT_vision_tick
+	RequiredService BT_Navig_tick
+	RequiredService BT_manip_tick
+} ComponentInstance VisionSkill instantiates VisionSkill
+{
+	ProvidedService tickInput
+} ComponentInstance Navigationskill instantiates YarpNavigationClient
+{
+	ProvidedService BT_tick
+} ComponentInstance GraspingSkill instantiates GraspingSkill
+{
+	ProvidedService tickInput
+} Connection BT_runner.BehaviourTreeTickQueryServiceReq -> BT_tickDispatcher.BT_Tick_input Connection BT_tickDispatcher.BT_vision_tick -> VisionSkill.tickInput Connection BT_tickDispatcher.BT_Navig_tick -> Navigationskill.BT_tick Connection BT_tickDispatcher.BT_manip_tick -> GraspingSkill.tickInput }

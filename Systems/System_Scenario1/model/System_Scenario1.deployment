@@ -1,0 +1,17 @@
+DeploymentModel System_Scenario1 {
+
+TargetPlatformReference localhost using System_Scenario1.localhost
+	{
+		UploadDirectory "/home/icub/SOFTWARE/deployment_3.6/"
+		LoginAccount icub
+		NetworkInterface eno1
+	}
+	NamingService
+	{
+		deploy-to localhost }
+	ComponentArtefact System_Scenario1.BT_runner deploy-to localhost
+	ComponentArtefact System_Scenario1.BT_tickDispatcher deploy-to localhost
+	ComponentArtefact System_Scenario1.GraspingSkill deploy-to localhost
+	ComponentArtefact System_Scenario1.Navigationskill deploy-to localhost
+	ComponentArtefact System_Scenario1.VisionSkill deploy-to localhost
+}

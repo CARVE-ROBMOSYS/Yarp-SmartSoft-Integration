@@ -1,0 +1,9 @@
+# This file is generated using the SmartMDSD Toolchain.
+# Any changes will be overwritten next time the deployment project
+# is deployed/run from within the SmartMDSD toolchain.
+
+REFERENCED_PROJECT_BT_runner="/home/icub/SOFTWARE/smartsoft_3.6/Yarp-SmartSoft-Integration/BehaviorTree/BT_runner"
+REFERENCED_PROJECT_BT_tickDispatcher="/home/icub/SOFTWARE/smartsoft_3.6/Yarp-SmartSoft-Integration/BehaviorTree/BT_tickDispatcher"
+REFERENCED_PROJECT_GraspingSkill="/home/icub/SOFTWARE/smartsoft_3.6/Yarp-SmartSoft-Integration/Components/GraspingSkill"
+REFERENCED_PROJECT_Navigationskill="/home/icub/SOFTWARE/smartsoft_3.6/Yarp-SmartSoft-Integration/Bridges/YarpNavigationClient"
+REFERENCED_PROJECT_VisionSkill="/home/icub/SOFTWARE/smartsoft_3.6/Yarp-SmartSoft-Integration/Components/VisionSkill"
