@@ -1,0 +1,7 @@
+ComponentParameter VisionSkillParams component VisionSkill {
+	InternalParameter Settings 
+	{
+		remote_port  :String  =  "/tickManager"
+		local_port  :String  =  "/tickManager"
+	}
+}
