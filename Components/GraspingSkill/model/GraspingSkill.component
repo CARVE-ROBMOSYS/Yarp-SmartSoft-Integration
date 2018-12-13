@@ -1,0 +1,9 @@
+ComponentDefinition GraspingSkill {
+
+AnswerPort tickInput implements CommYARP_BT.BehaviourTreeTickQueryService {
+	}
+	RequestHandler tickHandler triggeredFrom tickInput {
+	}
+	CoordinationSlavePort CoordinationPort implements CommBasicObjects.DefaultCoordinationService { }
+	ComponentParameters GraspingSkillParams slave CoordinationPort
+}

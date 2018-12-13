@@ -1,0 +1,8 @@
+ComponentParameter GraspingSkillParams component GraspingSkill {
+
+	InternalParameter Settings 
+	{
+		remote_port  :String  =  "/tickManager"
+		local_port  :String  =  "/tickManager"
+	}
+}
