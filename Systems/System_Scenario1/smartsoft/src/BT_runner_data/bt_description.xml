@@ -1,0 +1,27 @@
+
+<root>
+ <BehaviorTree ID="bt0008">
+     <Fallback name="fal1">
+       <Condition ID="BottleGrasped" />
+       <Sequence name="seq1">
+         <Fallback name="FalCompute">
+           <Sequence name="SeqInvPose">
+             <Condition ID="InvPoseComputed" />
+             <Condition ID="InvPoseValid" />
+           </Sequence>
+           <Action ID="ComputeInvPose" />
+         </Fallback>
+         <Fallback name="GoInvPose">
+           <Condition ID="RobotAtInvPose" />
+           <Action ID="GoToInvPose" />
+         </Fallback>
+         <Fallback name="Locate">
+           <Condition ID="BottleLocated" />
+           <Action ID="LocateBottle" />
+         </Fallback>
+         <Action ID="GraspBottle" />
+       </Sequence>
+    </Fallback>
+ </BehaviorTree>
+</root>
+
