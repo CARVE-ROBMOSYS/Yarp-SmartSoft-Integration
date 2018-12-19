@@ -16,12 +16,20 @@
 //--------------------------------------------------------------------------
 #ifndef _BT_TICK_HANDLER_USER_HH
 #define _BT_TICK_HANDLER_USER_HH
-		
+
+#include <string>
 #include "BT_tick_HandlerCore.hh"
+#include <yarp/os/RpcClient.h>
+#include <yarp/dev/Map2DLocation.h>
 
 class BT_tick_Handler : public BT_tick_HandlerCore
 {
-protected:
+private:
+	bool has_goal{false};
+	CommYARP_BT::TickResult handle_tick_goTo(yarp::dev::Map2DLocation  location);
+	CommYARP_BT::TickResult handle_tick_check(yarp::dev::Map2DLocation location);
+	yarp::os::RpcClient  blackBoard_Client;
+
 public:
 	BT_tick_Handler(Smart::IQueryServerPattern<CommYARP_BT::CommTickCommand, CommYARP_BT::CommTickResult, SmartACE::QueryId>* server);
 	virtual ~BT_tick_Handler();

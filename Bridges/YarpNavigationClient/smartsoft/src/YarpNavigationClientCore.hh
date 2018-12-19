@@ -34,8 +34,6 @@ public:
 	yarp::os::Network yarp;
 	yarp::dev::PolyDriver     navClient;
 	yarp::dev::INavigation2D *iNav;
-
-	std::map<std::string, bool>   reachedLocations;
 };
 	
 #endif
