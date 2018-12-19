@@ -20,6 +20,7 @@
 #include "aceSmartSoft.hh"
 #include <iostream>
 
+#include <yarp/os/Network.h>
 #include <yarp/dev/IEncoders.h>
 #include <yarp/dev/PolyDriver.h>
 #include <yarp/dev/IPositionControl.h>
@@ -27,6 +28,8 @@
 class GraspingSkillCore
 {
 public:
+	yarp::os::Network yarp;
+
     yarp::dev::PolyDriver  		  armDev;
     yarp::dev::IPositionControl  *headPos, *armPos;
     yarp::dev::IEncoders         *headEnc, *armEnc;
