@@ -37,7 +37,7 @@
           </children>
           <children xmi:type="notation:Node" xmi:id="_hSjmINuKEeiMDY9CzLi-wA" type="3012" element="_hShJ4NuKEeiMDY9CzLi-wA">
             <children xmi:type="notation:Node" xmi:id="_hSjmI9uKEeiMDY9CzLi-wA" type="5010">
-              <layoutConstraint xmi:type="notation:Location" xmi:id="_hSjmJNuKEeiMDY9CzLi-wA" x="31" y="5"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_hSjmJNuKEeiMDY9CzLi-wA" x="-72" y="31"/>
             </children>
             <children xmi:type="notation:Node" xmi:id="_hSjmJduKEeiMDY9CzLi-wA" type="3014" element="_hShJ4duKEeiMDY9CzLi-wA">
               <styles xmi:type="notation:ShapeStyle" xmi:id="_hSjmJtuKEeiMDY9CzLi-wA" fontName="Ubuntu"/>
