@@ -20,9 +20,12 @@
 #include "aceSmartSoft.hh"
 #include <iostream>
 
+#include <yarp/os/Network.h>
+
 class VisionSkillCore
 {
 private:
+	yarp::os::Network yarp;
 
 public:
 	VisionSkillCore();
