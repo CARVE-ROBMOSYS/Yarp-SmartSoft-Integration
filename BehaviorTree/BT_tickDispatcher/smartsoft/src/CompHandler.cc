@@ -134,8 +134,13 @@ void CompHandler::onStartup()
 		entry.tickerId   = tokens[2];
 		entry.command    = tokens[3];
 
+
+		// recpnstruct params as a unique string
 		if(tokens.size() >= 5)
 			entry.params     = tokens[4];
+
+		for(int i=5; i<tokens.size(); i++)
+			entry.params     += " " + tokens[i];
 
 		bool found = false;
 		for (auto &elem : COMP->tickables_map)
