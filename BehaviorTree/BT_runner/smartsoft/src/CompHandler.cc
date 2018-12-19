@@ -33,7 +33,6 @@ void CompHandler::onStartup()
 	// COMP->connectMyPortName("SmartExampleComponent", "examplePort");
 	status = COMP->connectAndStartAllServices();
 	
-	sleep(2);
 	// Start all tasks. If you need manual control, use the content of this function to
 	// start each task individually.
 	COMP->startAllTasks();
@@ -45,7 +44,6 @@ void CompHandler::onStartup()
 	// Notify the component that setup/initialization is finished.
 	// You may move this function to any other place.
 	COMP->setStartupFinished();
-	sleep(2);
 }
 
 void CompHandler::onShutdown() 
