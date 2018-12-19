@@ -1,0 +1,70 @@
+/** 
+\class CommYARP_BT::CommTickCommandCore
+
+Structure of Communication Object:
+- command: CommYARP_BT::TickCommand 
+- parameter: String 
+
+\class CommYARP_BT::CommTickResultCore
+
+Structure of Communication Object:
+- result: CommYARP_BT::TickResult 
+
+\class CommYARP_BT::TickCommand
+
+Structure of Enumeration:
+- Tick 
+- Halt 
+
+\class CommYARP_BT::TickResult
+
+Structure of Enumeration:
+- Running 
+- Success 
+- Failure 
+- Idle 
+- Halted 
+- Error 
+
+
+
+
+@defgroup CommYARP_BT
+@ingroup commObjGroup
+@{
+\page CommYARP_BTPage CommYARP_BT
+Class Reference: CommYARP_BT
+<hr>
+
+@section CommTickCommand CommTickCommand
+- command: @ref TickCommand (Enum) 
+- parameter: String  
+
+Class Reference: CommYARP_BT::CommTickCommandCore
+<hr>
+@section CommTickResult CommTickResult
+- result: @ref TickResult (Enum) 
+
+Class Reference: CommYARP_BT::CommTickResultCore
+<hr>
+@section TickCommand TickCommand
+- Tick 
+- Halt 
+
+Class Reference: CommYARP_BT::TickCommand
+<hr>
+@section TickResult TickResult
+- Running 
+- Success 
+- Failure 
+- Idle 
+- Halted 
+- Error 
+
+Class Reference: CommYARP_BT::TickResult
+<hr>
+
+
+@}
+*/
+
