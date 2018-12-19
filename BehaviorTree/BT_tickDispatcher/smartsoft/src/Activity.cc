@@ -58,7 +58,7 @@ int Activity::on_execute()
     										return  (bool)(COMP->isNewData || COMP->isClosing) ;});
 
 
-	std::cout << COMP->isNewData << " " <<  COMP->isClosing << std::endl;
+	std::cout << "NewData: " << COMP->isNewData << "  Closing: " <<  COMP->isClosing << std::endl;
 
     if(COMP->isClosing)
     	return -1;
@@ -84,11 +84,8 @@ int Activity::on_execute()
 	}
 
 	answer.setResult(res);
-	std::cout << "answering query id " << COMP->reqId << "  with value: " << answer.getResult().to_string() << "  (res " << (int)res << " " << res << ")" << std::endl << std::endl;
+	yDebug() << "answering query id " << COMP->reqId << "  with value: " << answer.getResult().to_string() << "  (res " << (int)res << " " << res << ")\n";
 	COMP->bT_Tick_input->answer(COMP->reqId, answer);
-
-	std::cout << "COMPONENT 2 (activity) -> Got answer  [id " << COMP->reqId <<"] " << answer << "\n------- " << std::endl;
-
 
 	COMP->isNewData = false;
 	// it is possible to return != 0 (e.g. when the task detects errors), then the outer loop breaks and the task stops
