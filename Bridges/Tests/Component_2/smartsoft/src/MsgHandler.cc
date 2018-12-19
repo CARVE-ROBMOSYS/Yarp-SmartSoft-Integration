@@ -25,7 +25,7 @@ MsgHandler::MsgHandler(Smart::IQueryServerPattern<CommYARP_BT::CommTickCommand, 
 
 MsgHandler::~MsgHandler()
 {
-	
+	COMP->mutex.unlock();
 }
 
 
@@ -35,9 +35,12 @@ void MsgHandler::handleQuery(const SmartACE::QueryId &id, const CommYARP_BT::Com
 	
 	// implement your query handling logic here and fill in the answer object
 	
-	std::cout << "COMPONENT 2 -> Got request [id " << id <<"] " << request << std::endl;
-	COMP->msgClient->query(request, answer);
-	std::cout << "COMPONENT 2 -> Got answer  [id " << id <<"] " << answer << "\n------- " << std::endl;
+	COMP->cmd = request;
+	COMP->reqId = id;
+	COMP->isNewData = true;
 
-	this->server->answer(id, answer);
+	std::cout << "COMPONENT 2 -> Got request [id " << id <<"] " << request << std::endl;
+
+	COMP->gotNewData.notify_all();
+//	COMP->mutex.unlock();
 }

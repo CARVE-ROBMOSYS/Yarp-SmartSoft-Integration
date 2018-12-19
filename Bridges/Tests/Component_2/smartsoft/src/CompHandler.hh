@@ -16,7 +16,7 @@
 //--------------------------------------------------------------------------
 #ifndef _COMPHANDLER_HH
 #define _COMPHANDLER_HH
-	
+
 class CompHandler
 {
 public:

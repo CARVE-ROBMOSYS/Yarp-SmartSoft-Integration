@@ -30,7 +30,16 @@
                 <styles xmi:type="notation:FilteringStyle" xmi:id="_-Vw8WOP-Eeih64CimUzOkw"/>
               </children>
               <styles xmi:type="notation:ShapeStyle" xmi:id="_-Vw8U-P-Eeih64CimUzOkw" fontName="Ubuntu" fontHeight="8" bold="true"/>
-              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-Vw8VOP-Eeih64CimUzOkw" x="79" y="90" width="147" height="63"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-Vw8VOP-Eeih64CimUzOkw" x="79" y="66" width="147" height="63"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_fyKcoOZaEeizzqpUid--9w" type="3008" element="_fyFkIOZaEeizzqpUid--9w">
+              <children xmi:type="notation:Node" xmi:id="_fyLDsOZaEeizzqpUid--9w" type="5005"/>
+              <children xmi:type="notation:Node" xmi:id="_fyLDseZaEeizzqpUid--9w" type="7002">
+                <styles xmi:type="notation:SortingStyle" xmi:id="_fyLDsuZaEeizzqpUid--9w"/>
+                <styles xmi:type="notation:FilteringStyle" xmi:id="_fyLDs-ZaEeizzqpUid--9w"/>
+              </children>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_fyKcoeZaEeizzqpUid--9w" fontName="Ubuntu" fontHeight="8" bold="true"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fyKcouZaEeizzqpUid--9w" x="78" y="174"/>
             </children>
             <styles xmi:type="notation:SortingStyle" xmi:id="_03_aVeP-Eeih64CimUzOkw"/>
             <styles xmi:type="notation:FilteringStyle" xmi:id="_03_aVuP-Eeih64CimUzOkw"/>
@@ -63,17 +72,17 @@
         <styles xmi:type="notation:DiagramStyle" xmi:id="_028RcuP-Eeih64CimUzOkw"/>
         <edges xmi:type="notation:Edge" xmi:id="_-VxjY-P-Eeih64CimUzOkw" type="4001" element="_-VvHIOP-Eeih64CimUzOkw" source="_-VwVQOP-Eeih64CimUzOkw" target="_-Vw8UuP-Eeih64CimUzOkw">
           <children xmi:type="notation:Node" xmi:id="_-VxjZ-P-Eeih64CimUzOkw" type="6001">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-VxjaOP-Eeih64CimUzOkw" y="-10"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-VxjaOP-Eeih64CimUzOkw" y="-11"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_-VxjaeP-Eeih64CimUzOkw" type="6002">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-VxjauP-Eeih64CimUzOkw" x="-4" y="9"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-VxjauP-Eeih64CimUzOkw" x="-5" y="9"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_-Vxja-P-Eeih64CimUzOkw" type="6003">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-VxjbOP-Eeih64CimUzOkw" x="-6" y="6"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-VxjbOP-Eeih64CimUzOkw" x="-8" y="5"/>
           </children>
           <styles xmi:type="notation:ConnectorStyle" xmi:id="_-VxjZOP-Eeih64CimUzOkw"/>
           <styles xmi:type="notation:FontStyle" xmi:id="_-VxjZeP-Eeih64CimUzOkw" fontName="Ubuntu" fontHeight="8"/>
-          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_-VxjZuP-Eeih64CimUzOkw" points="[15, 0, -201, -3]$[91, 1, -125, -2]"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_-VxjZuP-Eeih64CimUzOkw" points="[15, -2, -201, 19]$[91, -9, -125, 12]"/>
           <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_-VyKcOP-Eeih64CimUzOkw" id="(0.5,0.5)"/>
           <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_-VyKceP-Eeih64CimUzOkw" id="(0.8655172413793103,0.5573770491803278)"/>
         </edges>
@@ -123,6 +132,18 @@
           <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']/@subContainerMappings[name='RequestHandlerContainer']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']/@subContainerMappings[name='RequestHandlerContainer']"/>
+      </ownedDiagramElements>
+      <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_fyFkIOZaEeizzqpUid--9w" name="Activity" tooltipText="Activity">
+        <target xmi:type="ComponentDefinition:Activity" href="model/Component_2.component#//@component/@elements.3"/>
+        <semanticElements xmi:type="ComponentDefinition:Activity" href="model/Component_2.component#//@component/@elements.3"/>
+        <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+        <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+        <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+        <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_fyFkIeZaEeizzqpUid--9w" borderSize="1" borderSizeComputationExpression="1">
+          <labelFormat>bold</labelFormat>
+          <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']/@subContainerMappings[name='ActivityContainer']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']/@subContainerMappings[name='ActivityContainer']"/>
       </ownedDiagramElements>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_-VvHIOP-Eeih64CimUzOkw" sourceNode="_-Vsq4OP-Eeih64CimUzOkw" targetNode="_-VugEOP-Eeih64CimUzOkw">

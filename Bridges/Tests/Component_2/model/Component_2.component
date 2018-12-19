@@ -6,4 +6,7 @@ AnswerPort msgServer implements CommYARP_BT.BehaviourTreeTickQueryService {
 	}
 	RequestPort msgClient implements CommYARP_BT.BehaviourTreeTickQueryService {
 	}
+Activity ^Activity
+	{
+	}
 }

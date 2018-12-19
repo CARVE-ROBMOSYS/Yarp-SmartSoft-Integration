@@ -37,6 +37,7 @@ int Activity::on_entry()
 {
 	// do initialization procedures here, which are called once, each time the task is started
 	// it is possible to return != 0 (e.g. when initialization fails) then the task is not executed further
+	sleep(5);
 	return 0;
 }
 int Activity::on_execute()
@@ -55,15 +56,15 @@ int Activity::on_execute()
 
 	request.setCommand(TickCommand::Tick);
 
-	static int counter = 1;
+	static int counter = 0;
 
 	std::cout << "Calling query number " << counter <<  std::endl;
 
 	COMP->msgSource->query(request, answer);
 
-	counter++;
 	std::cout << "Got answer " << answer << "\n------- " << std::endl;
 
+	counter++;
 	sleep(1);
 	// it is possible to return != 0 (e.g. when the task detects errors), then the outer loop breaks and the task stops
 	return 0;

@@ -19,6 +19,12 @@
 	
 #include "aceSmartSoft.hh"
 #include <iostream>
+#include <mutex>
+#include <atomic>
+#include <condition_variable>
+
+#include <CommYARP_BT/CommTickCommand.hh>
+#include <CommYARP_BT/CommTickResult.hh>
 
 class Component_2Core
 {
@@ -26,6 +32,16 @@ private:
 
 public:
 	Component_2Core();
+
+	CommYARP_BT::CommTickCommand cmd;
+	int reqId;
+	std::mutex mutex;
+	std::atomic<bool> isNewData {false};
+	std::atomic<bool> isClosing {false};
+	std::condition_variable gotNewData;
+
+	static bool getIsNewData(Component_2Core* c) { return c->isNewData;};
+
 };
 	
 #endif
