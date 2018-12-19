@@ -35,6 +35,8 @@ find_package(YARP 3.0.0 REQUIRED)
 find_package(AceSmartSoft REQUIRED)
 find_package(Doxygen)
 
+yarp_configure_external_installation(${PROJECT_NAME})
+
 message(STATUS "Using:")
 message(STATUS "  CMake: ${CMAKE_VERSION} (${CMAKE_COMMAND})")
 message(STATUS "  C Compiler: ${CMAKE_C_COMPILER_ID} ${CMAKE_C_COMPILER_VERSION} (${CMAKE_C_COMPILER})")
