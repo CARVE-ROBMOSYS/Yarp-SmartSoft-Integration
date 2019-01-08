@@ -98,7 +98,7 @@ void BT_tick_Handler::handleQuery(const SmartACE::QueryId &id, const CommYARP_BT
 		{
 			// Get subcommand: goTo or check
 			if(paramsVect[0] == "goTo")
-				result = handle_tick_goTo(desiredLoc);
+				result = handle_tick_goTo(desiredLoc, paramsVect[1]);
 
 			if(paramsVect[0] == "check")
 				result = handle_tick_check(desiredLoc);
@@ -120,13 +120,18 @@ void BT_tick_Handler::handleQuery(const SmartACE::QueryId &id, const CommYARP_BT
 	this->server->answer(id, answer);
 }
 
-CommYARP_BT::TickResult  BT_tick_Handler::handle_tick_goTo(yarp::dev::Map2DLocation location)
+CommYARP_BT::TickResult  BT_tick_Handler::handle_tick_goTo(yarp::dev::Map2DLocation location, string locationName)
 {
 	CommYARP_BT::TickResult result = CommYARP_BT::TickResult::Failure;
 	if(!handle_tick_check(location))
 	{
 		yInfo() << "Location reached";
 		result = CommYARP_BT::TickResult::Success;
+		yarp::os::Bottle cmd;
+		cmd.addString("set");
+		cmd.addString("RobotIn"+locationName);
+		cmd.addString("True");
+		blackBoard_Client.write(cmd);
 		return result;
 	}
 
@@ -179,6 +184,7 @@ CommYARP_BT::TickResult BT_tick_Handler::handle_tick_check(yarp::dev::Map2DLocat
 	bool ret = COMP->iNav->getCurrentPosition(robotLoc);
 
 	yInfo() << "Get [" << ret << "] Current robot location is " << robotLoc.toString();
+	yInfo() << "Diff is " << std::fabs(desiredLoc.x - robotLoc.x) << "  " << std::fabs(desiredLoc.y - robotLoc.y);
 
 
 	std::cout << std::fabs(desiredLoc.x - robotLoc.x) << std::endl;
@@ -186,8 +192,8 @@ CommYARP_BT::TickResult BT_tick_Handler::handle_tick_check(yarp::dev::Map2DLocat
 	std::cout << std::fabs(desiredLoc.theta - robotLoc.theta) << std::endl;
 
 	// Position matches if robot is inside a 0.1 circle.
-	if( std::fabs(desiredLoc.x 		- robotLoc.x)     <= 0.1 &&
-		std::fabs(desiredLoc.y 		- robotLoc.y)     <= 0.1 ) // &&
+	if( std::fabs(desiredLoc.x 		- robotLoc.x)     <= 0.25 &&
+		std::fabs(desiredLoc.y 		- robotLoc.y)     <= 0.25 ) // &&
 		// std::fabs(desiredLoc.theta 	- robotLoc.theta) <= 0.1 )
 	{
 		result = CommYARP_BT::TickResult::Success;
