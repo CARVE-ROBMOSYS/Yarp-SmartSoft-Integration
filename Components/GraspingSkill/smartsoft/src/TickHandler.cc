@@ -24,40 +24,16 @@ using namespace std;
 TickHandler::TickHandler(Smart::IQueryServerPattern<CommYARP_BT::CommTickCommand, CommYARP_BT::CommTickResult, SmartACE::QueryId>* server)
 :	TickHandlerCore(server)
 {
-	
+	COMP->RPChome.open("/SmartSoft/homing");
+	COMP->RPCgrasp.open("/SmartSoft/grasping");
+
+	yarp::os::Network::connect(COMP->RPChome.getName(),  "/action-gateway/cmd:io");
+	yarp::os::Network::connect(COMP->RPCgrasp.getName(), "/graspProcessor/cmd:rpc");
 }
 
 TickHandler::~TickHandler()
 {
 	
-}
-
-CommYARP_BT::TickResult TickHandler::handle_tick_goTo(const  std::vector<double> target)
-{
-
-}
-
-CommYARP_BT::TickResult TickHandler::handle_tick_check(const std::vector<double> target)
-{
-	double enc[8];
-	CommYARP_BT::TickResult result = CommYARP_BT::TickResult::Failure;
-
-	COMP->armEnc->getEncoders(enc);
-
-	// Check if all joints are in place
-	bool done_arm = true;
-	for(int i=0; i<8; i++)
-	{
-		done_arm &= (abs(enc[i] - target[i]) < 2);
-//		yInfo() << "abs(encs[i]) " << abs(enc[i] - target[i]) << " " << done_arm;
-	}
-
-	if(done_arm)
-	{
-		yInfo() << "Position reached";
-		result = CommYARP_BT::TickResult::Success;
-	}
-	return result;
 }
 
 void TickHandler::handleQuery(const SmartACE::QueryId &id, const CommYARP_BT::CommTickCommand& request) 
@@ -84,32 +60,24 @@ void TickHandler::handleQuery(const SmartACE::QueryId &id, const CommYARP_BT::Co
 	{
 		case CommYARP_BT::TickCommand::Tick:
 		{
-			if(paramsVect[0] == "goTo")
+			if(paramsVect[0] == "home")
 			{
-				if(paramsVect[1] == "lift_right_arm")
-				{
-					// Send the command to a dummy target position
-					if(handle_tick_check(dummyPos_rightArm) == CommYARP_BT::TickResult::Success)
-					{
-						result = CommYARP_BT::TickResult::Success;
-					}
-					else
-					{
-						yInfo() << "Moving arm";
-						COMP->armPos->positionMove(dummyPos_rightArm.data());
-						result = CommYARP_BT::TickResult::Running;
-					}
-				}
+				yarp::os::Bottle cmd;
+				cmd.addString("home");
+				bool ret = COMP->RPChome.write(cmd);
+				yInfo() << "home ret " << ret << " cmd " << cmd.toString();
+				result = CommYARP_BT::TickResult::Success;
 			}
-			if(paramsVect[0] == "check")
+
+			if(paramsVect[0] == "grasp")
 			{
-				if(paramsVect[1] == "lift_right_arm")
-				{
-					if(handle_tick_check(dummyPos_rightArm) == CommYARP_BT::TickResult::Success)
-					{
-						result = CommYARP_BT::TickResult::Success;
-					}
-				}
+				yarp::os::Bottle cmd;
+				cmd.addString("grasp");
+				cmd.addString("Bottle");
+				cmd.addString("right");
+				bool ret = COMP->RPCgrasp.write(cmd);
+				yInfo() << "grasp ret " << ret << " cmd " << cmd.toString();
+				result = CommYARP_BT::TickResult::Running;
 			}
 
 		} break;

@@ -21,11 +21,6 @@
 
 class TickHandler : public TickHandlerCore
 {
-private:
-	CommYARP_BT::TickResult handle_tick_goTo(const  std::vector<double> location);
-	CommYARP_BT::TickResult handle_tick_check(const std::vector<double> location);
-	std::vector<double> dummyPos_rightArm{45.0, 20.0, -40.0, 62.0, 5.0, 0.0, 0.0, 0.0};
-
 public:
 	TickHandler(Smart::IQueryServerPattern<CommYARP_BT::CommTickCommand, CommYARP_BT::CommTickResult, SmartACE::QueryId>* server);
 	virtual ~TickHandler();

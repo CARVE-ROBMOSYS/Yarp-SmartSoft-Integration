@@ -31,22 +31,6 @@ void CompHandler::onStartup()
 
 	Smart::StatusCode status;
 
-    Property config;
-    config.put("device", "remote_controlboard");
-    config.put("remote", "/SIM_CER_ROBOT/right_arm");
-    config.put("local",  "/moveJoints/right_arm");
-
-    COMP->armDev.open(config);
-    COMP->armDev.view(COMP->armPos);
-    COMP->armDev.view(COMP->armEnc);
-
-    if(! COMP->armPos)
-    {
-		std::string errorStr = "Cannot connect to robot arm";
-		throw std::invalid_argument(errorStr);
-    }
-
-
 	// Start all services. If you need manual control, use the content of this function to
 	// connect and start each service individually, e.g:
 	// COMP->connectMyPortName("SmartExampleComponent", "examplePort");
