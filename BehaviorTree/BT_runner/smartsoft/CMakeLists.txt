@@ -43,6 +43,11 @@ SMART_COMPONENT_AUTOBUILD_DEPENDENCIES()
 #FIND_PACKAGE(<SomePackageName>)
 FIND_PACKAGE(open62541 QUIET PATHS /usr/local/lib/cmake)
 
+find_package(BehaviorTree)
+if(BehaviorTree_FOUND)
+    add_definitions( -DUSE_BTCPP )
+endif()
+
 # these are the regular includes (add your own includes, if needed)
 INCLUDE_DIRECTORIES(
   ${CMAKE_CURRENT_LIST_DIR}/src
@@ -74,8 +79,9 @@ set(OCAML_SRCS ../OCamlWrap/wrap.c          # wrap c/c++
 
 include_directories(${CMAKE_SOURCE_DIR}/../)
 
+
 # create the executable using collected source-files
-ADD_EXECUTABLE(${PROJECT_NAME} ${SRC} ${SRC_GEN} ${SRC_GEN_PARAMS} ${OCAML_SRCS} ${OBJS})
+ADD_EXECUTABLE(${PROJECT_NAME} ${SRC} ${SRC_GEN} ${SRC_GEN_PARAMS} ${OCAML_SRCS} ${OBJS} ../tinyXML2/tinyxml2.cpp)
 
 # add_library(wrap SHARED ${OCAML_SRCS})
 
@@ -86,6 +92,8 @@ target_link_libraries(${PROJECT_NAME}   -L/usr/lib/ocaml
                                         unix
                                         dl 
                                         m)
+
+target_link_libraries(${PROJECT_NAME}  BehaviorTree::behaviortree_cpp)
 
 
 IF(open62541_FOUND)

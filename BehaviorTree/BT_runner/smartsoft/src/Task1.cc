@@ -21,6 +21,15 @@
 
 #include <iostream>
 
+#ifdef USE_BTCPP
+#include <behaviortree_cpp/blackboard/blackboard_local.h>
+
+using namespace BT;
+using namespace tinyxml2;
+#endif
+
+using namespace std;
+
 Task1::Task1(SmartACE::SmartComponent *comp) 
 :	Task1Core(comp)
 {
@@ -31,7 +40,14 @@ Task1::~Task1()
 	std::cout << "destructor Task1\n";
 }
 
-
+#ifdef USE_BTCPP
+// Create a dummy action for monitor BT
+NodeStatus DummyAction(TreeNode& self)
+{
+//    sleep(1);
+    return NodeStatus::SUCCESS;
+}
+#endif
 
 int Task1::on_entry()
 {
@@ -43,11 +59,75 @@ int Task1::on_entry()
 	caml_startup(dummy);
 
 //	std::string bt_filename(COMP->getGlobalState().getSettings().getBt_description() );
-	std::string bt_filename("bt_description.xml");
+	std::string bt_filename("./bt_description.xml");
+	std::string bt_skillList("skillList.xml");
 
 	std::cout << "Reading BT from file " << bt_filename << std::endl;
 	behaviourTree = read_bt(bt_filename.c_str());
 	std::cout << "... done!" << std::endl;
+
+
+#ifdef USE_BTCPP
+
+	XMLDocument doc;
+	tinyxml2::XMLError eResult = doc.LoadFile(bt_skillList.c_str());
+	if (eResult != tinyxml2::XML_SUCCESS)
+	{
+		std::cout << "Cannot parse doc " << std::endl;
+		return -1;
+	}
+
+	tinyxml2::XMLNode* root = doc.FirstChildElement("SkillList");
+	if (root == nullptr)
+	{
+		std::cout << "SkillList not found " << std::endl;
+		return -1;
+	}
+
+	std::cout << root->GetLineNum() << " " << root->ToText() << std::endl;
+
+	for (auto child_element = root->FirstChildElement(); child_element;
+		 child_element = child_element->NextSiblingElement())
+	{
+		std::cout << child_element->Name() << " " << child_element->Attribute("ID") << std::endl;
+		COMP->factory.registerSimpleAction(child_element->Attribute("ID"), DummyAction);
+	}
+	std::cout << "buildTreeFromFile " << bt_filename << std::endl;
+	// Important: when the object tree goes out of scope, all the TreeNodes are destroyed
+
+	COMP->tree_cpp = buildTreeFromFile(COMP->factory, bt_filename,  Blackboard::create<BlackboardLocal>());
+
+    std::cout << "///////////////////////// done " << std::endl;
+
+
+    // Create some loggers
+    logger_cout = make_shared<StdCoutLogger>(COMP->tree_cpp.root_node);
+    logger_minitrace = make_shared<MinitraceLogger>(COMP->tree_cpp.root_node, "bt_trace.json");
+    logger_file = make_shared<FileLogger>(COMP->tree_cpp.root_node, "bt_trace.fbl");
+    publisher_zmq = make_shared<PublisherZMQ>(COMP->tree_cpp.root_node);
+
+    printTreeRecursively(COMP->tree_cpp.root_node);
+
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+
+    for(auto node : COMP->tree_cpp.nodes)
+        COMP->nodeMap[node->name()] = node;
+
+// For debug only
+
+	for(int i : {1,2,3,0})
+	{
+		NodeStatus status = NodeStatus(i);
+		// Keep on ticking until you get either a SUCCESS or FAILURE state
+		for(auto node : COMP->tree_cpp.nodes)
+		{
+			node->setStatus((NodeStatus)i);
+			std::this_thread::sleep_for(std::chrono::milliseconds(200));
+		}
+	}
+	COMP->nodeMap["BottleGrasped"]->setStatus(NodeStatus::SUCCESS);
+#endif
+
 
 	return 0;
 }

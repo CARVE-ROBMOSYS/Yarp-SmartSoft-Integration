@@ -53,30 +53,11 @@ int ExecuteSkill(const char *name)
 
 	Smart::StatusCode status = COMP->behaviourTreeTickQueryServiceReq->query(request, answer);		// looks like the query function does not actually block
 
-/*
-	// using query request + answer
-	SmartACE::QueryId  id;
-	Smart::StatusCode status = COMP->behaviourTreeTickQueryServiceReq->queryRequest(request, id);
-	std::cout << "ExecuteSkill: Ticking skill " << name << " ... queryRequest return status is " << status << std::endl;
+#ifdef USE_BTCPP
+	COMP->nodeMap[name]->setStatus( (BT::NodeStatus) SS_to_Unige(answer.getResult()));
+#endif
 
-	int count = 0;
-	status = Smart::SMART_NODATA;
-	while(status != Smart::SMART_OK)
-	{
-		status = COMP->behaviourTreeTickQueryServiceReq->queryReceive(id, answer);
-		sleep(0.3);
-		std::cout << " Trying to get answer:  status " << status << " answer " << answer.getResult().to_string() << std::endl;
-		if(status == Smart::SMART_OK)
-			break;
-
-		count++;
-		if(count > 10)
-			break;
-	}
-*/
 	std::cout  << "got answer " << answer.getResult().to_string() <<  " status " << status << std::endl << std::endl;
-//	sleep(10);
-
 	return SS_to_Unige(answer.getResult());
 }
 
