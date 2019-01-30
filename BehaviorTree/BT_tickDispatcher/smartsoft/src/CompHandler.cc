@@ -214,6 +214,13 @@ void CompHandler::onStartup()
 //		std::cout << std::endl << std::endl;
     }
 
+    // opening debug port
+    COMP->debugPort.open("/tickDispatcher/debug:o");
+    yarp::os::Network::connect(COMP->debugPort.getName(), "/btDebug:i");
+
+    COMP->blackboardPort.open("/tickDispatcher/black:o");
+    yarp::os::Network::connect(COMP->blackboardPort.getName(), "/blackboard/rpc:i");
+
 	yInfo() << "DONE";
 
 	// Start all services. If you need manual control, use the content of this function to

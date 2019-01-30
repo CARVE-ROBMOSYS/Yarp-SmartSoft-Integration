@@ -54,8 +54,11 @@ CommYARP_BT::TickResult YarpTicker::tick(CommYARP_BT::TickCommand cmd, string pa
 {
 	std::cout << "\t YarpTicker ticking " << params << "... ";
 
-	CommYARP_BT::TickResult res = tickConvert_fromYarp( request_tick(params) );
-	std::cout << "\treturns  " << (int) res << "  " << res.to_string() << std::endl;
+	int tmp = request_tick(params);
+	std::cout << "\t request_tick  " << (int) tmp << std::endl;
+
+	CommYARP_BT::TickResult res = tickConvert_fromYarp( (ReturnStatus)tmp);
+	std::cout << "\tret SS  " << (int) res << "  " << res.to_string() << std::endl;
 
 	return res;
 }

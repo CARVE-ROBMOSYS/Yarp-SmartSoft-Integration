@@ -27,6 +27,7 @@
 #include "tickers/yarpTicker.h"
 #include "tickers/SmartTicker.h"
 #include "tickers/SmartNavigTicker.h"
+#include <yarp/os/Port.h>
 
 typedef struct
 {
@@ -58,6 +59,8 @@ public:
 	std::atomic<bool> isClosing {false};
 	std::condition_variable gotNewData;
 
+	yarp::os::Port debugPort;
+	yarp::os::Port blackboardPort;
 //	std::map<std::pair<std::string, std::string>, InfoInit >  tickables_map_init;   // serve davvero? per verificare in creazione se un ticker c'è già o meno...
 
 public:

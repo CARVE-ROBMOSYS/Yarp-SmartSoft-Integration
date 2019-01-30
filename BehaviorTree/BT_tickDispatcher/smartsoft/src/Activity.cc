@@ -16,6 +16,7 @@
 //--------------------------------------------------------------------------
 #include "Activity.hh"
 #include "BT_tickDispatcher.hh"
+#include <yarp/os/Bottle.h>
 
 #include <iostream>
 
@@ -88,9 +89,21 @@ int Activity::on_execute()
 	COMP->bT_Tick_input->answer(COMP->reqId, answer);
 
 	COMP->isNewData = false;
-	// it is possible to return != 0 (e.g. when the task detects errors), then the outer loop breaks and the task stops
+
+	yarp::os::Bottle trace, risp;
+	trace.addString(COMP->cmd.getCommand().to_string() + "  " +  COMP->cmd.getParameter());
+	trace.addString("      " + answer.getResult().to_string());
+	trace.addString("  ");
+	COMP->debugPort.write(trace);
+
+	trace.clear();
+	trace.addString("list");
+	COMP->blackboardPort.write(trace, risp);
+
+	COMP->debugPort.write(risp);
 	return 0;
 }
+
 int Activity::on_exit()
 {
 	// use this method to clean-up resources which are initialized in on_entry() and needs to be freed before the on_execute() can be called again
