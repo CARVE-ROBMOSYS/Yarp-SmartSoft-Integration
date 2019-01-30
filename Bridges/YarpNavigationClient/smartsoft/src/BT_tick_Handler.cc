@@ -32,7 +32,7 @@ BT_tick_Handler::BT_tick_Handler(Smart::IQueryServerPattern<CommYARP_BT::CommTic
 	bool ret = false;
 	std::cout << "BT_tick_Handler::BT_tick_Handler" << std::endl;
 	ret = blackBoard_Client.open("/yarpNavigationClient/blackboard:o");
-	ret &= yarp::os::Network::connect(blackBoard_Client.getName(), "/blackboard/rpc:i");
+	ret &= yarp::os::Network::connect("/yarpNavigationClient/blackboard:o", "/blackboard/rpc:i");
 	if(!ret)
 	{
 		yError() << "Cannot connect to YARP blackboard";
@@ -41,7 +41,7 @@ BT_tick_Handler::BT_tick_Handler(Smart::IQueryServerPattern<CommYARP_BT::CommTic
 
 BT_tick_Handler::~BT_tick_Handler()
 {
-	
+	COMP->iNav->stopNavigation();
 }
 
 
@@ -57,6 +57,18 @@ void BT_tick_Handler::handleQuery(const SmartACE::QueryId &id, const CommYARP_BT
 	std::cout << "Received request " << request.getCommand() << "  --  " << request.getParameter() << std::endl;
 	std::cout << "has goal " << has_goal << std::endl;
 
+
+	if(!COMP->initialized)
+	{
+		yInfo() << "Module is not fully initialized yet. Cannot process callback.";
+		answer.setResult(result);
+
+		// Debug print
+		yDebug() << "ID " <<  id << " req " << request.getParameter() << "; result " << result.to_string();
+
+		this->server->answer(id, answer);
+		return;
+	}
 
 	// implement your query handling logic here and fill in the answer object
 
@@ -79,7 +91,7 @@ void BT_tick_Handler::handleQuery(const SmartACE::QueryId &id, const CommYARP_BT
 	toBoard.addString(paramsVect[1]);
 	blackBoard_Client.write(toBoard, reply);
 
-	yDebug() << "Got reply from blackboard " << reply.toString();
+	// yDebug() << "Got reply from blackboard " << reply.toString();
 
 	// get actual data from string reply
 	yarp::dev::Map2DLocation desiredLoc;
@@ -120,42 +132,57 @@ void BT_tick_Handler::handleQuery(const SmartACE::QueryId &id, const CommYARP_BT
 	this->server->answer(id, answer);
 }
 
+void BT_tick_Handler::writeBlackBoard(bool reached, string locationName)
+{
+	yInfo() << "Location reached is " << reached;
+
+	CommYARP_BT::TickResult result = CommYARP_BT::TickResult::Success;
+	yarp::os::Bottle cmd, response;
+	cmd.addString("set");
+	cmd.addString("RobotAt"+locationName);
+	cmd.addString(reached?"True":"False");
+	blackBoard_Client.write(cmd, response);
+	return;
+}
+
 CommYARP_BT::TickResult  BT_tick_Handler::handle_tick_goTo(yarp::dev::Map2DLocation location, string locationName)
 {
-	CommYARP_BT::TickResult result = CommYARP_BT::TickResult::Failure;
-	if(!handle_tick_check(location))
-	{
-		yInfo() << "Location reached";
-		result = CommYARP_BT::TickResult::Success;
-		yarp::os::Bottle cmd;
-		cmd.addString("set");
-		cmd.addString("RobotIn"+locationName);
-		cmd.addString("True");
-		blackBoard_Client.write(cmd);
-		return result;
-	}
-
-	yarp::dev::NavigationStatusEnum status = yarp::dev::navigation_status_error;
+	CommYARP_BT::TickResult inLoco = CommYARP_BT::TickResult::Failure;
+	CommYARP_BT::TickResult result = CommYARP_BT::TickResult::Running;
 
 	if(has_goal)
 	{
+		yarp::dev::NavigationStatusEnum status;
 		COMP->iNav->getNavigationStatus(status);
 		std::cout << " navigation status " << yarp::os::Vocab::decode(status) << std::endl;
 
+		inLoco = handle_tick_check(location);
+
+		yInfo() << " in loco " << inLoco;
+
 		switch(status)
 		{
-			case yarp::dev::navigation_status_goal_reached:
-			case yarp::dev::navigation_status_idle:
-				result = CommYARP_BT::TickResult::Success;
-				has_goal = false;
-				break;
-
 			case yarp::dev::navigation_status_error:
 			case yarp::dev::navigation_status_failing:
+			case yarp::dev::navigation_status_aborted:
 				result = CommYARP_BT::TickResult::Failure;
 				has_goal = false;
 				break;
 
+			case yarp::dev::navigation_status_goal_reached:
+			case yarp::dev::navigation_status_idle:
+				if(inLoco == CommYARP_BT::TickResult::Success)
+				{
+					yarp::dev::Map2DLocation lastTarget;
+
+					COMP->iNav->getAbsoluteLocationOfCurrentTarget(lastTarget);
+					yInfo() << "SUCCESS: current target is " << lastTarget.toString();
+					result = CommYARP_BT::TickResult::Success;
+					has_goal = false;
+				}
+				else
+					result = CommYARP_BT::TickResult::Running;
+				break;
 			default:
 				result = CommYARP_BT::TickResult::Running;
 		}
@@ -163,13 +190,60 @@ CommYARP_BT::TickResult  BT_tick_Handler::handle_tick_goTo(yarp::dev::Map2DLocat
 	else
 	{
 		std::cout << "Calling gotoTargetByAbsoluteLocation..." << std::endl ;
+		yInfo() << "NEW target is " << location.toString();
+
+		// get navigation parameters from blackboard
+		Bottle config, reply;
+		config.clear();
+		reply.clear();
+		config.addString("get");
+		config.addString(locationName + "_navParams");
+		blackBoard_Client.write(config, reply);
+
+		Bottle ccc;
+		ccc.fromString(reply.get(0).asString());
+
+		// yInfo() << "navigation parameters for target " << locationName << " are " << reply.toString() << "  " << reply.size();
+		yInfo() << "navigation parameters for target " << locationName << " are " << ccc.toString();
+
+		config.clear();
+		config.addString("set_robot_radius");
+		config.addFloat64(ccc.get(0).asFloat64());
+		COMP->pathPlanner_port.write(config, reply);
+		yInfo() << "response is " << reply.toString();
+
+		sleep(1);
+
+		config.clear();
+		config.addString("get_robot_radius");
+		COMP->pathPlanner_port.write(config, reply);
+		yInfo() << "response is " << reply.toString();
+
+		config.clear();
+		config.addString("set");
+		config.addString("obstacle_stop");
+		config.addInt32( (ccc.get(1).asString() == "False" ? 0 : 1) );
+		COMP->goTo_port.write(config, reply);
+		yInfo() << "response is " << reply.toString();
+
+		config.clear();
+		config.addString("set");
+		config.addString("obstacle_avoidance");
+		config.addInt32( (ccc.get(1).asString() == "False" ? 0 : 1) );
+		COMP->goTo_port.write(config, reply);
+		yInfo() << "response is " << reply.toString();
+
+		sleep(1);
+
 		if( COMP->iNav->gotoTargetByAbsoluteLocation(location) )   // this may require some time (???)
 		{
 			result = CommYARP_BT::TickResult::Running;
 			has_goal = true;
 		}
-		std:: cout << "Returning" << std::endl;
+		std:: cout << "Returning " << result << std::endl;
 	}
+
+	writeBlackBoard((result == CommYARP_BT::TickResult::Success)? true : false, locationName);
 	return result;
 }
 
@@ -192,14 +266,16 @@ CommYARP_BT::TickResult BT_tick_Handler::handle_tick_check(yarp::dev::Map2DLocat
 	std::cout << std::fabs(desiredLoc.theta - robotLoc.theta) << std::endl;
 
 	// Position matches if robot is inside a 0.1 circle.
-	if( std::fabs(desiredLoc.x 		- robotLoc.x)     <= 0.25 &&
-		std::fabs(desiredLoc.y 		- robotLoc.y)     <= 0.25 ) // &&
-		// std::fabs(desiredLoc.theta 	- robotLoc.theta) <= 0.1 )
+	if( (std::fabs(desiredLoc.x 		- robotLoc.x)     <= 0.25) &&
+		(std::fabs(desiredLoc.y 		- robotLoc.y)     <= 0.25) &&
+	    (std::fabs(desiredLoc.theta 	- robotLoc.theta) <= 5.0) )
 	{
+		yWarning() << "Locattion reached";
 		result = CommYARP_BT::TickResult::Success;
 	}
 	else
 	{
+		yWarning() << "Running";
 		result = CommYARP_BT::TickResult::Failure;
 	}
 	return result;

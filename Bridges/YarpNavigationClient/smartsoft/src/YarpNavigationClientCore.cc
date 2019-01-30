@@ -17,7 +17,8 @@
 #include "YarpNavigationClientCore.hh"
 
 // constructor
-YarpNavigationClientCore::YarpNavigationClientCore()
+YarpNavigationClientCore::YarpNavigationClientCore() : 	iNav(nullptr),
+														initialized(false)
 {
 	std::cout << "constructor YarpNavigationClientCore\n";
 }

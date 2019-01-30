@@ -51,6 +51,8 @@ void CompHandler::onStartup()
     navigClientCfg.put("map_locations_server", "/mapServer");
     navigClientCfg.put("localization_server", "/localizationServer");
 
+	yDebug() << "Opening navigation client!!!";
+
 	//
 	// Open navigation client
 	//
@@ -60,7 +62,6 @@ void CompHandler::onStartup()
 		COMP->navClient.close();
 		throw std::invalid_argument(errorStr);
 	}
-
 
 	COMP->navClient.view(COMP->iNav);
 	if(COMP->iNav == nullptr)
@@ -80,6 +81,22 @@ void CompHandler::onStartup()
 		std::cout << locations[i] << std::endl;
 
 
+	// open configuration ports
+	COMP->pathPlanner_port.open("/SmartSoft/navigClient/pathPlanner/rpc");
+	COMP->goTo_port.open("/SmartSoft/navigClient/goTo/rpc");
+
+	bool conn = yarp::os::Network::connect(COMP->pathPlanner_port.getName(), "/robotPathPlanner/rpc");
+	conn &= yarp::os::Network::connect(COMP->goTo_port.getName(), "/robotGoto/rpc");
+
+	if(!conn)
+	{
+		std::string errorStr = " Cannot connect to pathPlanner or robotGoTo RPC ports";
+		COMP->navClient.close();
+		throw std::invalid_argument(errorStr);
+	}
+
+	yInfo() << "Connections to navigation RPCs done!";
+
 	// Start all services. If you need manual control, use the content of this function to
 	// connect and start each service individually, e.g:
 	// COMP->connectMyPortName("SmartExampleComponent", "examplePort");
@@ -96,12 +113,14 @@ void CompHandler::onStartup()
 	// Notify the component that setup/initialization is finished.
 	// You may move this function to any other place.
 	COMP->setStartupFinished(); 
+
+	COMP->initialized = true;
 }
 
 void CompHandler::onShutdown() 
 {
 	std::cout << "shutdown - put your cleanup code in CompHandler::onShutdown()!!!\n";
-	//COMP->navClient.close();
+	COMP->navClient.close();
 }
 
 

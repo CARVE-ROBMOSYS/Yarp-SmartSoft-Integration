@@ -23,6 +23,8 @@
 #include <yarp/os/Network.h>
 #include <yarp/dev/PolyDriver.h>
 #include <yarp/dev/INavigation2D.h>
+#include <yarp/os/Port.h>
+#include <atomic>
 
 class YarpNavigationClientCore
 {
@@ -34,6 +36,11 @@ public:
 	yarp::os::Network yarp;
 	yarp::dev::PolyDriver     navClient;
 	yarp::dev::INavigation2D *iNav;
+
+	yarp::os::Port      pathPlanner_port;
+	yarp::os::Port      goTo_port;
+
+	std::atomic<bool>   initialized;
 };
 	
 #endif
