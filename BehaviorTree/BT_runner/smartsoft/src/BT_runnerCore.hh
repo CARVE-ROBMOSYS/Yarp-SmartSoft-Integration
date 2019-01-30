@@ -20,11 +20,18 @@
 #include "aceSmartSoft.hh"
 #include <iostream>
 
+#include <behaviortree_cpp/bt_factory.h>
+#include <behaviortree_cpp/xml_parsing.h>
+
 class BT_runnerCore
 {
 private:
 
 public:
+	BT::Tree  tree_cpp;
+    BT::BehaviorTreeFactory factory;
+    std::map<std::string, BT::TreeNode::Ptr> nodeMap;
+
 	BT_runnerCore();
 };
 	

@@ -17,13 +17,31 @@
 #ifndef _TASK1_HH
 #define _TASK1_HH
 
+#include <memory>
+
 #include "Task1Core.hh"
 #include <caml/mlvalues.h>
+
+#ifdef USE_BTCPP
+#include <behaviortree_cpp/loggers/bt_cout_logger.h>
+#include <behaviortree_cpp/loggers/bt_file_logger.h>
+#include <behaviortree_cpp/loggers/bt_zmq_publisher.h>
+#include <behaviortree_cpp/loggers/bt_minitrace_logger.h>
+#endif
+
+#include "tinyXML2/tinyxml2.h"
 
 class Task1  : public Task1Core
 {
 private:
 	value behaviourTree;
+
+#ifdef USE_BTCPP
+    std::shared_ptr<BT::StdCoutLogger>   logger_cout;
+    std::shared_ptr<BT::MinitraceLogger> logger_minitrace;
+    std::shared_ptr<BT::FileLogger>      logger_file;
+    std::shared_ptr<BT::PublisherZMQ>    publisher_zmq;
+#endif
 
 public:
 	Task1(SmartACE::SmartComponent *comp);
