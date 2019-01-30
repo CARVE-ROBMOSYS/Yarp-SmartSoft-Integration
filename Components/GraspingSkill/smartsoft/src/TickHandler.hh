@@ -25,5 +25,6 @@ public:
 	TickHandler(Smart::IQueryServerPattern<CommYARP_BT::CommTickCommand, CommYARP_BT::CommTickResult, SmartACE::QueryId>* server);
 	virtual ~TickHandler();
 	virtual void handleQuery(const SmartACE::QueryId &id, const CommYARP_BT::CommTickCommand& request);
+
 };
 #endif

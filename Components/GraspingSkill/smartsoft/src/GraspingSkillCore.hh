@@ -32,6 +32,7 @@ public:
 	yarp::os::Network yarp;
 	yarp::os::RpcClient RPChome;
 	yarp::os::RpcClient RPCgrasp;
+	yarp::os::Port  blackBoard_Client;
 
     GraspingSkillCore();
 };
