@@ -37,7 +37,7 @@ UNIGE_Status SS_to_Unige(CommYARP_BT::TickResult result)
 
 int ExecuteSkill(const char *name)
 {
-    printf ("Ticking the skill: %s \n", name);
+    printf ("\n\n--------------\nTicking the skill: %s \n", name);
 
 	static bool reconnected = false;
 	CommYARP_BT::CommTickCommand request;
@@ -53,11 +53,11 @@ int ExecuteSkill(const char *name)
 
 	Smart::StatusCode status = COMP->behaviourTreeTickQueryServiceReq->query(request, answer);		// looks like the query function does not actually block
 
+	std::cout  << "got answer " << answer.getResult().to_string() <<  " status " << status << std::endl;
 #ifdef USE_BTCPP
 	COMP->nodeMap[name]->setStatus( (BT::NodeStatus) SS_to_Unige(answer.getResult()));
 #endif
 
-	std::cout  << "got answer " << answer.getResult().to_string() <<  " status " << status << std::endl << std::endl;
 	return SS_to_Unige(answer.getResult());
 }
 
