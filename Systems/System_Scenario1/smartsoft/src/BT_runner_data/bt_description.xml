@@ -4,6 +4,10 @@
      <Fallback name="fal1">
        <Condition ID="BottleGrasped" />
        <Sequence name="seq1">
+         <Fallback name="GoToKitchen">
+           <Condition ID="RobotInKitchen" />
+           <Action ID="GoToKitchen" />
+         </Fallback>
          <Fallback name="FalCompute">
            <Sequence name="SeqInvPose">
              <Condition ID="InvPoseComputed" />
@@ -12,15 +16,23 @@
            <Action ID="ComputeInvPose" />
          </Fallback>
          <Fallback name="GoInvPose">
-           <Condition ID="RobotAtInvPose" />
-           <Action ID="GoToInvPose" />
+            <Condition ID="RobotAtInvPose" />
+              <Sequence name="prepare">
+                <Action ID="PrepareArmsForGrasp" />  <!-- alza le braccia in preparazione al grasp -->
+                <Action ID="GoToInvPose" />
+             </Sequence>
          </Fallback>
          <Fallback name="Locate">
            <Condition ID="BottleLocated" />
-           <Action ID="LocateBottle" />
+            <Sequence name="prepare">
+           		<!-- <Action ID="PrepareHeadForGrasp" /> -->
+            	<Action ID="LocateBottle" />
+            </Sequence>
+         
          </Fallback>
          <Action ID="GraspBottle" />
-       </Sequence>
+       </Sequence> 
+       <Action ID="SetInvPoseInvaild" />
     </Fallback>
  </BehaviorTree>
 </root>
