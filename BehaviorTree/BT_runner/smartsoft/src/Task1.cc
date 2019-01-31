@@ -89,12 +89,15 @@ int Task1::on_entry()
 	for (auto child_element = root->FirstChildElement(); child_element;
 		 child_element = child_element->NextSiblingElement())
 	{
-		std::cout << child_element->Name() << " " << child_element->Attribute("ID") << std::endl;
-		COMP->factory.registerSimpleAction(child_element->Attribute("ID"), DummyAction);
+        std::cout << child_element->Name() << "." << child_element->Attribute("ID") << std::endl;
+        if(child_element->Name() == "Action")
+			COMP->factory.registerSimpleAction(child_element->Attribute("ID"), DummyAction);
+        else
+        	COMP->factory.registerSimpleCondition(child_element->Attribute("ID"), DummyAction);
 	}
 	std::cout << "buildTreeFromFile " << bt_filename << std::endl;
-	// Important: when the object tree goes out of scope, all the TreeNodes are destroyed
 
+	// Important: when the object tree goes out of scope, all the TreeNodes are destroyed
 	COMP->tree_cpp = buildTreeFromFile(COMP->factory, bt_filename,  Blackboard::create<BlackboardLocal>());
 
     std::cout << "///////////////////////// done " << std::endl;

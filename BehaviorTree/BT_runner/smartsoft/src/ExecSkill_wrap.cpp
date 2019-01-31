@@ -64,5 +64,11 @@ int ExecuteSkill(const char *name)
 void ResetSkill(const char *name)
 {
     printf("DUMMY Halting the skill: %s \n", name);
+#ifdef USE_BTCPP
+    printf("Set status to IDLE for Groot GUI\n");
+	COMP->nodeMap[name]->setStatus( (BT::NodeStatus) SS_to_Unige(answer.getResult()));
+	fflush(stdout);
+#endif
+
 	return;
 }
