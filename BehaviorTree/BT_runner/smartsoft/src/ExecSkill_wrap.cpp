@@ -63,12 +63,20 @@ int ExecuteSkill(const char *name)
 
 void ResetSkill(const char *name)
 {
-    printf("DUMMY Halting the skill: %s \n", name);
+    printf("Sending HALT command to the skill: %s \n", name);
+
+    CommYARP_BT::CommTickCommand request;
+	CommYARP_BT::CommTickResult  answer;
+	request.setCommand(CommYARP_BT::TickCommand::Halt);
+
+	Smart::StatusCode status = COMP->behaviourTreeTickQueryServiceReq->query(request, answer);
+
+	std::cout  << "got answer " << answer.getResult().to_string() <<  " status " << status << std::endl;
+
 #ifdef USE_BTCPP
     printf("Set status to IDLE for Groot GUI\n");
 	COMP->nodeMap[name]->setStatus( (BT::NodeStatus) SS_to_Unige(answer.getResult()));
 	fflush(stdout);
 #endif
-
 	return;
 }
