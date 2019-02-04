@@ -20,6 +20,7 @@ class YarpTicker : 	public ITickable,
 {
 private:
 
+	std::string target;
 	yarp::os::Network yarpNetwork;
 	ReturnStatusVocab a;
 
@@ -63,6 +64,13 @@ private:
 			return ret;
 		}
 	};
+
+	// Inherited from BTCmd: used internally
+
+	using TickClient::request_tick;
+	using TickClient::request_status;
+	using TickClient::request_halt;
+
 public:
 
 	YarpTicker();
@@ -82,13 +90,6 @@ public:
 	 * @params: optional parameters to be sent to the target
 	 */
 	CommYARP_BT::TickResult tick(CommYARP_BT::TickCommand cmd, std::string params) override;
-
-	/* Inherited from BTCmd:
-
-	  virtual int32_t request_tick();
-	  virtual int32_t request_status();
-	  virtual void request_halt();
-	 */
 };
 
 

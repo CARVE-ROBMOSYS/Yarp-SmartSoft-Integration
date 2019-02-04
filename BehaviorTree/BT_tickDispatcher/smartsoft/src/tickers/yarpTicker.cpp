@@ -13,6 +13,7 @@
 #include "BT_tickDispatcher.hh"
 
 using namespace std;
+using namespace CommYARP_BT;
 
 YarpTicker::YarpTicker()
 {
@@ -52,12 +53,22 @@ bool YarpTicker::configure(std::string target)
  */
 CommYARP_BT::TickResult YarpTicker::tick(CommYARP_BT::TickCommand cmd, string params)
 {
-	std::cout << "\t YarpTicker ticking " << params << "... ";
+	int tmpRet;
+	if(cmd == TickCommand::Tick)
+	{
+		std::cout << "\t YarpTicker ticking " << params << "... ";
+		tmpRet = request_tick(params);
+	}
 
-	int tmp = request_tick(params);
-	std::cout << "\t request_tick  " << (int) tmp << std::endl;
+	if(cmd == TickCommand::Halt)
+	{
+		std::cout << "\t YarpTicker halting " << params << "... ";
+		tmpRet = request_halt(params);
+		std::cout << "\t request_tick  " << (int) tmpRet << std::endl;
+	}
 
-	CommYARP_BT::TickResult res = tickConvert_fromYarp( (ReturnStatus)tmp);
+	TickResult res = tickConvert_fromYarp( (ReturnStatus)tmpRet);
+	std::cout << "\t request_tick  " << (int) tmpRet << std::endl;
 	std::cout << "\tret SS  " << (int) res << "  " << res.to_string() << std::endl;
 
 	return res;
