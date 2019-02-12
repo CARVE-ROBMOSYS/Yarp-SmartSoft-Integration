@@ -1,0 +1,9 @@
+ComponentDefinition VisionSkill_Simulator {
+
+AnswerPort TickInput implements CommYARP_BT.BehaviourTreeTickQueryService {
+	}
+	RequestHandler TickHandler triggeredFrom TickInput {
+	}
+	CoordinationSlavePort CoordinationPort implements CommBasicObjects.BaseCoordinationService { }
+	ComponentParameters VisionSkill_SimulatorParams slave CoordinationPort
+}

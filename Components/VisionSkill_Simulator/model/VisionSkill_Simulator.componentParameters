@@ -1,0 +1,8 @@
+ComponentParameter VisionSkill_SimulatorParams component VisionSkill_Simulator 
+{
+	InternalParameter Settings 
+	{
+		remote_port  :String  =  "/world_input_port"
+		local_port  :String  =  "/VisionSkill_Gazebo:o"
+	}
+}
