@@ -1,0 +1,3 @@
+SystemParameterModel System_Scenario2_GazeboParams extendsSystem System_Scenario2_Gazebo {
+
+}

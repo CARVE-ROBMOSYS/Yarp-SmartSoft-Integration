@@ -1,0 +1,17 @@
+SystemComponentArchitecture System_Scenario2_Gazebo {
+
+ComponentInstance BT_runner instantiates BT_runner
+{
+	RequiredService BehaviourTreeTickQueryServiceReq
+} ComponentInstance BT_tickDispatcher instantiates BT_tickDispatcher
+{
+	ProvidedService BT_Tick_input
+	RequiredService BT_manip_tick
+	RequiredService BT_Navig_tick
+} ComponentInstance YarpNavigationClient instantiates YarpNavigationClient
+{
+	ProvidedService BT_tick
+} ComponentInstance GenericMovementSkill instantiates GenericMovementSkill
+{
+	ProvidedService BT_tick_input
+} Connection BT_runner.BehaviourTreeTickQueryServiceReq -> BT_tickDispatcher.BT_Tick_input Connection BT_tickDispatcher.BT_manip_tick -> GenericMovementSkill.BT_tick_input Connection BT_tickDispatcher.BT_Navig_tick -> YarpNavigationClient.BT_tick }
