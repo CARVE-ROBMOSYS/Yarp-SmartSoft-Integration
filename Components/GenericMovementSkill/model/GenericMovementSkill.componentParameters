@@ -1,0 +1,7 @@
+ComponentParameter GenericMovementSkillParams component GenericMovementSkill {
+    InternalParameter Settings {
+        robotName  : String     =  "SIM_CER_ROBOT"
+        cartesianController_prefix :  String    =  "sim"
+    }
+}
+

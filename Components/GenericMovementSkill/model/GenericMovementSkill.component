@@ -1,0 +1,12 @@
+ComponentDefinition GenericMovementSkill {
+
+AnswerPort BT_tick_input implements CommYARP_BT.BehaviourTreeTickQueryService {
+	}
+	RequestHandler BT_tickHandler triggeredFrom BT_tick_input {
+	}
+	CoordinationSlavePort CoordinationPort implements CommBasicObjects.DefaultCoordinationService { }
+	ComponentParameters GenericMovementSkillParams slave CoordinationPort
+Activity Thread
+	{
+	}
+}
