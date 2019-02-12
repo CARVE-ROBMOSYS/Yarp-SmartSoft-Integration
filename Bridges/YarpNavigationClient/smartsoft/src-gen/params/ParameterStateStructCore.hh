@@ -51,7 +51,7 @@ public:
 			SettingsType() {
 				localization_server_name = "/localizationServer";
 				map_server_name = "/mapServer";
-				navigation_server_name = "//navigationServer";
+				navigation_server_name = "/navigationServer";
 			}
 		
 			/**
