@@ -1,0 +1,9 @@
+ComponentDefinition VisionSkill_Gazebo {
+
+AnswerPort tickInput implements CommYARP_BT.BehaviourTreeTickQueryService {
+	}
+	RequestHandler tickHandler triggeredFrom tickInput {
+	}
+	CoordinationSlavePort CoordinationPort implements CommBasicObjects.DefaultCoordinationService { }
+	ComponentParameters VisionSkillParams slave CoordinationPort
+}
