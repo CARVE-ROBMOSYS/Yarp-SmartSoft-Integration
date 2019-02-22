@@ -3,10 +3,10 @@
     <BehaviorTree ID="bt0008">
         <Fallback name="Main">
             <Sequence name="Autonomus">
-                <Fallback>
-                    <Sequence>
+                <Fallback name="ReachRoom">
+                    <Sequence name="ShouldFollow">
                         <Condition ID="RoomKnown"/>
-                        <Fallback name="GoToRoom">
+                        <Fallback name="GoToRoom_Fal">
                             <Condition ID="RobotInRoom"/>
                             <Action ID="GoToRoom"/>
                         </Fallback>

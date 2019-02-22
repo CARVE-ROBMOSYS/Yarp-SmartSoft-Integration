@@ -23,7 +23,7 @@
 <Condition ID="RobotAtInvPose" />
 
 <Action ID="SetInvPoseInvaild" />
-<Action ID="AlwaysRunning" />
+<Action ID="KeepRunning" />
 
 <!-- For future use -->
 <Action ID="FindGlass" />

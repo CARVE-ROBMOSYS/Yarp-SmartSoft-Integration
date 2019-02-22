@@ -13,4 +13,5 @@ TargetPlatformReference localhost using System_Scenario2_Gazebo.localhost
 	NamingService
 	{
 		deploy-to localhost }
+ComponentArtefact System_Scenario2_Gazebo.VisionSkill_Simulator deploy-to localhost
 }
