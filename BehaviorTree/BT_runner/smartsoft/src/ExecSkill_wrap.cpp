@@ -8,6 +8,8 @@
 
 enum UNIGE_Status {UNIGE_RUNNING, UNIGE_FAILURE, UNIGE_SUCCESS, UNIGE_ERROR};
 
+enum GROOT_status {GROOT_IDLE, GROOT_RUNNING, GROOT_SUCCESS, GROOT_FAILURE};
+
 UNIGE_Status SS_to_Unige(CommYARP_BT::TickResult result)
 {
 	switch(result)
@@ -35,6 +37,33 @@ UNIGE_Status SS_to_Unige(CommYARP_BT::TickResult result)
 	}
 };
 
+GROOT_status SS_to_groot(CommYARP_BT::TickResult result)
+{
+	switch(result)
+	{
+		case CommYARP_BT::TickResult::Success:
+		{
+			return GROOT_SUCCESS;
+		} break;
+
+		case CommYARP_BT::TickResult::Failure:
+		{
+			return GROOT_FAILURE;
+		} break;
+
+		case CommYARP_BT::TickResult::Running:
+		{
+			return GROOT_RUNNING;
+		} break;
+
+		case CommYARP_BT::TickResult::Error:
+		{
+			return GROOT_IDLE;
+		} break;
+
+	}
+};
+
 int ExecuteSkill(const char *name)
 {
     printf ("\n\n--------------\nTicking the skill: %s \n", name);
@@ -55,7 +84,7 @@ int ExecuteSkill(const char *name)
 
 	std::cout  << "got answer " << answer.getResult().to_string() <<  " status " << status << std::endl;
 #ifdef USE_BTCPP
-	COMP->nodeMap[name]->setStatus( (BT::NodeStatus) SS_to_Unige(answer.getResult()));
+	COMP->nodeMap[name]->setStatus( (BT::NodeStatus) SS_to_groot(answer.getResult()));
 #endif
 
 	return SS_to_Unige(answer.getResult());
@@ -75,7 +104,7 @@ void ResetSkill(const char *name)
 
 #ifdef USE_BTCPP
     printf("Set status to IDLE for Groot GUI\n");
-	COMP->nodeMap[name]->setStatus( (BT::NodeStatus) SS_to_Unige(answer.getResult()));
+	COMP->nodeMap[name]->setStatus( BT::NodeStatus::IDLE);
 	fflush(stdout);
 #endif
 	return;
