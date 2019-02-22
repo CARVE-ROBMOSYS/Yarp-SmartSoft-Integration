@@ -25,12 +25,12 @@ C_DEPS :=
 SUBDIRS := \
 OCamlWrap \
 libs \
-smartsoft/build/CMakeFiles/3.10.2/CompilerIdC \
-smartsoft/build/CMakeFiles/3.10.2/CompilerIdCXX \
-smartsoft/build/CMakeFiles/BT_runner.dir/home/icub/SOFTWARE/smartsoft_3.6/Yarp-SmartSoft-Integration/BehaviorTree/BT_runner/OCamlWrap \
+smartsoft/build/CMakeFiles/3.12.20180920-g352399/CompilerIdC \
+smartsoft/build/CMakeFiles/3.12.20180920-g352399/CompilerIdCXX \
 smartsoft/build/CMakeFiles/BT_runner.dir/src \
 smartsoft/build/CMakeFiles/BT_runner.dir/src-gen \
 smartsoft/build/CMakeFiles/BT_runner.dir/src-gen/params \
+smartsoft/build/CMakeFiles/BT_runner.dir/usr/local/src/robot/yarp-smartsoft/Yarp-SmartSoft-Integration/BehaviorTree/BT_runner/OCamlWrap \
 smartsoft/build/CMakeFiles \
 smartsoft/src \
 smartsoft/src-gen \

@@ -31,8 +31,8 @@ start)
 	
 	echo "Starting all devices ..."
 	
-	echo "Starting icub@127.0.0.1"
-	xterm -fg red -title "SSH: icub@127.0.0.1" -e 'echo;echo "Starting remote SSH session at icub@127.0.0.1 ..."; echo;echo;ssh -X icub@127.0.0.1 "cd /home/icub/SOFTWARE/deployment_3.6//System_Scenario1.deployment; pwd; bash --login -i -e start-localhost.sh start"' &
+	echo "Starting r1-user@127.0.0.1"
+	xterm -fg red -title "SSH: r1-user@127.0.0.1" -e 'echo;echo "Starting remote SSH session at r1-user@127.0.0.1 ..."; echo;echo;ssh -X r1-user@127.0.0.1 "cd /home/r1-user/SmartSoft-deploy/System_Scenario1.deployment; pwd; bash --login -i -e start-localhost.sh start"' &
 	echo $! >> $PID_FILE
 	
 ;;
@@ -40,8 +40,8 @@ start)
 stop)
 	echo "Stopping all devices"
 	
-	echo "Stopping icub@127.0.0.1"
-	xterm -title "stopping icub@127.0.0.1" -e 'echo;echo "Starting remote SSH session at icub@127.0.0.1 ..."; echo;echo;ssh -X icub@127.0.0.1 "cd /home/icub/SOFTWARE/deployment_3.6//System_Scenario1.deployment; pwd; bash --login -i -e start-localhost.sh stop"' 
+	echo "Stopping r1-user@127.0.0.1"
+	xterm -title "stopping r1-user@127.0.0.1" -e 'echo;echo "Starting remote SSH session at r1-user@127.0.0.1 ..."; echo;echo;ssh -X r1-user@127.0.0.1 "cd /home/r1-user/SmartSoft-deploy/System_Scenario1.deployment; pwd; bash --login -i -e start-localhost.sh stop"' 
 	echo $! >> $PID_FILE
 	
 	

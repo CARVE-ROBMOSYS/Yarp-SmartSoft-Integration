@@ -23,8 +23,8 @@ C_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
-smartsoft/build/CMakeFiles/3.10.2/CompilerIdC \
-smartsoft/build/CMakeFiles/3.10.2/CompilerIdCXX \
+smartsoft/build/CMakeFiles/3.12.20180920-g352399/CompilerIdC \
+smartsoft/build/CMakeFiles/3.12.20180920-g352399/CompilerIdCXX \
 smartsoft/build/CMakeFiles/GraspingSkill.dir/src \
 smartsoft/build/CMakeFiles/GraspingSkill.dir/src-gen \
 smartsoft/build/CMakeFiles/GraspingSkill.dir/src-gen/params \

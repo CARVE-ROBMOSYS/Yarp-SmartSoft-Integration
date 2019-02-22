@@ -12,8 +12,8 @@ RM := rm -rf
 -include smartsoft/src-gen/CommYARP_BT/subdir.mk
 -include smartsoft/build/CMakeFiles/CommYARP_BT.dir/src/CommYARP_BT/subdir.mk
 -include smartsoft/build/CMakeFiles/CommYARP_BT.dir/src-gen/CommYARP_BT/subdir.mk
--include smartsoft/build/CMakeFiles/3.10.2/CompilerIdCXX/subdir.mk
--include smartsoft/build/CMakeFiles/3.10.2/CompilerIdC/subdir.mk
+-include smartsoft/build/CMakeFiles/3.12.20180920-g352399/CompilerIdCXX/subdir.mk
+-include smartsoft/build/CMakeFiles/3.12.20180920-g352399/CompilerIdC/subdir.mk
 -include smartsoft/build/CMakeFiles/subdir.mk
 -include subdir.mk
 -include objects.mk

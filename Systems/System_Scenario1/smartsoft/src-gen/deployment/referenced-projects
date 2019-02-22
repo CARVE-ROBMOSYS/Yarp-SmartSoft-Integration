@@ -2,8 +2,8 @@
 # Any changes will be overwritten next time the deployment project
 # is deployed/run from within the SmartMDSD toolchain.
 
-REFERENCED_PROJECT_BT_runner="/home/icub/SOFTWARE/smartsoft_3.6/Yarp-SmartSoft-Integration/BehaviorTree/BT_runner"
-REFERENCED_PROJECT_BT_tickDispatcher="/home/icub/SOFTWARE/smartsoft_3.6/Yarp-SmartSoft-Integration/BehaviorTree/BT_tickDispatcher"
-REFERENCED_PROJECT_GraspingSkill="/home/icub/SOFTWARE/smartsoft_3.6/Yarp-SmartSoft-Integration/Components/GraspingSkill"
-REFERENCED_PROJECT_Navigationskill="/home/icub/SOFTWARE/smartsoft_3.6/Yarp-SmartSoft-Integration/Bridges/YarpNavigationClient"
-REFERENCED_PROJECT_VisionSkill="/home/icub/SOFTWARE/smartsoft_3.6/Yarp-SmartSoft-Integration/Components/VisionSkill"
+REFERENCED_PROJECT_BT_runner="/usr/local/src/robot/yarp-smartsoft/Yarp-SmartSoft-Integration/BehaviorTree/BT_runner"
+REFERENCED_PROJECT_BT_tickDispatcher="/usr/local/src/robot/yarp-smartsoft/Yarp-SmartSoft-Integration/BehaviorTree/BT_tickDispatcher"
+REFERENCED_PROJECT_GraspingSkill="/usr/local/src/robot/yarp-smartsoft/Yarp-SmartSoft-Integration/Components/GraspingSkill"
+REFERENCED_PROJECT_Navigationskill="/usr/local/src/robot/yarp-smartsoft/Yarp-SmartSoft-Integration/Bridges/YarpNavigationClient"
+REFERENCED_PROJECT_VisionSkill="/usr/local/src/robot/yarp-smartsoft/Yarp-SmartSoft-Integration/Components/VisionSkill"

@@ -23,6 +23,12 @@ C_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
+smartsoft/build/CMakeFiles/3.12.20180920-g352399/CompilerIdC \
+smartsoft/build/CMakeFiles/3.12.20180920-g352399/CompilerIdCXX \
+smartsoft/build/CMakeFiles/VisionSkill.dir/src \
+smartsoft/build/CMakeFiles/VisionSkill.dir/src-gen \
+smartsoft/build/CMakeFiles/VisionSkill.dir/src-gen/params \
+smartsoft/build/CMakeFiles \
 smartsoft/src \
 smartsoft/src-gen \
 smartsoft/src-gen/params \

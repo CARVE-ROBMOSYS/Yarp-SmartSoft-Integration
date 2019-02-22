@@ -67,7 +67,7 @@
             <layoutConstraint xmi:type="notation:Bounds" xmi:id="_eL5HwvxmEeiefN3TO805eA" x="161" y="48" width="30" height="30"/>
           </children>
           <styles xmi:type="notation:ShapeStyle" xmi:id="_bEHegfxmEeiefN3TO805eA" fontName="Ubuntu" fontHeight="10" bold="true"/>
-          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_bEHegvxmEeiefN3TO805eA" x="108" y="96" width="171" height="135"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_bEHegvxmEeiefN3TO805eA" x="96" y="96" width="171" height="135"/>
         </children>
         <children xmi:type="notation:Node" xmi:id="_ckwK0PxmEeiefN3TO805eA" type="2002" element="_ckqEMPxmEeiefN3TO805eA">
           <children xmi:type="notation:Node" xmi:id="_ckwK0_xmEeiefN3TO805eA" type="5006"/>
@@ -152,9 +152,9 @@
             <children xmi:type="notation:Node" xmi:id="_3Rf6QPxmEeiefN3TO805eA" type="5010">
               <layoutConstraint xmi:type="notation:Location" xmi:id="_3Rf6QfxmEeiefN3TO805eA" x="31" y="5"/>
             </children>
-            <children xmi:type="notation:Node" xmi:id="_3Rf6QvxmEeiefN3TO805eA" type="3014" element="_3RWwUfxmEeiefN3TO805eA">
-              <styles xmi:type="notation:ShapeStyle" xmi:id="_3RghUPxmEeiefN3TO805eA" fontName="Ubuntu"/>
-              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_3RghUfxmEeiefN3TO805eA"/>
+            <children xmi:type="notation:Node" xmi:id="_sty-wAUpEem2v-Rt7bIcJQ" type="3014" element="_stVrwAUpEem2v-Rt7bIcJQ">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_sty-wQUpEem2v-Rt7bIcJQ" fontName="Ubuntu"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_sty-wgUpEem2v-Rt7bIcJQ"/>
             </children>
             <styles xmi:type="notation:ShapeStyle" xmi:id="_3RfTMfxmEeiefN3TO805eA" fontName="Ubuntu" fontHeight="8"/>
             <layoutConstraint xmi:type="notation:Bounds" xmi:id="_3RfTMvxmEeiefN3TO805eA" x="-22" y="48" width="30" height="30"/>
@@ -185,17 +185,17 @@
         <styles xmi:type="notation:DiagramStyle" xmi:id="_M0NqQvxmEeiefN3TO805eA"/>
         <edges xmi:type="notation:Edge" xmi:id="_5ePeoPxmEeiefN3TO805eA" type="4001" element="_5eDRYPxmEeiefN3TO805eA" source="_eL5HwPxmEeiefN3TO805eA" target="_fO9HQPxmEeiefN3TO805eA">
           <children xmi:type="notation:Node" xmi:id="_5eQswPxmEeiefN3TO805eA" type="6001">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5eQswfxmEeiefN3TO805eA" x="-3" y="-82"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5eQswfxmEeiefN3TO805eA" x="3" y="-82"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_5eQswvxmEeiefN3TO805eA" type="6002">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5eQsw_xmEeiefN3TO805eA" y="10"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5eQsw_xmEeiefN3TO805eA" x="9" y="10"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_5eRT0PxmEeiefN3TO805eA" type="6003">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5eRT0fxmEeiefN3TO805eA" y="10"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5eRT0fxmEeiefN3TO805eA" x="2" y="10"/>
           </children>
           <styles xmi:type="notation:ConnectorStyle" xmi:id="_5ePeofxmEeiefN3TO805eA"/>
           <styles xmi:type="notation:FontStyle" xmi:id="_5ePeovxmEeiefN3TO805eA" fontName="Ubuntu" fontHeight="8"/>
-          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_5ePeo_xmEeiefN3TO805eA" points="[0, 0, -99, 0]$[99, 0, 0, 0]"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_5ePeo_xmEeiefN3TO805eA" points="[0, 0, -111, 0]$[111, 0, 0, 0]"/>
           <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_5eSh8PxmEeiefN3TO805eA" id="(1.0,0.5)"/>
           <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_5eSh8fxmEeiefN3TO805eA" id="(0.0,0.5)"/>
         </edges>
@@ -360,7 +360,7 @@
         <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
         <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
         <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
-        <ownedStyle xmi:type="diagram:CustomStyle" xmi:id="_3RWwUfxmEeiefN3TO805eA" showIcon="false" id="2wansw">
+        <ownedStyle xmi:type="diagram:CustomStyle" xmi:id="_stVrwAUpEem2v-Rt7bIcJQ" showIcon="false" id="2wansw">
           <description xmi:type="style:CustomStyleDescription" href="platform:/plugin/org.sirius.system.componentArchitecture.design/description/componentArchitecture.odesign#//@ownedViewpoints[name='SystemArchitectureViewpoint']/@ownedRepresentations[name='SystemArchitectureDiagram']/@defaultLayer/@containerMappings[name='ComponentInstanceContainer']/@borderedNodeMappings[name='ProvidedServiceNode']/@conditionnalStyles.1/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sirius.system.componentArchitecture.design/description/componentArchitecture.odesign#//@ownedViewpoints[name='SystemArchitectureViewpoint']/@ownedRepresentations[name='SystemArchitectureDiagram']/@defaultLayer/@containerMappings[name='ComponentInstanceContainer']/@borderedNodeMappings[name='ProvidedServiceNode']"/>
@@ -551,7 +551,7 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.sirius.system.targetPlatform.design/description/targetPlatform.odesign#//@ownedViewpoints[name='TargetPlatformViewpoint']/@ownedRepresentations[name='TargetPlatformDiagram']/@defaultLayer/@containerMappings[name='TargetPlatformContainer']/@subContainerMappings[name='OperatingSystemContainer']"/>
       </ownedDiagramElements>
-      <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_SOs9APxmEeiefN3TO805eA" name="icub" tooltipText="LoginAccount">
+      <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_SOs9APxmEeiefN3TO805eA" name="giovanni" tooltipText="LoginAccount">
         <target xmi:type="TargetPlatform:LoginAccount" href="model/System_Scenario1.target#//@elements.0/@elements.2"/>
         <semanticElements xmi:type="TargetPlatform:LoginAccount" href="model/System_Scenario1.target#//@elements.0/@elements.2"/>
         <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
@@ -804,7 +804,7 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.sirius.system.deployment.design/description/deployment.odesign#//@ownedViewpoints[name='DeploymentViewpoint']/@ownedRepresentations[name='DeploymentDiagram']/@defaultLayer/@containerMappings[name='TargetPlatformRefContainer']/@subContainerMappings[name='NetworkInterfaceContainer']"/>
       </ownedDiagramElements>
-      <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_DG1wkPxnEeiefN3TO805eA" name="icub" tooltipText="LoginAccount">
+      <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_DG1wkPxnEeiefN3TO805eA" name="giovanni" tooltipText="LoginAccount">
         <target xmi:type="Deployment:LoginAccountSelection" href="model/System_Scenario1.deployment#//@elements.0/@login"/>
         <semanticElements xmi:type="Deployment:LoginAccountSelection" href="model/System_Scenario1.deployment#//@elements.0/@login"/>
         <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
@@ -815,7 +815,7 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.sirius.system.deployment.design/description/deployment.odesign#//@ownedViewpoints[name='DeploymentViewpoint']/@ownedRepresentations[name='DeploymentDiagram']/@defaultLayer/@containerMappings[name='TargetPlatformRefContainer']/@subContainerMappings[name='LoginAccountContainer']"/>
       </ownedDiagramElements>
-      <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_E50KEPxnEeiefN3TO805eA" name="/home/icub/SOFTWARE/deployment_3.6/" tooltipText="UploadFolder">
+      <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_E50KEPxnEeiefN3TO805eA" name="/home/r1-user/SmartSoft-deploy" tooltipText="UploadFolder">
         <target xmi:type="Deployment:UploadDirectory" href="model/System_Scenario1.deployment#//@elements.0/@directory"/>
         <semanticElements xmi:type="Deployment:UploadDirectory" href="model/System_Scenario1.deployment#//@elements.0/@directory"/>
         <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>

@@ -18,9 +18,9 @@
 # run this script from the component's root folder to deploy the scenario to device.
 #
 
-TARGET_SSHUSER=icub
+TARGET_SSHUSER=r1-user
 TARGET_IP=127.0.0.1
-TARGET_DIRECTORY="/home/icub/SOFTWARE/deployment_3.6/"
+TARGET_DIRECTORY="/home/r1-user/SmartSoft-deploy"
 DEPLOYMENT_DIRECTORY=System_Scenario1.deployment/
 
 echo "#######################################################"
@@ -217,9 +217,9 @@ if [ "$1" = "local" ]; then
 	rsync -l -r -v --progress --exclude ".svn" $DEPL_FILES $DEPLOYMENT_DIRECTORY/localhost
 else
 	# remote deployment
-	SSH_TARGET=icub@127.0.0.1:$TARGET_DIRECTORY/$DEPLOYMENT_DIRECTORY
+	SSH_TARGET=r1-user@127.0.0.1:$TARGET_DIRECTORY/$DEPLOYMENT_DIRECTORY
 	echo "Deployment to $SSH_TARGET"
-	ssh icub@127.0.0.1 mkdir -p $TARGET_DIRECTORY/$DEPLOYMENT_DIRECTORY
+	ssh r1-user@127.0.0.1 mkdir -p $TARGET_DIRECTORY/$DEPLOYMENT_DIRECTORY
 	
 	TMPDIR=$(mktemp -d --suffix=.deployment) || exit 1
 	echo "Temporary directory: $TMPDIR"

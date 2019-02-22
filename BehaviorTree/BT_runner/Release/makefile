@@ -11,12 +11,12 @@ RM := rm -rf
 -include smartsoft/src-gen/params/subdir.mk
 -include smartsoft/src-gen/subdir.mk
 -include smartsoft/src/subdir.mk
+-include smartsoft/build/CMakeFiles/BT_runner.dir/usr/local/src/robot/yarp-smartsoft/Yarp-SmartSoft-Integration/BehaviorTree/BT_runner/OCamlWrap/subdir.mk
 -include smartsoft/build/CMakeFiles/BT_runner.dir/src-gen/params/subdir.mk
 -include smartsoft/build/CMakeFiles/BT_runner.dir/src-gen/subdir.mk
 -include smartsoft/build/CMakeFiles/BT_runner.dir/src/subdir.mk
--include smartsoft/build/CMakeFiles/BT_runner.dir/home/icub/SOFTWARE/smartsoft_3.6/Yarp-SmartSoft-Integration/BehaviorTree/BT_runner/OCamlWrap/subdir.mk
--include smartsoft/build/CMakeFiles/3.10.2/CompilerIdCXX/subdir.mk
--include smartsoft/build/CMakeFiles/3.10.2/CompilerIdC/subdir.mk
+-include smartsoft/build/CMakeFiles/3.12.20180920-g352399/CompilerIdCXX/subdir.mk
+-include smartsoft/build/CMakeFiles/3.12.20180920-g352399/CompilerIdC/subdir.mk
 -include smartsoft/build/CMakeFiles/subdir.mk
 -include libs/subdir.mk
 -include OCamlWrap/subdir.mk

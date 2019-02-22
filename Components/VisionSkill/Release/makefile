@@ -11,6 +11,12 @@ RM := rm -rf
 -include smartsoft/src-gen/params/subdir.mk
 -include smartsoft/src-gen/subdir.mk
 -include smartsoft/src/subdir.mk
+-include smartsoft/build/CMakeFiles/VisionSkill.dir/src-gen/params/subdir.mk
+-include smartsoft/build/CMakeFiles/VisionSkill.dir/src-gen/subdir.mk
+-include smartsoft/build/CMakeFiles/VisionSkill.dir/src/subdir.mk
+-include smartsoft/build/CMakeFiles/3.12.20180920-g352399/CompilerIdCXX/subdir.mk
+-include smartsoft/build/CMakeFiles/3.12.20180920-g352399/CompilerIdC/subdir.mk
+-include smartsoft/build/CMakeFiles/subdir.mk
 -include subdir.mk
 -include objects.mk
 

@@ -90,9 +90,9 @@ int Task1::on_entry()
 		 child_element = child_element->NextSiblingElement())
 	{
         std::cout << child_element->Name() << "." << child_element->Attribute("ID") << std::endl;
-        if(child_element->Name() == "Action")
+        if(string(child_element->Name()) == string("Action"))
 			COMP->factory.registerSimpleAction(child_element->Attribute("ID"), DummyAction);
-        else
+        if(string(child_element->Name()) == string("Condition"))
         	COMP->factory.registerSimpleCondition(child_element->Attribute("ID"), DummyAction);
 	}
 	std::cout << "buildTreeFromFile " << bt_filename << std::endl;
@@ -117,7 +117,7 @@ int Task1::on_entry()
         COMP->nodeMap[node->name()] = node;
 
 // For debug only
-
+/*
 	for(int i : {1,2,3,0})
 	{
 		NodeStatus status = NodeStatus(i);
@@ -129,6 +129,7 @@ int Task1::on_entry()
 		}
 	}
 	COMP->nodeMap["BottleGrasped"]->setStatus(NodeStatus::SUCCESS);
+*/
 #endif
 
 
@@ -152,7 +153,7 @@ int Task1::on_execute()
 
 	int secs = 1;
 	std::cout << "sleeping " << secs << " sec " << std::endl;
-	sleep(secs);
+	usleep(100 * 1000);
 
 	// it is possible to return != 0 (e.g. when the task detects errors), then the outer loop breaks and the task stops
 	return 0;

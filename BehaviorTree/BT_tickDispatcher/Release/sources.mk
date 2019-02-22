@@ -23,13 +23,13 @@ C_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
-smartsoft/build/CMakeFiles/3.10.2/CompilerIdC \
-smartsoft/build/CMakeFiles/3.10.2/CompilerIdCXX \
-smartsoft/build/CMakeFiles/BT_tickDispatcher.dir/home/icub/SOFTWARE/YARP-BT-modules/src \
+smartsoft/build/CMakeFiles/3.12.20180920-g352399/CompilerIdC \
+smartsoft/build/CMakeFiles/3.12.20180920-g352399/CompilerIdCXX \
 smartsoft/build/CMakeFiles/BT_tickDispatcher.dir/src \
 smartsoft/build/CMakeFiles/BT_tickDispatcher.dir/src/tickers \
 smartsoft/build/CMakeFiles/BT_tickDispatcher.dir/src-gen \
 smartsoft/build/CMakeFiles/BT_tickDispatcher.dir/src-gen/params \
+smartsoft/build/CMakeFiles/BT_tickDispatcher.dir/usr/local/src/robot/yarp-smartsoft/YARP-BT-modules/src \
 smartsoft/build/CMakeFiles \
 smartsoft/src \
 smartsoft/src/tickers \

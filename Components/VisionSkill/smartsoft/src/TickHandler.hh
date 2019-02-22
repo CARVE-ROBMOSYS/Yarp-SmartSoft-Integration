@@ -23,7 +23,7 @@
 class TickHandler : public TickHandlerCore
 {
 private:
-	yarp::os::RpcClient  blackBoard_Client;
+	yarp::os::Port  blackBoard_Client;
 
 public:
 	TickHandler(Smart::IQueryServerPattern<CommYARP_BT::CommTickCommand, CommYARP_BT::CommTickResult, SmartACE::QueryId>* server);

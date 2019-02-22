@@ -2,8 +2,8 @@ DeploymentModel System_Scenario1 {
 
 TargetPlatformReference localhost using System_Scenario1.localhost
 	{
-		UploadDirectory "/home/icub/SOFTWARE/deployment_3.6/"
-		LoginAccount icub
+		UploadDirectory "/home/r1-user/SmartSoft-deploy"
+		LoginAccount giovanni
 		NetworkInterface eno1
 	}
 	NamingService
