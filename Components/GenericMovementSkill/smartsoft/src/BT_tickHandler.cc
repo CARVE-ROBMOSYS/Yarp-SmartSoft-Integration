@@ -195,7 +195,7 @@ void BT_tickHandler::handleQuery(const SmartACE::QueryId &id, const CommYARP_BT:
 
 	string type = reply.get(0).asString();
 	Bottle *listOfLists = reply.get(1).asList();
-
+	string conditionName = reply.get(2).asString();
 
 	// The command may contains more than one goal at the same time
 	for(int i=0; i<listOfLists->size(); i++)
@@ -247,5 +247,12 @@ void BT_tickHandler::handleQuery(const SmartACE::QueryId &id, const CommYARP_BT:
 		}
 	}
 
+	if(answer.getResult() == CommYARP_BT::TickResult::Success)
+	{
+		cmd.addString("set");
+		cmd.addString(conditionName);
+		cmd.addString("True");
+		COMP->blackBoardRPC.write(cmd, reply);
+	}
 	this->server->answer(id, answer);
 }

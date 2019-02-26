@@ -1,0 +1,17 @@
+#####################
+# internal parameters
+#####################
+##########################
+# InternalParameter Settings
+[Settings]
+cartesianController_prefix sim
+robotName SIM_CER_ROBOT
+
+
+#####################
+# extended parameters
+#####################
+
+#####################
+# instance parameters
+#####################
