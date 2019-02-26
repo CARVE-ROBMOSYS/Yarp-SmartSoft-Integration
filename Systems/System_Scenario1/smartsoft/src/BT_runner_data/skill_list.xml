@@ -2,7 +2,6 @@
 
 <SkillList>
 
-
 <Action ID="GoToKitchen" />
 <Condition ID="RobotInKitchen" />
 
@@ -10,53 +9,38 @@
 <Condition ID="BottleLocated" />
 <Condition ID="BottleGrasped" />
 
-<Action ID="AttentionOn" />
-<Action ID="AttentionOff" />
-<Action ID="PrepareArmsForGrasp" />
-<Action ID="PrepareHeadForGrasp" />
-<Action ID="ResetArms" />
-<Action ID="ResetHead" />
-<Condition ID="IsAttentionOn" />
-<Condition ID="IsAttentionOff" />
-<Condition ID="IsPrepareArmsForGrasp" />
-<Condition ID="IsPrepareHeadForGrasp" />
-<Condition ID="IsResetArms" />
-<Condition ID="IsResetHead" />
-
-
 <Action ID="FindBottle" />
 <Action ID="LocateBottle" />
 <Action ID="GraspBottle" />
-
 
 <Action ID="ComputeInvPose" />
 <Condition ID="InvPoseValid" />
 <Condition ID="InvPoseComputed" />
 
+<Action ID="KeepArmsForGrasp"/>
 
 <Action ID="GoToInvPose" />
 <Condition ID="RobotAtInvPose" />
-
 
 <Action ID="SetInvPoseInvaild" />
 <Action ID="AlwaysRunning" />
 
 <!-- For future use -->
-<Action ID="Ask_for_help" />
-<Action ID="Follow_human" />
 <Action ID="FindGlass" />
 <Action ID="FetchGlass" />
 <Action ID="PourDrink" />
 
-<!-- Other -->
-<Action ID="patrolling" />
 
-<!-- For testing -->
-<Action ID="Go_to_location1" />
-<Action ID="Go_to_location2" />
-<Action ID="Go_to_location3" />
-<Action ID="Go_to_location4" />
 <Condition ID="ConditionTrue" /> 
 <Condition ID="ConditionFalse" />
+
+<Action ID="AskForHelp"/>
+<Action ID="FollowHuman"/>
+<Action ID="GoToRoom"/>
+<Condition ID="RobotInRoom"/>
+<Condition ID="RoomKnown"/>
+
+<!-- Other -->
+<Action ID="patrolling" />
 
 </SkillList>
