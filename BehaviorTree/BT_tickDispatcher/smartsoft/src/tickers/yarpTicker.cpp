@@ -63,7 +63,7 @@ CommYARP_BT::TickResult YarpTicker::tick(CommYARP_BT::TickCommand cmd, string pa
 	if(cmd == TickCommand::Halt)
 	{
 		std::cout << "\t YarpTicker halting " << params << "... ";
-		tmpRet = request_halt(params);
+		tmpRet = request_halt();
 		std::cout << "\t request_tick  " << (int) tmpRet << std::endl;
 	}
 
