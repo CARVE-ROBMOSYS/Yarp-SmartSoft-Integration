@@ -11,8 +11,6 @@ using namespace yarp::os;
 class Monitor : public RFModule
 {
 public:
-    Monitor();
-//    void set_filename(std::string rfsm_filename);
     bool configure(yarp::os::ResourceFinder &rf);
 
 private:
@@ -23,12 +21,7 @@ private:
     bool close();
     BufferedPort<Bottle>  event_port_; // a port to handle event messages
     Port state_port_; // a port to rpc requests
-
     rfsm::StateMachine rfsm;
-
-
-
-
 
 };
 

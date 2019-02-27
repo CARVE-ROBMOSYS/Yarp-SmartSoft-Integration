@@ -5,24 +5,15 @@
 #include <yarp/os/LogStream.h>
 using namespace std;
 using namespace yarp::os;
-Monitor::Monitor()
-{
-
-}
-
-
-
 
 double Monitor::getPeriod()
 {
-    return 1.0;
+    return 1.0; // TODO change to 0.1
 }
+
 bool Monitor::updateModule()
 {
-
     cout<<  "Current state : " << rfsm.getCurrentState() << endl;
-
-
     Bottle *input = event_port_.read(false);
 
     if (input!=NULL) {
@@ -37,12 +28,11 @@ bool Monitor::updateModule()
 
 bool Monitor::respond(const Bottle &command, Bottle &reply)
 {
-
-    if (command.get(0).asString() == "state") {
+    if (command.get(0).asString() == "state")
+    {
         reply.addString(rfsm.getCurrentState());
         return true;
     }
-
     reply.addString("command not recognized");
 
     return true;
@@ -51,9 +41,7 @@ bool Monitor::respond(const Bottle &command, Bottle &reply)
 
 bool Monitor::configure(yarp::os::ResourceFinder &rf)
 {
-
     std::string filename;
-
     if (rf.check("filename"))
     {
         filename = rf.find("filename").asString();

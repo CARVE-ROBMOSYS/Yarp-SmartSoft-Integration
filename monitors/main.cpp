@@ -19,13 +19,10 @@ int main(int argc, char * argv[])
         return 1;
     }
 
-
-
     rf.setVerbose(true);
-
     cout << "Configuring and starting module. \n";
-    module.runModule(rf);   // This calls configure(rf) and, upon success, the module execution begins with a call to updateModule()
-    cout<<"Main returning..."<<endl;
+
+    module.runModule(rf);
     return 0;
 }
 
