@@ -38,10 +38,12 @@ bool Monitor::updateModule()
 bool Monitor::respond(const Bottle &command, Bottle &reply)
 {
 
-    if (command.get(0).asString() == "getState") {
+    if (command.get(0).asString() == "state") {
         reply.addString(rfsm.getCurrentState());
         return true;
     }
+
+    reply.addString("command not recognized");
 
     return true;
 }
