@@ -65,15 +65,15 @@ bool Monitor::configure(yarp::os::ResourceFinder &rf)
 
     }
 
-    if (!event_port_.open("/monitor/"+filename+"event:i"))
+    if (!event_port_.open("/monitor/"+filename+"/event:i"))
     {
-             yError() << "Cannot open port " << "/monitor/"+filename+"event:i";
+             yError() << "Cannot open port " << "/monitor/" << filename << "/event:i";
         return false;
     }
 
-    if(state_port_.open("/monitor/"+filename+"rpc:i"))
+    if(!state_port_.open("/monitor/"+filename+"/rpc:i"))
     {
-        yError() << "Cannot open port " << "/monitor/"+filename+"rpc:i";
+        yError() << "Cannot open port " << "/monitor/" << filename << "/rpc:i";
 
         return false;
     }
