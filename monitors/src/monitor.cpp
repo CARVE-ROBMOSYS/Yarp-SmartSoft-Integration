@@ -56,7 +56,7 @@ bool Monitor::configure(yarp::os::ResourceFinder &rf)
 
     if (rf.check("filename"))
     {
-        rf.find("filename").asString();
+        filename = rf.find("filename").asString();
     }
     else
     {
