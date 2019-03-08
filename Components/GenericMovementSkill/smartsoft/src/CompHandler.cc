@@ -70,10 +70,13 @@ void CompHandler::onStartup()
 		throw std::runtime_error("Cannot open all required devices.");
 	}
 
-	string prefix = COMP->getGlobalState().getSettings().getCartesianController_prefix();
+	COMP->useCartesian = COMP->getGlobalState().getSettings().getUseCartesian();
 
-	result &= yarp::os::Network::connect(COMP->cartesianLeftArm.getName(),  prefix + string("/cer_reaching-controller/left/rpc"));
-	result &= yarp::os::Network::connect(COMP->cartesianRightArm.getName(), prefix + string("/cer_reaching-controller/right/rpc"));
+	if(COMP->useCartesian)
+	{
+		result &= yarp::os::Network::connect(COMP->cartesianLeftArm.getName(),  string("/cer_reaching-controller/left/rpc"));
+		result &= yarp::os::Network::connect(COMP->cartesianRightArm.getName(), string("/cer_reaching-controller/right/rpc"));
+	}
 	result &= yarp::os::Network::connect(COMP->blackBoardRPC.getName(), "/blackboard/rpc:i");
 
 	if(!result)

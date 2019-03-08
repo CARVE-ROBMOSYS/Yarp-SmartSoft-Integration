@@ -45,6 +45,7 @@ public:
 	 yarp::os::RpcClient cartesianLeftArm;
 	 yarp::os::RpcClient cartesianRightArm;
 	 yarp::os::RpcClient blackBoardRPC;
+	 bool useCartesian{false};
 };
 	
 #endif

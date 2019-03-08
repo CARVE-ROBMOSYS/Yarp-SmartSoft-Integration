@@ -112,6 +112,11 @@ bool BT_tickHandler::halt()
 
 bool BT_tickHandler::setNewCartesianTarget(Bottle *inner)
 {
+	if(!COMP->useCartesian)
+	{
+		std::cout << "Module is not configured to use the cartesian! Set <useCartesian> flag to true.";
+		return false;
+	}
 	// Prepare bottle for cartesian command
 	yarp::os::Bottle cartesian_cmd, reply;
 	cartesian_cmd.addString("go");

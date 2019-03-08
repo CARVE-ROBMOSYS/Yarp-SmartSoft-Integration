@@ -85,13 +85,13 @@ void ParamUpdateHandler::loadParameter(SmartACE::SmartIniParameter &parameter)
 		// load internal parameters (if any)
 		//
 		// parameter Settings
-		if(parameter.getString("Settings", "cartesianController_prefix", commitState.Settings.cartesianController_prefix))
-		{
-			globalState.Settings.cartesianController_prefix = commitState.Settings.cartesianController_prefix;
-		}
 		if(parameter.getString("Settings", "robotName", commitState.Settings.robotName))
 		{
 			globalState.Settings.robotName = commitState.Settings.robotName;
+		}
+		if(parameter.getBoolean("Settings", "useCartesian", commitState.Settings.useCartesian))
+		{
+			globalState.Settings.useCartesian = commitState.Settings.useCartesian;
 		}
 		
 		//

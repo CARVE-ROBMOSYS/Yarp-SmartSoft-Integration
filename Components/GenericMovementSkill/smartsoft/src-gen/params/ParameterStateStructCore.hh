@@ -42,27 +42,27 @@ public:
 			/**
 			 * here are the member definitions
 			 */
-			std::string cartesianController_prefix;
 			std::string robotName;
+			bool useCartesian;
 		
 		public:
 			// default constructor
 			SettingsType() {
-				cartesianController_prefix = "sim";
 				robotName = "SIM_CER_ROBOT";
+				useCartesian = false;
 			}
 		
 			/**
 			 * here are the public getters
 			 */
-			inline std::string getCartesianController_prefix() const { return cartesianController_prefix; }
 			inline std::string getRobotName() const { return robotName; }
+			inline bool getUseCartesian() const { return useCartesian; }
 			
 			void to_ostream(std::ostream &os = std::cout) const
 			{
 				os << "Settings(";
-				os << "cartesianController_prefix = " << cartesianController_prefix << ", ";
 				os << "robotName = " << robotName << ", ";
+				os << "useCartesian = " << useCartesian << ", ";
 				os << ")\n";
 			}
 			

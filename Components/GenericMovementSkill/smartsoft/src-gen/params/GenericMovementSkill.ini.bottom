@@ -4,8 +4,8 @@
 ##########################
 # InternalParameter Settings
 [Settings]
-cartesianController_prefix sim
 robotName SIM_CER_ROBOT
+useCartesian false
 
 
 #####################
