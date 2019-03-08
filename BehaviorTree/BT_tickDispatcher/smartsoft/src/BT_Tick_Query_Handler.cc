@@ -17,7 +17,8 @@
 #include "BT_Tick_Query_Handler.hh"
 #include "BT_tickDispatcher.hh"
 
-BT_Tick_Query_Handler::BT_Tick_Query_Handler(Smart::IQueryServerPattern<CommYARP_BT::CommTickCommand, CommYARP_BT::CommTickResult, SmartACE::QueryId>* server)
+BT_Tick_Query_Handler::BT_Tick_Query_Handler(Smart::IQueryServerPattern<CommYARP_BT::CommTickCommand,
+		CommYARP_BT::CommTickResult, SmartACE::QueryId>* server)
 :	BT_Tick_Query_HandlerCore(server)
 {
 	
@@ -39,9 +40,11 @@ void BT_Tick_Query_Handler::handleQuery(const SmartACE::QueryId &id, const CommY
 	CommYARP_BT::TickResult  res = CommYARP_BT::TickResult::Error;
 	std::string tickParam = request.getParameter();
 
-	std::cout << "\n\n-----\nTick Manager Received tick request [id " << id << "] " << tickParam << std::endl;
+	if(cmd == CommYARP_BT::TickCommand::Tick)
+		std::cout << "\n\n-----\nDispatcher received TICK request [id " << id << "] " << tickParam << std::endl;
 
-	//	sleep(4);
+	if(cmd == CommYARP_BT::TickCommand::Halt)
+		std::cout << "\n\n-----\nDispatcher received HALT request [id " << id << "] " << tickParam << std::endl;
 
 	COMP->reqId = id;
 	COMP->cmd = request;

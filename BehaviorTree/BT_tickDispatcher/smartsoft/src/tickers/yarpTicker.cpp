@@ -53,23 +53,23 @@ bool YarpTicker::configure(std::string target)
  */
 CommYARP_BT::TickResult YarpTicker::tick(CommYARP_BT::TickCommand cmd, string params)
 {
-	int tmpRet;
+	ReturnStatus tmpRet;
 	if(cmd == TickCommand::Tick)
 	{
-		std::cout << "\t YarpTicker ticking " << params << "... ";
+		std::cout << "\t YarpTicker ticking " << params << "... \n";
 		tmpRet = request_tick(params);
 	}
 
 	if(cmd == TickCommand::Halt)
 	{
-		std::cout << "\t YarpTicker halting " << params << "... ";
+		std::cout << "\t YarpTicker halting " << params << "... \n";
 		tmpRet = request_halt();
-		std::cout << "\t request_tick  " << (int) tmpRet << std::endl;
 	}
 
+	ReturnStatusVocab tmpVocab;
 	TickResult res = tickConvert_fromYarp( (ReturnStatus)tmpRet);
-	std::cout << "\t request_tick  " << (int) tmpRet << std::endl;
-	std::cout << "\tret SS  " << (int) res << "  " << res.to_string() << std::endl;
+	std::cout << "\t return (YARP)  " << tmpVocab.toString(tmpRet) << "\t\t as int " << (int) tmpRet << std::endl;
+	std::cout << "\t return (SS)    " << res.to_string()   << "\t as int " << (int) res    << std::endl << std::endl;
 
 	return res;
 }

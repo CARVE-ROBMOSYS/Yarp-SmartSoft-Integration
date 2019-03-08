@@ -24,7 +24,7 @@ CommYARP_BT::TickResult RelayTicker::tick(CommYARP_BT::TickCommand cmd, std::str
 	request.setCommand(cmd);
 	request.setParameter(params);
 
-	std::cout << "Relay ticker - Got request: " << request  << std::endl;
+	std::cout << "Relay ticker - Got request: " << request.getCommand() << " " << request.getParameter()  << std::endl;
 
 	Smart::StatusCode status;
 	status = _client->query(request, answer);

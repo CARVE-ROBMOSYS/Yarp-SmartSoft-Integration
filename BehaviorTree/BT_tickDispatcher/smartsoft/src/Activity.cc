@@ -49,21 +49,14 @@ int Activity::on_execute()
 	Smart::StatusCode status;
 	CommYARP_BT::CommTickResult answer;
 
-	std::cout << "Hello from Activity " << std::endl;
-
     std::unique_lock<std::mutex> lk(COMP->mutex);
     BT_tickDispatcher *component = COMP;
 
     // Wait for a new message
-    COMP->gotNewData.wait(lk, [component]{ std::cout << component->isNewData << " " << COMP->isNewData << std::endl;
-    										return  (bool)(COMP->isNewData || COMP->isClosing) ;});
-
-
-	std::cout << "NewData: " << COMP->isNewData << "  Closing: " <<  COMP->isClosing << std::endl;
+    COMP->gotNewData.wait(lk, [component]{ return  (bool)(COMP->isNewData || COMP->isClosing) ;});
 
     if(COMP->isClosing)
     	return -1;
-
 
     // execute the request
 
@@ -75,12 +68,12 @@ int Activity::on_execute()
 	auto it = COMP->tickables_map.find(skill);
 	if( it == COMP->tickables_map.end())
 	{
-		std::cout << "Error: skill " << skill << " not found!";
+		std::cout << "Error: skill " << skill << "(param " << tickParam << ") not found!";
 		res = CommYARP_BT::TickResult::Error;
 	}
 	else
 	{
-		yDebug() << "Activity ticking " << (*it).second.tickerId << " with params " <<  (*it).second.params;
+		yDebug() << "Activity sending <" << cmd.to_string() << "> to <" << (*it).second.tickerId << "> with params <" <<  (*it).second.params << ">\n";
 		res = (int) (*it).second.tickerInstance->tick(cmd /* (*it).second.command*/, (*it).second.params);
 	}
 
