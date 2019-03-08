@@ -46,7 +46,7 @@ void CompHandler::onStartup()
 
     yarp::os::Property        navigClientCfg;
     navigClientCfg.put("device", "navigation2DClient");
-    navigClientCfg.put("local", "/robotPathPlannerExample");
+    navigClientCfg.put("local", "/SmartSoft/robotPathPlanner");
     navigClientCfg.put("navigation_server", "/navigationServer");
     navigClientCfg.put("map_locations_server", "/mapServer");
     navigClientCfg.put("localization_server", "/localizationServer");

@@ -26,6 +26,8 @@ class BT_tick_Handler : public BT_tick_HandlerCore
 {
 private:
 	bool has_goal{false};
+	std::string currentGoalName{""};
+
 	CommYARP_BT::TickResult handle_tick_goTo(yarp::dev::Map2DLocation  location, std::string locationName);
 	CommYARP_BT::TickResult handle_tick_check(yarp::dev::Map2DLocation location);
 	yarp::os::Port  blackBoard_Client;

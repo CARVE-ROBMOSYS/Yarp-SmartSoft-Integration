@@ -85,10 +85,12 @@ void BT_tick_Handler::handleQuery(const SmartACE::QueryId &id, const CommYARP_BT
 	for(int i=0; i< paramsVect.size(); i++)
 		yInfo() << "param [" << i << "] is " << paramsVect[i];
 
+	string navTarget = paramsVect[1];
+
 	// Get absolute position of 'location' from blackboard
 	Bottle toBoard, reply;
 	toBoard.addString("get");
-	toBoard.addString(paramsVect[1]);
+	toBoard.addString(navTarget);
 	blackBoard_Client.write(toBoard, reply);
 
 	// yDebug() << "Got reply from blackboard " << reply.toString();
@@ -110,17 +112,25 @@ void BT_tick_Handler::handleQuery(const SmartACE::QueryId &id, const CommYARP_BT
 		{
 			// Get subcommand: goTo or check
 			if(paramsVect[0] == "goTo")
-				result = handle_tick_goTo(desiredLoc, paramsVect[1]);
-
+			{
+				result = handle_tick_goTo(desiredLoc, navTarget);
+				writeBlackBoard((result == CommYARP_BT::TickResult::Success)? true : false, navTarget);
+			}
 			if(paramsVect[0] == "check")
 				result = handle_tick_check(desiredLoc);
 		} break;
 
 		case CommYARP_BT::TickCommand::Halt:
 		{
-			COMP->iNav->stopNavigation();
-			has_goal = false;
-			result = CommYARP_BT::TickResult::Success;
+			// if we are asked to stop navigation toward current goal, then be it.
+			// if we are asked to stop navigation toward a goal we are not currently trying to reach, ignore the halt signal.
+			if(navTarget == currentGoalName)
+			{
+				COMP->iNav->stopNavigation();
+				has_goal = false;
+			}
+			result = CommYARP_BT::TickResult::Halted;
+
 		} break;
 	}
 
@@ -142,6 +152,17 @@ void BT_tick_Handler::writeBlackBoard(bool reached, string locationName)
 	cmd.addString("RobotAt"+locationName);
 	cmd.addString(reached?"True":"False");
 	blackBoard_Client.write(cmd, response);
+
+	// hack, we use navigation as a fake locate bottle. In this case set 'BottleLocated' to true when action is done.
+	if(reached && (locationName == "FindBottle" || locationName == "FindBottleSim") )
+	{
+		yDebug() << "Writing BottleFound True to blackboard";
+		cmd.clear();
+		cmd.addString("set");
+		cmd.addString("BottleFound");
+		cmd.addString("True");
+		blackBoard_Client.write(cmd, response);
+	}
 	return;
 }
 
@@ -192,6 +213,7 @@ CommYARP_BT::TickResult  BT_tick_Handler::handle_tick_goTo(yarp::dev::Map2DLocat
 		std::cout << "Calling gotoTargetByAbsoluteLocation..." << std::endl ;
 		yInfo() << "NEW target is " << location.toString();
 
+		currentGoalName = locationName;
 		// get navigation parameters from blackboard
 		Bottle config, reply;
 		config.clear();
@@ -240,10 +262,15 @@ CommYARP_BT::TickResult  BT_tick_Handler::handle_tick_goTo(yarp::dev::Map2DLocat
 			result = CommYARP_BT::TickResult::Running;
 			has_goal = true;
 		}
+		else
+		{
+			result = CommYARP_BT::TickResult::Failure;	 // should be Error!
+			currentGoalName = "";
+			has_goal = false;
+		}
 		std:: cout << "Returning " << result << std::endl;
 	}
 
-	writeBlackBoard((result == CommYARP_BT::TickResult::Success)? true : false, locationName);
 	return result;
 }
 
