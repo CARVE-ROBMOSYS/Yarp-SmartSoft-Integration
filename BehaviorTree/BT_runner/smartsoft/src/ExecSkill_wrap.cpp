@@ -97,6 +97,7 @@ void ResetSkill(const char *name)
     CommYARP_BT::CommTickCommand request;
 	CommYARP_BT::CommTickResult  answer;
 	request.setCommand(CommYARP_BT::TickCommand::Halt);
+	request.setParameter(name);
 
 	Smart::StatusCode status = COMP->behaviourTreeTickQueryServiceReq->query(request, answer);
 
