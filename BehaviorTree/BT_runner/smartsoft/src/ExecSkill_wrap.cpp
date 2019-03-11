@@ -87,6 +87,7 @@ int ExecuteSkill(const char *name)
 	COMP->nodeMap[name]->setStatus( (BT::NodeStatus) SS_to_groot(answer.getResult()));
 #endif
 
+	usleep(100*1000);
 	return SS_to_Unige(answer.getResult());
 }
 
@@ -108,5 +109,6 @@ void ResetSkill(const char *name)
 	COMP->nodeMap[name]->setStatus( BT::NodeStatus::IDLE);
 	fflush(stdout);
 #endif
+	usleep(100*1000);
 	return;
 }

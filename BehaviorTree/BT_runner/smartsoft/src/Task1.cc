@@ -60,7 +60,7 @@ int Task1::on_entry()
 
 //	std::string bt_filename(COMP->getGlobalState().getSettings().getBt_description() );
 	std::string bt_filename("./bt_description.xml");
-	std::string bt_skillList("skillList.xml");
+	std::string bt_skillList("skill_list.xml");
 
 	std::cout << "Reading BT from file " << bt_filename << std::endl;
 	behaviourTree = read_bt(bt_filename.c_str());
@@ -73,7 +73,7 @@ int Task1::on_entry()
 	tinyxml2::XMLError eResult = doc.LoadFile(bt_skillList.c_str());
 	if (eResult != tinyxml2::XML_SUCCESS)
 	{
-		std::cout << "Cannot parse doc " << std::endl;
+		std::cout << "Groot interface: Cannot read " << bt_skillList.c_str() << " file for skill description" << std::endl;
 		return -1;
 	}
 
@@ -116,20 +116,6 @@ int Task1::on_entry()
     for(auto node : COMP->tree_cpp.nodes)
         COMP->nodeMap[node->name()] = node;
 
-// For debug only
-/*
-	for(int i : {1,2,3,0})
-	{
-		NodeStatus status = NodeStatus(i);
-		// Keep on ticking until you get either a SUCCESS or FAILURE state
-		for(auto node : COMP->tree_cpp.nodes)
-		{
-			node->setStatus((NodeStatus)i);
-			std::this_thread::sleep_for(std::chrono::milliseconds(200));
-		}
-	}
-	COMP->nodeMap["BottleGrasped"]->setStatus(NodeStatus::SUCCESS);
-*/
 #endif
 
 
