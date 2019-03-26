@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<SkillList>
+
+<Action ID="GoToKitchen" />
+<Condition ID="RobotInKitchen" />
+
+<Condition ID="BottleFound" />
+<Condition ID="BottleLocated" />
+<Condition ID="BottleGrasped" />
+
+<Action ID="FindBottle" />
+<Action ID="LocateBottle" />
+<Action ID="GraspBottle" />
+
+<Action ID="ComputeInvPose" />
+<Condition ID="InvPoseValid" />
+<Condition ID="InvPoseComputed" />
+
+<Action ID="KeepArmsForGrasp"/>
+
+<Action ID="GoToInvPose" />
+<Condition ID="RobotAtInvPose" />
+
+<Action ID="SetInvPoseInvaild" />
+<Action ID="KeepRunning" />
+
+<Condition ID="GlassLocated"/>
+<Action ID="LocateGlass" />
+<Condition ID="ContentPoured"/>
+<Action ID="PourDrink" />
+
+
+<Action ID="AskForHelp"/>
+<Action ID="FollowHuman"/>
+<Action ID="GoToRoom"/>
+<Condition ID="RobotInRoom"/>
+<Condition ID="RoomKnown"/>
+
+
+</SkillList>

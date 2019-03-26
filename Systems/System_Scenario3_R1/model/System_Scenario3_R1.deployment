@@ -1,0 +1,9 @@
+DeploymentModel System_Scenario3_R1 {
+
+TargetPlatformReference localhost using System_Scenario3_R1.localhost
+	{
+		UploadDirectory "/tmp"
+		LoginAccount icub
+		NetworkInterface eno1
+	}
+}
