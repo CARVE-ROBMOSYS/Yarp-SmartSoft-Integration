@@ -6,7 +6,7 @@
 #include "BT_runner.hh"
 #include "CommYARP_BT/CommTickCommand.hh"
 
-enum UNIGE_Status {UNIGE_RUNNING, UNIGE_FAILURE, UNIGE_SUCCESS, UNIGE_ERROR};
+enum UNIGE_Status {UNIGE_RUNNING, UNIGE_FAILURE, UNIGE_SUCCESS};
 
 enum GROOT_status {GROOT_IDLE, GROOT_RUNNING, GROOT_SUCCESS, GROOT_FAILURE};
 
@@ -20,6 +20,7 @@ UNIGE_Status SS_to_Unige(CommYARP_BT::TickResult result)
 		} break;
 
 		case CommYARP_BT::TickResult::Failure:
+		case CommYARP_BT::TickResult::Error:
 		{
 			return UNIGE_FAILURE;
 		} break;
@@ -28,12 +29,6 @@ UNIGE_Status SS_to_Unige(CommYARP_BT::TickResult result)
 		{
 			return UNIGE_RUNNING;
 		} break;
-
-		case CommYARP_BT::TickResult::Error:
-		{
-			return UNIGE_ERROR;
-		} break;
-
 	}
 };
 
@@ -87,7 +82,7 @@ int ExecuteSkill(const char *name)
 	COMP->nodeMap[name]->setStatus( (BT::NodeStatus) SS_to_groot(answer.getResult()));
 #endif
 
-	usleep(100*1000);
+	usleep(10*1000);
 	return SS_to_Unige(answer.getResult());
 }
 
@@ -109,6 +104,6 @@ void ResetSkill(const char *name)
 	COMP->nodeMap[name]->setStatus( BT::NodeStatus::IDLE);
 	fflush(stdout);
 #endif
-	usleep(100*1000);
+	usleep(10*1000);
 	return;
 }
