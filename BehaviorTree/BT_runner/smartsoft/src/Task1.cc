@@ -116,9 +116,22 @@ int Task1::on_entry()
     for(auto node : COMP->tree_cpp.nodes)
         COMP->nodeMap[node->name()] = node;
 
+    /*
+	for(int i : {1,0})
+	{
+		NodeStatus status = NodeStatus(i);
+		// Keep on ticking until you get either a SUCCESS or FAILURE state
+		for(auto node : COMP->tree_cpp.nodes)
+		{
+			node->setStatus((NodeStatus)i);
+			std::this_thread::sleep_for(std::chrono::milliseconds(200));
+		}
+	}
+	*/
+
 #endif
 
-
+	getchar();
 	return 0;
 }
 
@@ -137,9 +150,8 @@ int Task1::on_execute()
 	// it is possible to return != 0 (e.g. when the task detects errors), then the outer loop breaks and the task stops
 	std::cout << "-> tick return value is " << ret << std::endl;
 
-	int secs = 1;
-	std::cout << "sleeping " << secs << " sec " << std::endl;
-	usleep(100 * 1000);
+	usleep(1000 * 1000);
+	//getchar();
 
 	// it is possible to return != 0 (e.g. when the task detects errors), then the outer loop breaks and the task stops
 	return 0;
