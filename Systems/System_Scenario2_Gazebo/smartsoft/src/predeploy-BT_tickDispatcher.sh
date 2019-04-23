@@ -28,9 +28,7 @@
 # component is to be deployed.
 # These libraries will be searched in $SMART_ROOT/lib and then deployed
 # Add one file per line.
-#DEPLOY_LIBRARIES="$DEPLOY_LIBRARIES
-#libSmartSickInterface.so
-#"
+DEPLOY_LIBRARIES_USER="$DEPLOY_LIBRARIES_USER /usr/local/src/robot/yarp-smartsoft/YARP-BT-modules/build/lib/libYARPBTModules.so*"
 
 
 # add custom code here. E.g. use this script to collect data-files and 

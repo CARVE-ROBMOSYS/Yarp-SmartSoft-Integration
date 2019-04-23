@@ -26,7 +26,7 @@ bool GoalTicker::configure(std::string target)
 }
 
 
-CommYARP_BT::TickResult GoalTicker::tick(CommYARP_BT::TickCommand cmd, std::string params)
+CommYARP_BT::TickResult GoalTicker::tick(CommYARP_BT::TickCommand cmd, std::string params, std::string skillName)
 {
 /*
 	std::cout << "GoalTicker: ticking skill <" << targetSkill << "> state <" << params << "> " << std::endl;

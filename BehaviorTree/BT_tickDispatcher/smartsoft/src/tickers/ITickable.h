@@ -60,7 +60,7 @@ public:
 	 *       tickCommand_t enum.
 	 * @params: optional parameters to be sent to the target
 	 */
-	virtual CommYARP_BT::TickResult tick(CommYARP_BT::TickCommand cmd, std::string params) = 0;
+	virtual CommYARP_BT::TickResult tick(CommYARP_BT::TickCommand cmd, std::string params, std::string skillName="skillName") = 0;
 };
 
 #endif  // YARPSMARTSOFT_ITCKER_H

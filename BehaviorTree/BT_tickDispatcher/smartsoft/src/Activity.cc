@@ -54,7 +54,6 @@ int Activity::on_execute()
 
     // Wait for a new message
     COMP->gotNewData.wait(lk, [component]{ return  (bool)(COMP->isNewData || COMP->isClosing) ;});
-
     if(COMP->isClosing)
     	return -1;
 
@@ -74,7 +73,7 @@ int Activity::on_execute()
 	else
 	{
 		yDebug() << "Activity sending <" << cmd.to_string() << "> to <" << (*it).second.tickerId << "> with params <" <<  (*it).second.params << ">\n";
-		res = (int) (*it).second.tickerInstance->tick(cmd /* (*it).second.command*/, (*it).second.params);
+		res = (int) (*it).second.tickerInstance->tick(cmd /* (*it).second.command*/, (*it).second.params, (*it).first);
 	}
 
 	answer.setResult(res);

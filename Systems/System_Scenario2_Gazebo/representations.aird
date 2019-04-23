@@ -22,6 +22,7 @@
     <semanticResources>platform:/resource/VisionSkill/model/VisionSkill.componentParameters</semanticResources>
     <semanticResources>platform:/resource/VisionSkill_Simulator/model/VisionSkill_Simulator.component</semanticResources>
     <semanticResources>platform:/resource/VisionSkill_Simulator/model/VisionSkill_Simulator.componentParameters</semanticResources>
+    <semanticResources>platform:/resource/VisionSkill/model/VisionSkill.component</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" xmi:id="_ZghZIC7MEemSKrt_Bz-lNA">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.sirius.system.componentArchitecture.design/description/componentArchitecture.odesign#//@ownedViewpoints[name='SystemArchitectureViewpoint']"/>
       <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_ZmEAcC7MEemSKrt_Bz-lNA" name="System_Scenario2_GazeboComponentArchitecture" repPath="#_ZlVnsC7MEemSKrt_Bz-lNA">
@@ -111,7 +112,7 @@
           </children>
           <children xmi:type="notation:Node" xmi:id="_4JC70DaGEemX48PtbKIrsA" type="3012" element="_4IvZ0DaGEemX48PtbKIrsA">
             <children xmi:type="notation:Node" xmi:id="_4JDi4DaGEemX48PtbKIrsA" type="5010">
-              <layoutConstraint xmi:type="notation:Location" xmi:id="_4JDi4TaGEemX48PtbKIrsA" x="31" y="5"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_4JDi4TaGEemX48PtbKIrsA" x="-19" y="-14"/>
             </children>
             <children xmi:type="notation:Node" xmi:id="_4JEJ8DaGEemX48PtbKIrsA" type="3014" element="_4IwA4DaGEemX48PtbKIrsA">
               <styles xmi:type="notation:ShapeStyle" xmi:id="_4JEJ8TaGEemX48PtbKIrsA" fontName="Ubuntu"/>

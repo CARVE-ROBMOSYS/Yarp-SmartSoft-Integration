@@ -44,6 +44,8 @@ SMART_COMPONENT_AUTOBUILD_DEPENDENCIES()
 FIND_PACKAGE(open62541 QUIET PATHS /usr/local/lib/cmake)
 
 find_package(YARP REQUIRED)
+find_package(YARPBTModules REQUIRED)
+
 
 # these are the regular includes (add your own includes, if needed)
 INCLUDE_DIRECTORIES(
@@ -64,7 +66,9 @@ FILE(GLOB_RECURSE SRC_GEN_PARAMS ${CMAKE_CURRENT_LIST_DIR}/src-gen/params/*.cc)
 ADD_EXECUTABLE(${PROJECT_NAME} ${SRC} ${SRC_GEN} ${SRC_GEN_PARAMS}) # add ${USER_SRC} (if needed)
 
 # link your external libraries here (if there are any)
-target_link_libraries(${PROJECT_NAME} ${YARP_LIBRARIES} )
+target_link_libraries(${PROJECT_NAME} ${YARP_LIBRARIES} YARPBTModules)
+
+message(" YARPBTModules_LIBRARIES is ${YARPBTModules_LIBRARIES} ")
 
 IF(open62541_FOUND)
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} open62541)

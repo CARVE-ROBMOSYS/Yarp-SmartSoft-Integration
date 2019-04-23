@@ -26,7 +26,6 @@
 #include "tickers/ITickable.h"
 #include "tickers/yarpTicker.h"
 #include "tickers/SmartTicker.h"
-#include "tickers/SmartNavigTicker.h"
 #include <yarp/os/Port.h>
 
 typedef struct
@@ -50,7 +49,6 @@ public:
 	// keep track of what has been instantiated
 	std::list<YarpTicker  *> yarpTickers_list;
 	std::list<ITickable *> smartTickers_list;
-	SmartNavigationTicker   *smartNavTicker;
 
 	CommYARP_BT::CommTickCommand cmd;
 	int reqId;

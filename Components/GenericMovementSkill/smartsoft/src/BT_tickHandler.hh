@@ -19,6 +19,8 @@
 		
 #include "BT_tickHandlerCore.hh"
 #include <yarp/os/Bottle.h>
+#include <yarp/os/Port.h>
+
 
 class BT_tickHandler : public BT_tickHandlerCore
 {
@@ -26,6 +28,7 @@ private:
 	bool isRunning{false};
 	bool isGoalJointSpace{false};
 	std::list<std::string> partList;
+	yarp::os::Port  	   toMonitor_port;
 
 	bool halt();
 	bool isJointTargetReached(std::string part);

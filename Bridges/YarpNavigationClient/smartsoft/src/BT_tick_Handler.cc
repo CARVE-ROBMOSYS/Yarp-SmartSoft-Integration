@@ -26,6 +26,9 @@
 using namespace std;
 using namespace yarp::os;
 
+#include <BTMonitorMsg.h>
+
+
 BT_tick_Handler::BT_tick_Handler(Smart::IQueryServerPattern<CommYARP_BT::CommTickCommand, CommYARP_BT::CommTickResult, SmartACE::QueryId>* server)
 :	BT_tick_HandlerCore(server)
 {
@@ -37,6 +40,8 @@ BT_tick_Handler::BT_tick_Handler(Smart::IQueryServerPattern<CommYARP_BT::CommTic
 	{
 		yError() << "Cannot connect to YARP blackboard";
 	}
+
+	toMonitor_port.open("/yarpNavigationClient/monitor:o");
 }
 
 BT_tick_Handler::~BT_tick_Handler()
@@ -134,6 +139,7 @@ void BT_tick_Handler::handleQuery(const SmartACE::QueryId &id, const CommYARP_BT
 		} break;
 	}
 
+	resultMap[navTarget] = result;
 	answer.setResult(result);
 
 	// Debug print
@@ -153,6 +159,25 @@ void BT_tick_Handler::writeBlackBoard(bool reached, string locationName)
 	cmd.addString(reached?"True":"False");
 	blackBoard_Client.write(cmd, response);
 
+	// send e_from_env signal to the monitors
+	if(reached)
+	{
+		if(locationName == "FindBottle" || locationName == "FindBottleSim")
+		{
+			BTMonitorMsg msg;
+			msg.skill     = locationName;
+			msg.event     = "e_from_env";
+			toMonitor_port.write(msg);
+		}
+		else
+		{
+			BTMonitorMsg msg;
+			msg.skill     = string("GoTo") + locationName;
+			msg.event     = "e_from_env";
+			toMonitor_port.write(msg);
+		}
+	}
+
 	// hack, we use navigation as a fake locate bottle. In this case set 'BottleLocated' to true when action is done.
 	if(reached && (locationName == "FindBottle" || locationName == "FindBottleSim") )
 	{
@@ -171,6 +196,35 @@ CommYARP_BT::TickResult  BT_tick_Handler::handle_tick_goTo(yarp::dev::Map2DLocat
 	CommYARP_BT::TickResult inLoco = CommYARP_BT::TickResult::Failure;
 	CommYARP_BT::TickResult result = CommYARP_BT::TickResult::Running;
 
+/*
+	if(currentGoal_result == CommYARP_BT::TickResult::Success && currentGoalName == locationName)
+	{
+		// send signal to the monitors
+    	if(locationName == "FindBottle" || locationName == "FindBottleSim")
+		{
+			yDebug() << "Sending e_req FindBottle to monitor";
+
+	        BTMonitorMsg msg;
+	        msg.skill     = locationName;
+	        msg.event     = "e_req";
+	        toMonitor_port.write(msg);
+
+	        msg.event     = "e_from_env";
+	        toMonitor_port.write(msg);
+		}
+    	else
+		{
+    		BTMonitorMsg msg;
+			msg.skill     = string("GoTo") + locationName;
+			msg.event     = "e_req";
+			toMonitor_port.write(msg);
+
+	        msg.event     = "e_from_env";
+	        toMonitor_port.write(msg);
+		}
+    	return CommYARP_BT::TickResult::Success;
+	}
+*/
 	if(has_goal)
 	{
 		yarp::dev::NavigationStatusEnum status;
@@ -213,6 +267,7 @@ CommYARP_BT::TickResult  BT_tick_Handler::handle_tick_goTo(yarp::dev::Map2DLocat
 		std::cout << "Calling gotoTargetByAbsoluteLocation..." << std::endl ;
 		yInfo() << "NEW target is " << location.toString();
 
+		resultMap[locationName] = CommYARP_BT::TickResult::Running;
 		currentGoalName = locationName;
 		// get navigation parameters from blackboard
 		Bottle config, reply;
@@ -221,6 +276,28 @@ CommYARP_BT::TickResult  BT_tick_Handler::handle_tick_goTo(yarp::dev::Map2DLocat
 		config.addString("get");
 		config.addString(locationName + "_navParams");
 		blackBoard_Client.write(config, reply);
+
+		// send signal to the monitors
+    	if(locationName == "FindBottle" || locationName == "FindBottleSim")
+		{
+			yDebug() << "Sending e_req FindBottle to monitor";
+
+	        BTMonitorMsg msg;
+	        msg.skill     = locationName;
+	        msg.event     = "e_req";
+	        toMonitor_port.write(msg);
+			result = CommYARP_BT::TickResult::Running;
+
+//			std:: cout << " Find Bottle running without doing anything!! " << result << std::endl;
+//			return result;
+		}
+    	else
+		{
+    		BTMonitorMsg msg;
+			msg.skill     = string("GoTo") + locationName;
+			msg.event     = "e_req";
+			toMonitor_port.write(msg);
+		}
 
 		Bottle ccc;
 		ccc.fromString(reply.get(0).asString());
@@ -297,7 +374,7 @@ CommYARP_BT::TickResult BT_tick_Handler::handle_tick_check(yarp::dev::Map2DLocat
 		(std::fabs(desiredLoc.y 		- robotLoc.y)     <= 0.25) &&
 	    (std::fabs(desiredLoc.theta 	- robotLoc.theta) <= 5.0) )
 	{
-		yWarning() << "Locattion reached";
+		yWarning() << "Location reached";
 		result = CommYARP_BT::TickResult::Success;
 	}
 	else

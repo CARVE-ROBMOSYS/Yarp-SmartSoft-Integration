@@ -12,8 +12,8 @@
 #include <yarp/os/Network.h>
 
 #include "ITickable.h"
-#include "include/tick_client.h"
-
+#include "tick_client.h"
+#include <yarp/os/LogStream.h>
 
 class YarpTicker : 	public ITickable,
 					public TickClient
@@ -89,7 +89,7 @@ public:
 	 *       tickCommand_t enum.
 	 * @params: optional parameters to be sent to the target
 	 */
-	CommYARP_BT::TickResult tick(CommYARP_BT::TickCommand cmd, std::string params) override;
+	CommYARP_BT::TickResult tick(CommYARP_BT::TickCommand cmd, std::string params, std::string skillName="skillName") override;
 };
 
 

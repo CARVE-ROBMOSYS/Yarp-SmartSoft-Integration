@@ -1,6 +1,6 @@
-<root main_tree_to_execute="bt0008">
+<root main_tree_to_execute="BehaviorTree">
     <!-- ////////// -->
-    <BehaviorTree ID="bt0008">
+    <BehaviorTree ID="BehaviorTree">
         <Fallback name="Main">
             <Sequence name="Autonomus">
                 <Fallback name="ReachRoom">
@@ -41,7 +41,6 @@
                         <Action ID="GraspBottle"/>
                     </Sequence>
                     <Action ID="SetInvPoseInvaild"/>
-                    <Action ID="KeepRunning"/>
                 </Fallback>
             </Sequence>
             <Action ID="AskForHelp"/>

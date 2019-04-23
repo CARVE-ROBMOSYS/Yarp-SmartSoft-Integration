@@ -26,9 +26,9 @@ bool SmartTicker::configure(std::string target)
 }
 
 
-CommYARP_BT::TickResult SmartTicker::tick(CommYARP_BT::TickCommand cmd, std::string params)
+CommYARP_BT::TickResult SmartTicker::tick(CommYARP_BT::TickCommand cmd, std::string params, std::string skillName)
 {
-	std::cout << "SmartTicker: ticking skill <" << targetSkill << "> state <" << params << "> " << std::endl;
+	std::cout << "SmartTicker: ticking skill <" << skillName << "> state <" << params << "> " << std::endl;
 
 	this->stateMaster->setWaitState(params, targetSkill); // throw();
 

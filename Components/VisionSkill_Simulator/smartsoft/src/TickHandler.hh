@@ -18,6 +18,7 @@
 #define _TICKHANDLER_USER_HH
 		
 #include "TickHandlerCore.hh"
+#include <yarp/os/Port.h>
 #include <yarp/os/RpcClient.h>
 
 class TickHandler : public TickHandlerCore
@@ -28,6 +29,7 @@ private:
 	bool shouldFail {false};
 	yarp::os::RpcClient  blackBoard_Client;
 	yarp::os::RpcClient  toGazeboWorld;
+	yarp::os::Port  	 toMonitor_port;
 
 public:
 	TickHandler(Smart::IQueryServerPattern<CommYARP_BT::CommTickCommand, CommYARP_BT::CommTickResult, SmartACE::QueryId>* server);

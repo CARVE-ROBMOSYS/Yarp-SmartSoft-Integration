@@ -20,6 +20,7 @@
 #include <numeric>
 #include <yarp/os/Bottle.h>
 #include <yarp/os/LogStream.h>
+#include <BTMonitorMsg.h>
 
 using namespace std;
 using namespace yarp::os;
@@ -27,12 +28,12 @@ using namespace yarp::os;
 BT_tickHandler::BT_tickHandler(Smart::IQueryServerPattern<CommYARP_BT::CommTickCommand, CommYARP_BT::CommTickResult, SmartACE::QueryId>* server)
 :	BT_tickHandlerCore(server)
 {
-	
+	toMonitor_port.open("/genericMovement/monitor:o");
 }
 
 BT_tickHandler::~BT_tickHandler()
 {
-	
+	toMonitor_port.close();
 }
 
 bool BT_tickHandler::isJointTargetReached(string part)
@@ -69,15 +70,16 @@ bool BT_tickHandler::isCartesianTargetReached(string part)
 
 bool BT_tickHandler::setNewJointTarget(Bottle *inner)
 {
-	string part = inner->get(1).asString();
-	int nJoints = inner->size() - 2;
+	string part = inner->get(0).asString();
+	int nJoints = inner->size() - 1;
 	std::vector<int> joints(nJoints);
 	std::vector<double> vals(nJoints);
 	std::iota(begin(joints), end(joints), 0);
 
-	for(int tmp=0; tmp<nJoints; tmp++)		// Bottle has not begin, end and iterator, so cannot use std algorithms
+
+	for(int tmp=0; tmp<nJoints; tmp++)		// Bottle has not begin / end iterators, so cannot use std algorithms
 	{
-		vals[tmp] = inner->get(tmp+2).asDouble();
+		vals[tmp] = inner->get(tmp+1).asDouble();
 	}
 
 	COMP->controlMap[part]->positionMove(nJoints, joints.data(), vals.data());
@@ -191,57 +193,121 @@ void BT_tickHandler::handleQuery(const SmartACE::QueryId &id, const CommYARP_BT:
 	}
 
 	// get info from blackboard
+	yDebug() << "Getting parameters for " << request.getParameter();
 	Bottle cmd, reply;
 	cmd.addString("get");
 	cmd.addString(request.getParameter());
 	COMP->blackBoardRPC.write(cmd, reply);
-
 	yDebug() << "Received reply from blackboard: " << reply.toString();
 
-	string type = reply.get(0).asString();
-	Bottle *listOfLists = reply.get(1).asList();
-	string conditionName = reply.get(2).asString();
+	Bottle *t, tmp;
+	tmp.fromString(reply.get(0).asString());
+
+	t = tmp.get(0).asList();
+	yDebug() << "tmp from reply: " << tmp.toString();
+
+	string type = t->get(0).asString();
+	Bottle *listOfLists = t->get(1).asList();
+	string conditionName = t->get(2).asString();
+
+	yDebug() << "type: " << type;
+	yDebug() << "conditionName: " << conditionName;
+
+
+	auto found = COMP->statusMap.find(conditionName);
+	if( found != COMP->statusMap.end() )
+	{
+		if( (found->second == CommYARP_BT::TickResult::Success) || (found->second == CommYARP_BT::TickResult::Failure) )
+		{
+			yInfo() << "action " << conditionName << " done with result " << found->second;
+			if(found->second == CommYARP_BT::TickResult::Success)
+			{
+				yError() << "Setting " << conditionName << __LINE__;
+				cmd.clear();
+				cmd.addString("set");
+				cmd.addString(conditionName);
+				cmd.addString("True");
+				bool wrote = COMP->blackBoardRPC.write(cmd, reply);
+				yWarning() << " write on blackboard ret " << wrote;
+/*
+				// send signal to the monitors
+				BTMonitorMsg msg;
+				msg.skill     = conditionName;
+				msg.event     = "e_req";
+				bool ret = toMonitor_port.write(msg);
+				yWarning() << " sent msg to monitor " << msg.skill << msg.event << ret;
+
+				// send signal to the monitors
+				// BTMonitorMsg msg;
+				msg.skill     = conditionName;
+				msg.event     = "e_from_env";
+				wrote = toMonitor_port.write(msg);
+				yWarning() << " write to monitor ret " << wrote;
+*/
+			}
+			answer.setResult(found->second);
+			this->server->answer(id, answer);
+			return;
+		}
+	}
+
+
+	// send signal to the monitors
+	BTMonitorMsg msg;
+	if(conditionName == "BottleGrasped")
+		msg.skill = "GraspBottle";
+	else
+		msg.skill     = conditionName;
+
+	msg.event     = "e_req";
+	bool ret = toMonitor_port.write(msg);
+	yWarning() << " sent msg to monitor " << msg.skill << msg.event << ret;
 
 	// The command may contains more than one goal at the same time
+	bool done = true;
 	for(int i=0; i<listOfLists->size(); i++)
 	{
-		bool done = true;
 		Bottle *target = listOfLists->get(i).asList();
 		string part = target->get(0).asString();
 
-		if(isRunning)
+		yWarning() << i << " target "  << target->size();
+		yWarning() << i << " part "  << part;
+
+		if(found != COMP->statusMap.end())
 		{
+			yError() << __LINE__;
+
 			if(isGoalJointSpace)
 			{
 				done &= isJointTargetReached(part);
+				yInfo() << "done part " << part << " is " << done;
 			}
 			else
 			{
 				done &= isCartesianTargetReached(part);
 			}
-
-			if(!done)
-				answer.setResult(CommYARP_BT::TickResult::Running);
-			else
-			{
-				answer.setResult(CommYARP_BT::TickResult::Success);
-				isRunning = false;
-			}
 		}
 		else
 		{
+			yError() << __LINE__;
+			done = false;
+
 			// check if command is in joint space or cartesian space
 			if(type == "joint")
 			{
 				isGoalJointSpace = true;
 				setNewJointTarget(target);
 				answer.setResult(CommYARP_BT::TickResult::Running);
+				isRunning = true;
+				yError() << __LINE__;
+				COMP->statusMap[conditionName] = CommYARP_BT::TickResult::Running;
 			}
 			else if(type == "cartesian")
 			{
 				isGoalJointSpace = false;
 				setNewCartesianTarget(target);
 				answer.setResult(CommYARP_BT::TickResult::Running);
+				COMP->statusMap[conditionName] = CommYARP_BT::TickResult::Running;
 			}
 			else
 			{
@@ -252,12 +318,39 @@ void BT_tickHandler::handleQuery(const SmartACE::QueryId &id, const CommYARP_BT:
 		}
 	}
 
+	COMP->statusMap[conditionName] = answer.getResult();
+
+	if(isRunning && done)
+	{
+		answer.setResult(CommYARP_BT::TickResult::Success);
+		COMP->statusMap[conditionName] = CommYARP_BT::TickResult::Success;
+	}
+	else
+	{
+		answer.setResult(CommYARP_BT::TickResult::Running);
+		COMP->statusMap[conditionName] = CommYARP_BT::TickResult::Running;
+	}
+
 	if(answer.getResult() == CommYARP_BT::TickResult::Success)
 	{
+		yError() << "Setting " << conditionName << __LINE__;
+		cmd.clear();
 		cmd.addString("set");
 		cmd.addString(conditionName);
 		cmd.addString("True");
-		COMP->blackBoardRPC.write(cmd, reply);
+		bool wrote = COMP->blackBoardRPC.write(cmd, reply);
+		yWarning() << " write on blackboard ret " << wrote << " reply " << reply.toString();
+
+		// send signal to the monitors
+		BTMonitorMsg msg;
+		if(conditionName == "BottleGrasped")
+			msg.skill = "GraspBottle";
+		else
+			msg.skill     = conditionName;
+		msg.event     = "e_from_env";
+		wrote = toMonitor_port.write(msg);
+		yWarning() << " write to monitor ret " << wrote;
 	}
 	this->server->answer(id, answer);
+	return;
 }

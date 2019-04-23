@@ -13,7 +13,6 @@
 #include "BT_tickDispatcher.hh"
 
 using namespace std;
-using namespace CommYARP_BT;
 
 YarpTicker::YarpTicker()
 {
@@ -35,10 +34,10 @@ bool YarpTicker::configure(std::string target)
 		return false;
 	}
 
-	TickClient::configure(COMP->getGlobalState().getSettings().getTickManager_localPort() + target);
+	TickClient::configure(COMP->getGlobalState().getSettings().getTickManager_localPort() + "/" + target, true, target);
 
 	yInfo() << "connecting to " << target;
-	if(!TickClient::connect(target))
+	if(!TickClient::connect("/"+target))
 		yError() << " Cannot connect to " << target;
 
 	yInfo() << "DONE";
@@ -51,23 +50,24 @@ bool YarpTicker::configure(std::string target)
  *       tickCommand_t enum.
  * @params: optional parameters to be sent to the target
  */
-CommYARP_BT::TickResult YarpTicker::tick(CommYARP_BT::TickCommand cmd, string params)
+CommYARP_BT::TickResult YarpTicker::tick(CommYARP_BT::TickCommand cmd, string params, std::string skillName)
 {
 	ReturnStatus tmpRet;
-	if(cmd == TickCommand::Tick)
+	if(cmd == CommYARP_BT::TickCommand::Tick)
 	{
-		std::cout << "\t YarpTicker ticking " << params << "... \n";
+		std::cout << "\t YarpTicker ticking " << skillName << " with params " << params << "... \n";
 		tmpRet = request_tick(params);
 	}
 
-	if(cmd == TickCommand::Halt)
+	if(cmd == CommYARP_BT::TickCommand::Halt)
 	{
-		std::cout << "\t YarpTicker halting " << params << "... \n";
-		tmpRet = request_halt();
+		std::cout << "\t YarpTicker halting " << skillName << " with params " << params << "... \n";
+		tmpRet = request_halt(params);
+		std::cout << "\t request_tick  " << (int) tmpRet << std::endl;
 	}
 
 	ReturnStatusVocab tmpVocab;
-	TickResult res = tickConvert_fromYarp( (ReturnStatus)tmpRet);
+	CommYARP_BT::TickResult res = tickConvert_fromYarp( (ReturnStatus)tmpRet);
 	std::cout << "\t return (YARP)  " << tmpVocab.toString(tmpRet) << "\t\t as int " << (int) tmpRet << std::endl;
 	std::cout << "\t return (SS)    " << res.to_string()   << "\t as int " << (int) res    << std::endl << std::endl;
 

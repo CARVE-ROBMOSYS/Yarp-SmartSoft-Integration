@@ -29,6 +29,8 @@ GraspingSkill::GraspingSkill()
 	// set all pointer members to NULL
 	//coordinationPort = NULL;
 	//graspingSkillParams = NULL;
+	thread = NULL;
+	threadTrigger = NULL;
 	tickHandler = NULL;
 	tickInput = NULL;
 	tickInputInputTaskTrigger = NULL;
@@ -45,6 +47,12 @@ GraspingSkill::GraspingSkill()
 	connections.component.useLogger = false;
 	
 	connections.tickInput.serviceName = "tickInput";
+	connections.thread.minActFreq = 0.0;
+	connections.thread.maxActFreq = 0.0;
+	// scheduling default parameters
+	connections.thread.scheduler = "DEFAULT";
+	connections.thread.priority = -1;
+	connections.thread.cpuAffinity = -1;
 }
 
 
@@ -78,6 +86,20 @@ Smart::StatusCode GraspingSkill::connectAndStartAllServices() {
  * Start all tasks contained in this component.
  */
 void GraspingSkill::startAllTasks() {
+	// start task Thread
+	if(connections.thread.scheduler != "DEFAULT") {
+		ACE_Sched_Params thread_SchedParams(ACE_SCHED_OTHER, ACE_THR_PRI_OTHER_DEF);
+		if(connections.thread.scheduler == "FIFO") {
+			thread_SchedParams.policy(ACE_SCHED_FIFO);
+			thread_SchedParams.priority(ACE_THR_PRI_FIFO_MIN);
+		} else if(connections.thread.scheduler == "RR") {
+			thread_SchedParams.policy(ACE_SCHED_RR);
+			thread_SchedParams.priority(ACE_THR_PRI_RR_MIN);
+		}
+		thread->start(thread_SchedParams, connections.thread.cpuAffinity);
+	} else {
+		thread->start();
+	}
 }
 
 /**
@@ -162,6 +184,31 @@ void GraspingSkill::init(int argc, char *argv[])
 		param = new SmartACE::ParameterSlave(component, &paramHandler);
 		
 		
+		// create Task Thread
+		thread = new Thread(component);
+		// configure input-links
+		// configure task-trigger (if task is configurable)
+		if(connections.thread.trigger == "PeriodicTimer") {
+			// create PeriodicTimerTrigger
+			int microseconds = 1000*1000 / connections.thread.periodicActFreq;
+			if(microseconds > 0) {
+				Smart::TimedTaskTrigger *triggerPtr = new Smart::TimedTaskTrigger();
+				triggerPtr->attach(thread);
+				component->getTimerManager()->scheduleTimer(triggerPtr, std::chrono::microseconds(microseconds), std::chrono::microseconds(microseconds));
+				// store trigger in class member
+				threadTrigger = triggerPtr;
+			} else {
+				std::cerr << "ERROR: could not set-up Timer with cycle-time " << microseconds << " as activation source for Task Thread" << std::endl;
+			}
+		} else if(connections.thread.trigger == "DataTriggered") {
+			threadTrigger = getInputTaskTriggerFromString(connections.thread.inPortRef);
+			if(threadTrigger != NULL) {
+				threadTrigger->attach(thread, connections.thread.prescale);
+			} else {
+				std::cerr << "ERROR: could not set-up InPort " << connections.thread.inPortRef << " as activation source for Task Thread" << std::endl;
+			}
+		} 
+		
 		
 		// link observers with subjects
 	} catch (const std::exception &ex) {
@@ -195,6 +242,10 @@ void GraspingSkill::run()
 	// unlink all observers
 	
 	// destroy all task instances
+	// unlink all UpcallManagers
+	// unlink the TaskTrigger
+	threadTrigger->detach(thread);
+	delete thread;
 
 	// destroy all input-handler
 
@@ -303,6 +354,25 @@ void GraspingSkill::loadParameter(int argc, char *argv[])
 		// load parameters for server tickInput
 		parameter.getString("tickInput", "serviceName", connections.tickInput.serviceName);
 		
+		// load parameters for task Thread
+		parameter.getDouble("Thread", "minActFreqHz", connections.thread.minActFreq);
+		parameter.getDouble("Thread", "maxActFreqHz", connections.thread.maxActFreq);
+		parameter.getString("Thread", "triggerType", connections.thread.trigger);
+		if(connections.thread.trigger == "PeriodicTimer") {
+			parameter.getDouble("Thread", "periodicActFreqHz", connections.thread.periodicActFreq);
+		} else if(connections.thread.trigger == "DataTriggered") {
+			parameter.getString("Thread", "inPortRef", connections.thread.inPortRef);
+			parameter.getInteger("Thread", "prescale", connections.thread.prescale);
+		}
+		if(parameter.checkIfParameterExists("Thread", "scheduler")) {
+			parameter.getString("Thread", "scheduler", connections.thread.scheduler);
+		}
+		if(parameter.checkIfParameterExists("Thread", "priority")) {
+			parameter.getInteger("Thread", "priority", connections.thread.priority);
+		}
+		if(parameter.checkIfParameterExists("Thread", "cpuAffinity")) {
+			parameter.getInteger("Thread", "cpuAffinity", connections.thread.cpuAffinity);
+		}
 		
 		paramHandler.loadParameter(parameter);
 	

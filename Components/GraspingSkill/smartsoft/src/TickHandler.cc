@@ -17,6 +17,7 @@
 #include "TickHandler.hh"
 #include "GraspingSkill.hh"
 
+#include <BTMonitorMsg.h>
 #include <yarp/os/LogStream.h>
 
 using namespace std;
@@ -39,6 +40,7 @@ TickHandler::TickHandler(Smart::IQueryServerPattern<CommYARP_BT::CommTickCommand
 		yError() << "Cannot connect to YARP blackboard";	yarp::os::Port  blackBoard_Client;
 
 	}
+	toMonitor_port.open("/graspingSkill/monitor:o");
 }
 
 TickHandler::~TickHandler()
@@ -46,6 +48,7 @@ TickHandler::~TickHandler()
 	
 }
 
+// TDB:  change and use the thread
 void TickHandler::handleQuery(const SmartACE::QueryId &id, const CommYARP_BT::CommTickCommand& request) 
 {
 	// init helper variables
@@ -66,12 +69,24 @@ void TickHandler::handleQuery(const SmartACE::QueryId &id, const CommYARP_BT::Co
 	while (ss >> temp)
 		paramsVect.push_back(temp);
 
+	string skillName;
+
 	switch(cmd)
 	{
 		case CommYARP_BT::TickCommand::Tick:
 		{
-			if(paramsVect[0] == "homeArms")
+			if(paramsVect[0] == "KeepArmsForGrasp")
 			{
+				skillName = paramsVect[0];
+				{
+					// send signal to the monitors
+			        BTMonitorMsg msg;
+			        msg.skill     = skillName;
+			        msg.event     = "e_req";
+			        toMonitor_port.write(msg);
+				}
+
+
 				yarp::os::Bottle cmd;
 				cmd.addString("home");
 				cmd.addString("arms");
@@ -91,29 +106,23 @@ void TickHandler::handleQuery(const SmartACE::QueryId &id, const CommYARP_BT::Co
 
 			if(paramsVect[0] == "grasp")
 			{
+				skillName = string("Grasp") + paramsVect[1];
+				{
+					// send signal to the monitors
+			        BTMonitorMsg msg;
+			        msg.skill     = skillName;
+			        msg.event     = "e_req";
+			        toMonitor_port.write(msg);
+				}
+
 				yarp::os::Bottle cmd, reply;
 				cmd.addString("grasp");
 				cmd.addString(paramsVect[1]);
 				cmd.addString("right");
 				bool ret = COMP->RPCgrasp.write(cmd, reply);
 				yInfo() << "grasp ret " << ret << " cmd " << cmd.toString() << " reply " << reply.toString();
-				if(reply.toString() == "[nack]")
-				{
-					result = CommYARP_BT::TickResult::Failure;
-					Bottle toBoard, reply;
-					toBoard.addString("set");
-					toBoard.addString("InvPoseValid");
-					toBoard.addString("False");
-					COMP->blackBoard_Client.write(toBoard, reply);
 
-					toBoard.clear();
-					toBoard.addString("set");
-					toBoard.addString("InvPoseComputed");
-					toBoard.addString("False");
-					COMP->blackBoard_Client.write(toBoard, reply);
-					yError() << "Grasp failed";
-				}
-				else if(reply.toString() == "[ack]")
+				if(reply.toString() == "[ack]")
 				{
 						result = CommYARP_BT::TickResult::Success;
 						Bottle toBoard, reply;
@@ -134,10 +143,18 @@ void TickHandler::handleQuery(const SmartACE::QueryId &id, const CommYARP_BT::Co
 		case CommYARP_BT::TickCommand::Halt:
 		{
 			// Dummy halt
-			result = CommYARP_BT::TickResult::Success;
+			result = CommYARP_BT::TickResult::Halted;
 		} break;
 	}
 
+	if(result == CommYARP_BT::TickResult::Success)
+	{
+		// send signal to the monitors
+        BTMonitorMsg msg;
+        msg.skill     = skillName;
+        msg.event     = "e_from_env";
+        toMonitor_port.write(msg);
+	}
 	// implement your query handling logic here and fill in the answer object
 	answer.setResult(result);
 	this->server->answer(id, answer);

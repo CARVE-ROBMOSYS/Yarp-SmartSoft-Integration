@@ -63,7 +63,7 @@ void CompHandler::onStartup()
 
 	COMP->cartesianLeftArm .open("/genericMovement/cartesian/left/rpcClient");
 	COMP->cartesianRightArm.open("/genericMovement/cartesian/right/rpcClient");
-	COMP->blackBoardRPC    .open("/genericMovement/blackboard/rpcClient");
+	COMP->blackBoardRPC    .open("/genericMovement/blackboard/rpc:o");
 
 	if(!result)
 	{
@@ -108,7 +108,7 @@ void CompHandler::onStartup()
 	
 	// Start all tasks. If you need manual control, use the content of this function to
 	// start each task individually.
-	COMP->startAllTasks();
+	// COMP->startAllTasks();
 	
 	// Start all timers. If you need manual control, use the content of this function to
 	// start each timer individually.

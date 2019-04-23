@@ -18,6 +18,7 @@
 #define _TICKHANDLER_USER_HH
 		
 #include "TickHandlerCore.hh"
+#include <yarp/os/Port.h>
 
 class TickHandler : public TickHandlerCore
 {
@@ -25,6 +26,6 @@ public:
 	TickHandler(Smart::IQueryServerPattern<CommYARP_BT::CommTickCommand, CommYARP_BT::CommTickResult, SmartACE::QueryId>* server);
 	virtual ~TickHandler();
 	virtual void handleQuery(const SmartACE::QueryId &id, const CommYARP_BT::CommTickCommand& request);
-
+	yarp::os::Port  toMonitor_port;
 };
 #endif

@@ -25,6 +25,7 @@
 #include <yarp/os/RpcClient.h>
 #include <yarp/dev/PolyDriver.h>
 #include <yarp/dev/IPositionControl.h>
+#include "BT_tickHandler.hh"
 
 
 class GenericMovementSkillCore
@@ -45,6 +46,13 @@ public:
 	 yarp::os::RpcClient cartesianLeftArm;
 	 yarp::os::RpcClient cartesianRightArm;
 	 yarp::os::RpcClient blackBoardRPC;
+
+	 struct mem
+	 {
+		 CommYARP_BT::TickResult res;
+		 bool isRunning;
+	 };
+	 std::map<std::string, CommYARP_BT::TickResult> statusMap;
 	 bool useCartesian{false};
 };
 	

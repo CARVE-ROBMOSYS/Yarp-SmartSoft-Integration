@@ -1,7 +1,7 @@
 ComponentParameter BT_tickDispatcherParams component BT_tickDispatcher {
 	InternalParameter Settings 
 	{
-		tickManager_localPort  :String  =  "/tickManager"
+		tickManager_localPort  :String  =  "/tickDispatcher"
 		configFile : String = "config.ini"
 		}
 
@@ -11,3 +11,4 @@ ComponentParameter BT_tickDispatcherParams component BT_tickDispatcher {
 		TriggerInstance configFile passive
 		}
 }
+

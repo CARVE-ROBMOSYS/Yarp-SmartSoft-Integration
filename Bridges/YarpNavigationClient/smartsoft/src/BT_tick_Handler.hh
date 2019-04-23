@@ -28,9 +28,13 @@ private:
 	bool has_goal{false};
 	std::string currentGoalName{""};
 
+	std::map<std::string, CommYARP_BT::TickResult> resultMap;
+
+
 	CommYARP_BT::TickResult handle_tick_goTo(yarp::dev::Map2DLocation  location, std::string locationName);
 	CommYARP_BT::TickResult handle_tick_check(yarp::dev::Map2DLocation location);
 	yarp::os::Port  blackBoard_Client;
+	yarp::os::Port  toMonitor_port;
 
 	void writeBlackBoard(bool reached, std::string locationName);
 

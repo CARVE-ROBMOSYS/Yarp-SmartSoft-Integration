@@ -20,6 +20,7 @@
 #include <yarp/os/Bottle.h>
 #include <yarp/os/Network.h>
 #include <yarp/os/LogStream.h>
+#include <BTMonitorMsg.h>
 
 using namespace std;
 using namespace yarp::os;
@@ -42,7 +43,7 @@ TickHandler::TickHandler(Smart::IQueryServerPattern<CommYARP_BT::CommTickCommand
 	{
 		yError() << "Cannot connect to YARP blackboard";
 	}
-
+	toMonitor_port.open("/visionSkill/monitor:o");
 }
 
 TickHandler::~TickHandler()
@@ -57,7 +58,21 @@ void TickHandler::handleQuery(const SmartACE::QueryId &id, const CommYARP_BT::Co
 	CommYARP_BT::CommTickResult answer;
 	CommYARP_BT::TickResult result = CommYARP_BT::TickResult::Failure;
 
-	// debug print
+	// handle tick
+	CommYARP_BT::TickCommand::ENUM_TickCommand cmd = request.getCommand();
+	string params = request.getParameter();
+
+	// send signal to the monitors
+	if(cmd == CommYARP_BT::TickCommand::Tick)
+	{
+		yDebug() << " Sending e_req to LocateBottle";
+		BTMonitorMsg msg;
+		msg.skill     = "LocateBottle";
+		msg.event     = "e_req";
+		toMonitor_port.write(msg);
+	}
+
+	// Do actual job
 	std::cout << "Received request " << request.getCommand() << "  --  " << request.getParameter() << std::endl;
 	yarp::os::Bottle worldInt_request, worldReply;
 	worldInt_request.addString("getPose");
@@ -66,29 +81,6 @@ void TickHandler::handleQuery(const SmartACE::QueryId &id, const CommYARP_BT::Co
 	toGazeboWorld.write(worldInt_request, worldReply);
 
 	yDebug() << worldReply.toString();
-
-	// handle tick
-	CommYARP_BT::TickCommand::ENUM_TickCommand cmd = request.getCommand();
-	string params = request.getParameter();
-
-	while (tickCounter < ticks2Succeed)
-	{
-		tickCounter++;
-		yDebug() << "VisionSkill Gazebo running";
-		result = CommYARP_BT::TickResult::Running;
-		this->server->answer(id, answer);
-	}
-
-	if(shouldFail)
-	{
-		yDebug() << "VisionSkill Gazebo failed because 'should fail' is true";
-		result = CommYARP_BT::TickResult::Failure;
-		this->server->answer(id, answer);
-	}
-
-	// reset values
-	tickCounter = 0;
-	shouldFail = !shouldFail;
 
 	switch(cmd)
 	{
@@ -112,21 +104,26 @@ void TickHandler::handleQuery(const SmartACE::QueryId &id, const CommYARP_BT::Co
 			blackBoard_Client.write(toBoard, reply);
 
 			yDebug() << "Setting BottlePose to value " << toBoard.toString() << " inside the blackboard";
+			result = CommYARP_BT::TickResult::Success;
 
-			if(reply.get(0).asInt32() == 1)
-				result = CommYARP_BT::TickResult::Success;
-			else
-				result = CommYARP_BT::TickResult::Failure;
+			// send signal to the monitors
+			BTMonitorMsg msg;
+			msg.skill     = "LocateBottle";
+			msg.event     = "e_from_env";
+			toMonitor_port.write(msg);
+			yDebug() << "Sending <LocateBottle e_from_env> to monitor";
+
 		} break;
 
 		case CommYARP_BT::TickCommand::Halt:
 		{
 			// Dummy halt
-			result = CommYARP_BT::TickResult::Success;
+			result = CommYARP_BT::TickResult::Halted;
 		} break;
 	}
 
 	// implement your query handling logic here and fill in the answer object
 	answer.setResult(result);
 	this->server->answer(id, answer);
+	return;
 }

@@ -45,10 +45,11 @@ FIND_PACKAGE(open62541 QUIET PATHS /usr/local/lib/cmake)
 set(CMAKE_CXX_STANDARD 11)
 
 find_package(YARP REQUIRED)
+find_package(YARPBTModules REQUIRED)
 
 # include Miccol stuff --> TBR
-include_directories(/usr/local/src/robot/yarp-smartsoft/YARP-BT-modules)
-include_directories(/usr/local/src/robot/yarp-smartsoft/YARP-BT-modules/include)
+#include_directories(/home/icub/SOFTWARE/YARP-BT-modules)
+#include_directories(/home/icub/SOFTWARE/YARP-BT-modules/include)
 
 
 # these are the regular includes (add your own includes, if needed)
@@ -73,14 +74,21 @@ include_directories(tickers)
 
 # create the executable using collected source-files
 add_executable(${PROJECT_NAME} ${SRC} ${SRC_GEN} ${SRC_GEN_PARAMS} ${TICKERS}
-                /usr/local/src/robot/yarp-smartsoft/YARP-BT-modules/src/ReturnStatus.cpp            # should be a library to be linked
-                /usr/local/src/robot/yarp-smartsoft/YARP-BT-modules/src/BTCmd.cpp                   # should be a library to be linked
-                /usr/local/src/robot/yarp-smartsoft/YARP-BT-modules/src/tick_client.cpp             # should be a library to be linked
-                /usr/local/src/robot/yarp-smartsoft/YARP-BT-modules/src/tick_server.cpp             # should be a library to be linked
+#                /home/icub/SOFTWARE/YARP-BT-modules/src/ReturnStatus.cpp            # should be a library to be linked
+#                /home/icub/SOFTWARE/YARP-BT-modules/src/BTCmd.cpp                   # should be a library to be linked
+#                /home/icub/SOFTWARE/YARP-BT-modules/src/tick_client.cpp             # should be a library to be linked
+#                /home/icub/SOFTWARE/YARP-BT-modules/src/tick_server.cpp             # should be a library to be linked
                 )
 
 # link your external libraries here (if there are any)
-target_link_libraries(${PROJECT_NAME} ${YARP_LIBRARIES} )
+
+message("YARPBTModules_LIBRARIES is ${YARPBTModules_LIBRARIES}")
+message("YARPBTModules_LIBRARY   is ${YARPBTModules_LIBRARY}")
+message("YARPBTModules_LIBS      is ${YARPBTModules_LIBS}")
+message("YARPBTModules      is ${YARPBTModules}")
+
+
+target_link_libraries(${PROJECT_NAME} ${YARP_LIBRARIES} YARPBTModules)
 
 IF(open62541_FOUND)
 target_link_libraries(${PROJECT_NAME} open62541)

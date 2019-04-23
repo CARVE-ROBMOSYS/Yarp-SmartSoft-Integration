@@ -41,7 +41,7 @@ public:
 	 *       tickCommand_t enum.
 	 * @params: optional parameters to be sent to the target
 	 */
-	CommYARP_BT::TickResult tick(CommYARP_BT::TickCommand cmd, std::string params) override;
+	CommYARP_BT::TickResult tick(CommYARP_BT::TickCommand cmd, std::string params, std::string skillName="skillName") override;
 };
 
 

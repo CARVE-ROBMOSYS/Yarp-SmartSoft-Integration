@@ -27,7 +27,6 @@
 #include "tickers/yarpTicker.h"
 #include "tickers/RelayTicker.h"
 #include "tickers/SmartTicker.h"
-#include "tickers/SmartNavigTicker.h"
 
 #include <yarp/os/LogStream.h>
 
@@ -177,14 +176,6 @@ void CompHandler::onStartup()
 				entry.tickerInstance = t;
 				COMP->tickables_map[entry.skill2Tick] = entry;				// add entry in the map
 				COMP->smartTickers_list.push_back(t);						// keep a list of ticker to easily destroy them at the closure
-			}
-			else if(entry.tickerType == "SmartNavig")
-			{
-				SmartNavigationTicker *t = new SmartNavigationTicker();				// create new navigation ticker
-				success = t->configure(entry.tickerId);
-				entry.tickerInstance = t;
-				COMP->tickables_map[entry.skill2Tick] = entry;				// add entry in the map
-//				COMP->yarpTickers_list.push_back(t);						// keep a list of ticker to easy destroy them at the closure
 			}
 			else if(entry.tickerType == "RelayTicker")
 			{

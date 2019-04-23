@@ -15,6 +15,8 @@
 #include "aceSmartSoft.hh"
 
 #include "ITickable.h"
+#include <yarp/os/Port.h>
+#include <yarp/os/Network.h>
 
 
 class RelayTicker : public ITickable
@@ -22,8 +24,10 @@ class RelayTicker : public ITickable
 private:
 	typedef Smart::IQueryClientPattern<CommYARP_BT::CommTickCommand, CommYARP_BT::CommTickResult,SmartACE::QueryId> tickClient;
 
+	yarp::os::Network yarpNetwork;
 	tickClient *_client;
 	std::string targetSkill;
+	yarp::os::Port  toMonitor_port;
 
 public:
 
@@ -36,7 +40,7 @@ public:
 	/**
 	 * Configure the ticker by giving the required info to identify the target
 	 * to be ticked. The info depend on the ticker type.
-	 * @target: tick ation target identification info. For yarp it will be the
+	 * @target: tick action target identification info. For yarp it will be the
 	 *          input tick port name, for SmartSoft the instance module name
 	 */
 	bool configure(std::string target) override;
@@ -47,7 +51,7 @@ public:
 	 *       tickCommand_t enum.
 	 * @params: optional parameters to be sent to the target
 	 */
-	CommYARP_BT::TickResult tick(CommYARP_BT::TickCommand cmd, std::string params) override;
+	CommYARP_BT::TickResult tick(CommYARP_BT::TickCommand cmd, std::string params, std::string skillName="skillName") override;
 };
 
 

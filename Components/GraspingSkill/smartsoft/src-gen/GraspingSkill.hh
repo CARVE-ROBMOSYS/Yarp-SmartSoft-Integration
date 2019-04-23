@@ -29,6 +29,7 @@
 #include <CommYARP_BT/CommTickResultACE.hh>
 
 // include tasks
+#include "Thread.hh"
 // include UpcallManagers
 
 // include input-handler
@@ -77,6 +78,8 @@ public:
 	}
 	
 	// define tasks
+	Smart::TaskTriggerSubject* threadTrigger;
+	Thread *thread;
 	
 	// define input-ports
 	
@@ -131,6 +134,22 @@ public:
 		} component;
 		
 		//--- task parameter ---
+		struct Thread_struct {
+			double minActFreq;
+			double maxActFreq;
+			std::string trigger;
+			// only one of the following two params is 
+			// actually used at run-time according 
+			// to the system config model
+			double periodicActFreq;
+			// or
+			std::string inPortRef;
+			int prescale;
+			// scheduling parameters
+			std::string scheduler;
+			int priority;
+			int cpuAffinity;
+		} thread;
 		
 		//--- upcall parameter ---
 		
